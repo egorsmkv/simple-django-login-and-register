@@ -1,3 +1,3 @@
 Django==1.11.4
 PyMySQL==0.7.11
-git+https://github.com/GabrielUlici/django-bootstrap4.git@375a421afeb0f863c29958d8b7a27c9f2b96c62c
+git+https://github.com/egorsmkv/django-bootstrap4.git@3db2fff7ef7fdc7580c6c38a68968b658a005f67
