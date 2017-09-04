@@ -33,7 +33,7 @@ For example:
 CREATE DATABASE `simple-django-login-and-register` COLLATE 'utf8mb4_unicode_ci';
 ```
 
-### Configure the settings (connection to the database and other options)
+### Configure the settings (connection to the database, connection to the smtp server, and other options)
 
 1. Edit `source/app/conf/development/settings.py` if you want to develop the project.
 
