@@ -1,9 +1,11 @@
-<script src="/static/vendor/jquery/jquery-3.2.1.min.js"></script>
+{% load staticfiles %}
 
-<script src="/static/vendor/popper/popper.min.js"></script>
-<script src="/static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="{% static 'vendor/jquery/jquery-3.2.1.min.js' %}"></script>
 
-<script src="/static/js/ie10-viewport-bug-workaround.js"></script>
+<script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
 
 </body>
 </html>

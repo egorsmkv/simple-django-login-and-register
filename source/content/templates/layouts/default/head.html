@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,21 +8,22 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description"
-          content="An example of Django project with login, registration, log out and password recovery functionality.">
+          content="An example of Django project with login, registration, log out and password reset functionality.">
     <meta name="author" content="Yehor Smoliakov">
 
-    <link rel="icon" href="/static/favicon.ico">
+    <link rel="icon" href="{% static 'favicon.ico' %}">
 
     <title>Simple Django Login and Registration</title>
 
-    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/styles.css" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
+
     <a class="navbar-brand" href="/">Demo</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
@@ -32,18 +35,19 @@
         <ul class="navbar-nav mr-auto">
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/accounts/logout">Log out</a>
+                    <a class="nav-link" href="{% url 'logout' %}">Log out</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/accounts/login">Log in</a>
+                    <a class="nav-link" href="{% url 'login' %}">Log in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/accounts/register">Create an account</a>
+                    <a class="nav-link" href="{% url 'register' %}">Create an account</a>
                 </li>
             {% endif %}
         </ul>
     </div>
+
 </nav>
 
 {% if messages %}
