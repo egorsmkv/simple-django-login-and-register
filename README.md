@@ -4,7 +4,9 @@ An example of Django project with login, registration, log out and password reco
 
 ## Screenshots
 
-Empty now.
+| Login page | Register page | Authorized page |
+| -----------|---------------|-----------------|
+| <img src="./screenshots/login.png" width="200"> | <img src="./screenshots/register.png" width="200"> | <img src="./screenshots/authorized_page.png" width="200"> |
 
 ## Installing
 
