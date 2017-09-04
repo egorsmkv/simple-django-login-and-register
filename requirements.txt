@@ -1,0 +1,4 @@
+Django==1.11.4
+PyMySQL==0.7.11
+git+https://github.com/GabrielUlici/django-bootstrap4.git@375a421afeb0f863c29958d8b7a27c9f2b96c62c
+gunicorn==19.7.1
