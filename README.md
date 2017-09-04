@@ -1,6 +1,6 @@
 # Simple Django Login and Registration
 
-An example of Django project with login, registration, log out and password recovery functionality.
+An example of Django project with login, registration, password change, log out, and password reset functionality.
 
 ## Screenshots
 
