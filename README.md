@@ -22,10 +22,10 @@ cd simple-django-login-and-register/source
 ### Install dependencies
 
 ```
-pip install -r requirements-dev.txt # or requirements.txt if you deploy the project on production server
+pip install -r requirements-dev.txt # or requirements.txt if you deploy the project on a production server
 ```
 
-### Create MySQL database for the project
+### Create a MySQL database for the project
 
 For example:
 
@@ -33,27 +33,27 @@ For example:
 CREATE DATABASE `simple-django-login-and-register` COLLATE 'utf8mb4_unicode_ci';
 ```
 
-### Configure settings (connection to the database and other options)
+### Configure the settings (connection to the database and other options)
 
 1. Edit `source/app/conf/development/settings.py` if you want to develop the project.
 
 2. Edit `source/app/conf/production/settings.py` if you want to run the project in production.
 
-### Make migrations
+### Apply migrations
 
 ```
 ./manage.py migrate
 ```
 
-### Collect static files (only production server)
+### Collect static files (only a production server)
 
 ```
 ./manage.py collectstatic
 ```
 
-### Run server
+### Running
 
-#### Development server
+#### A Development server
 
 Just run that command:
 
@@ -61,12 +61,12 @@ Just run that command:
 ./manage.py runserver
 ```
 
-#### Production server
+#### A Production server
 
-##### If you have `systemd` on your server
+##### If you have the `systemd` on your server
 
 Empty now.
 
-##### With supervisord
+##### With the `supervisord`
 
 Empty now.
