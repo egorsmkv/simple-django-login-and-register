@@ -16,6 +16,11 @@ urlpatterns = [
 
     url(r'^accounts/register/$', accounts.views.register, name='register'),
 
+    url(r'^accounts/password/change/$', auth.PasswordChangeView.as_view(
+        template_name='accounts/password_change_form.html'), name='password_change'),
+    url(r'^accounts/password/change/done/$', auth.PasswordChangeDoneView.as_view(
+        template_name='accounts/password_change_done.html'), name='password_change_done'),
+
     url(r'^accounts/password/reset/$', auth.PasswordResetView.as_view(template_name='accounts/password_reset.html'),
         name='password_reset'),
     url(r'^accounts/password/reset/done/$', auth.PasswordResetDoneView.as_view(
