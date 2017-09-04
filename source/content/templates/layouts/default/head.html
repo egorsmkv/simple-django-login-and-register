@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description"
+          content="An example of Django project with login, registration, log out and password recovery functionality.">
+    <meta name="author" content="Yehor Smoliakov">
+
+    <link rel="icon" href="/static/favicon.ico">
+
+    <title>Simple Django Login and Registration</title>
+
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
+    <a class="navbar-brand" href="/">Demo</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/accounts/logout">Log out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="/accounts/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/accounts/register">Create an account</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+{% if messages %}
+    <div class="container-fluid">
+        {% include 'bootstrap4/messages.html' %}
+    </div>
+{% endif %}

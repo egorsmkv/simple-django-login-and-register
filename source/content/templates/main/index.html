@@ -1,0 +1,19 @@
+{% include 'layouts/default/head.html' %}
+
+<div class="container-fluid">
+
+    <div class="mt-3">
+        <div>
+            {% if request.user.is_authenticated %}
+                You are authorized.
+                <br>
+                Your username is <b>{{ request.user.username }}</b>.
+            {% else %}
+                You are a guest.
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% include 'layouts/default/foot.html' %}
