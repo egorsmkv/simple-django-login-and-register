@@ -67,7 +67,9 @@ Just run that command:
 
 #### A Production server
 
-The nginx uses as a proxy server for our application.
+- The systemd uses as a process control system. You can use [supervisord](http://supervisord.org) or another software.
+- The gunicorn uses as a WSGI server. You can use [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) or another software.
+- The nginx uses as a proxy server for the application.
 
 ##### If you have the `systemd` on your server
 
@@ -111,10 +113,6 @@ Enable the unit if you want always start the application (e.g. reboot or applica
 ```
 [sudo] systemctl enable simple-login
 ```
-
-##### With the `supervisord`
-
-Empty now.
 
 ##### Create the nginx config
 
