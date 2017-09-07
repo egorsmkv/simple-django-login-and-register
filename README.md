@@ -59,7 +59,7 @@ CREATE DATABASE `simple-django-login-and-register` COLLATE 'utf8mb4_unicode_ci';
 
 #### A Development server
 
-Just run that command:
+Just run this command:
 
 ```
 ./manage.py runserver
