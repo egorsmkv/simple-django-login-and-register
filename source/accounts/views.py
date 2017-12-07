@@ -1,31 +1,24 @@
 from django.contrib.auth import login, authenticate
-from django.shortcuts import render, redirect
-from django.template.context_processors import csrf
 from django.contrib import messages
+from django.views.generic.edit import FormView
 
 from .forms import SignUpForm
 
 
-def register(request):
-    ctx = dict()
-    ctx.update(csrf(request))
+class SignUpView(FormView):
+    template_name = 'accounts/register.html'
+    form_class = SignUpForm
+    success_url = '/'
 
-    form = SignUpForm(request.POST or None)
+    def form_valid(self, form):
+        form.save()
 
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
 
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
 
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
+        messages.add_message(self.request, messages.SUCCESS, 'You are successfully registered!')
 
-            messages.add_message(request, messages.SUCCESS, 'You are successfully registered!')
-
-            return redirect('/')
-
-    ctx['form'] = form
-
-    return render(request, 'accounts/register.html', ctx)
+        return super().form_valid(form)
