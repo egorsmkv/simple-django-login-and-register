@@ -13,6 +13,8 @@ SECRET_KEY = '&5x@4yv(eu3ekb+uyklk%32%g2w$&rtt!_rheg4f-jl0g)kt5('
 DEBUG = True
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -20,6 +22,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # Vendor apps
     'bootstrap4',
@@ -61,14 +64,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-EMAIL_HOST = ''
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_PORT = 465
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_HOST_USER = 'test@example.com'
+EMAIL_FILE_PATH = '/tmp/app-messages'
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
@@ -101,6 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ENABLE_USER_ACTIVATION = True
 LOGIN_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

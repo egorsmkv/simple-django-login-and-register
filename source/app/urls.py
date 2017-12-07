@@ -9,12 +9,13 @@ import accounts.views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', main.views.index_page),
+    path('', main.views.index_page, name='index'),
 
     path('accounts/login/', auth.LoginView.as_view(template_name='accounts/login.html'), name='login'),
     path('accounts/logout/', auth.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
 
     path('accounts/register/', accounts.views.SignUpView.as_view(), name='register'),
+    path('accounts/activate/<code>/', accounts.views.ActivateView.as_view(), name='activate'),
 
     path('accounts/password/change/', auth.PasswordChangeView.as_view(
         template_name='accounts/password_change_form.html'), name='password_change'),

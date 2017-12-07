@@ -118,3 +118,5 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(CONTENT_DIR, 'assets'),
 ]
+
+SITE_ID = 1
