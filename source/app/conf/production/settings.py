@@ -11,6 +11,8 @@ ALLOWED_HOSTS = [
     'your-host.example'
 ]
 
+SITE_ID = 1
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -99,6 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ENABLE_USER_ACTIVATION = True
 LOGIN_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
@@ -118,5 +121,3 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = [
     os.path.join(CONTENT_DIR, 'assets'),
 ]
-
-SITE_ID = 1
