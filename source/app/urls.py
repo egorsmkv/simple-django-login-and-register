@@ -8,7 +8,7 @@ import accounts.views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('', main.views.index_page, name='index'),
+    path('', main.views.IndexPageView.as_view(), name='index'),
 
     path('accounts/login/', accounts.views.SignInView.as_view(), name='login'),
     path('accounts/logout/', auth.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
