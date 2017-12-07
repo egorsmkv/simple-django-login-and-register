@@ -4,7 +4,7 @@ from os.path import dirname
 BASE_DIR = dirname(dirname(dirname(dirname(os.path.abspath(__file__)))))
 CONTENT_DIR = os.path.join(BASE_DIR, 'content')
 
-SECRET_KEY = '&5x@4yv(eu3ekb+uyklk%32%g2w$&rtt!_rheg4f-jl0g)kt5('
+SECRET_KEY = '3d305kajG5Jy8KBafCMpHwDIsNi0SqVaW'
 
 DEBUG = False
 ALLOWED_HOSTS = [

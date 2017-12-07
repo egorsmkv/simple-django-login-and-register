@@ -8,7 +8,7 @@ warnings.simplefilter('error', DeprecationWarning)
 BASE_DIR = dirname(dirname(dirname(dirname(os.path.abspath(__file__)))))
 CONTENT_DIR = os.path.join(BASE_DIR, 'content')
 
-SECRET_KEY = '&5x@4yv(eu3ekb+uyklk%32%g2w$&rtt!_rheg4f-jl0g)kt5('
+SECRET_KEY = 'NhfTvayqggTBPswCXXhWaN69HuglgZIkM'
 
 DEBUG = True
 ALLOWED_HOSTS = []
