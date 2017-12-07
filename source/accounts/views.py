@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 from django.conf import settings
 
 from .utils import get_login_form
-from .forms import SignUpForm
+from .forms import SignUpForm,ReSendActivationCodeForm
 from .models import Activation
 
 
@@ -96,3 +96,37 @@ class ActivateView(RedirectView):
         login(self.request, user)
 
         return super().get_redirect_url()
+
+
+class ReSendActivationCodeView(SuccessURLAllowedHostsMixin, FormView):
+    template_name = 'accounts/resend_activation_code.html'
+    form_class = ReSendActivationCodeForm
+    redirect_field_name = REDIRECT_FIELD_NAME
+    success_url = '/'
+
+    def get_success_url(self):
+        url = self.get_redirect_url()
+        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
+
+    def get_redirect_url(self):
+        redirect_to = self.request.POST.get(
+            self.redirect_field_name,
+            self.request.GET.get(self.redirect_field_name, '')
+        )
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        return redirect_to if url_is_safe else ''
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
+
+    def form_valid(self, form):
+
+        # create new activation code
+
+        return HttpResponseRedirect(self.get_success_url())

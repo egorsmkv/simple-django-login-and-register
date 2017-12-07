@@ -13,6 +13,8 @@ urlpatterns = [
     path('accounts/login/', accounts.views.SignInView.as_view(), name='login'),
     path('accounts/logout/', auth.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
 
+    path('accounts/activate/resend/', accounts.views.ReSendActivationCodeView.as_view(), name='resend_activation_code'),
+
     path('accounts/register/', accounts.views.SignUpView.as_view(), name='register'),
     path('accounts/activate/<code>/', accounts.views.ActivateView.as_view(), name='activate'),
 

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UsernameField
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
@@ -18,7 +18,7 @@ class SignInViaEmailForm(forms.Form):
 
     email = forms.EmailField(
         label=_('Email'),
-        widget=forms.EmailInput(attrs={'placeholder': '@', 'focus': True}),
+        widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}),
     )
     password = forms.CharField(
         label=_('Password'),
@@ -126,3 +126,31 @@ class SignUpForm(UserCreationForm):
         msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
         msg.attach_alternative(html_content, 'text/html')
         msg.send()
+
+
+class ReSendActivationCodeForm(forms.Form):
+    email_or_username = forms.CharField(
+        label=_('Email or Username'),
+        widget=forms.TextInput(attrs={'autofocus': True}),
+    )
+
+    error_messages = {
+        'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
+    }
+
+    def __init__(self, request=None, *args, **kwargs):
+        self.request = request
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        email_or_username = self.cleaned_data.get('email_or_username')
+
+        if email_or_username is not None:
+            # todo: implement expire check
+
+            raise forms.ValidationError(
+                self.error_messages['non_expired'],
+                code='non_expired',
+            )
+
+        return self.cleaned_data
