@@ -44,27 +44,24 @@ class SignInViaEmailForm(forms.Form):
         password = self.cleaned_data.get('password')
 
         if email is not None and password:
-            try:
-                email = email.lower()
-                self.user_cache = User.objects.filter(email=email).first()
+            email = email.lower()
+            self.user_cache = User.objects.filter(email=email).first()
+            if self.user_cache:
                 self.confirm_login_allowed(self.user_cache)
 
-                # Check the password
                 if not self.user_cache.check_password(password):
-                    raise forms.ValidationError(
-                        self.error_messages['invalid_login'],
-                        code='invalid_login',
-                        params={'email': email},
-                    )
-
-            except User.DoesNotExist:
-                raise forms.ValidationError(
-                    self.error_messages['invalid_login'],
-                    code='invalid_login',
-                    params={'email': email},
-                )
+                    self.invalid_login(email)
+            else:
+                self.invalid_login(email)
 
         return self.cleaned_data
+
+    def invalid_login(self, email):
+        raise forms.ValidationError(
+            self.error_messages['invalid_login'],
+            code='invalid_login',
+            params={'email': email},
+        )
 
     def confirm_login_allowed(self, user):
         if not user.is_active:
