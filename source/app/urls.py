@@ -1,7 +1,6 @@
 from django.contrib import admin
-from django.urls import path
-
 from django.contrib.auth import views as auth
+from django.urls import path
 
 import main.views
 import accounts.views
@@ -11,7 +10,7 @@ urlpatterns = [
 
     path('', main.views.index_page, name='index'),
 
-    path('accounts/login/', auth.LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    path('accounts/login/', accounts.views.SignInView.as_view(), name='login'),
     path('accounts/logout/', auth.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
 
     path('accounts/register/', accounts.views.SignUpView.as_view(), name='register'),
