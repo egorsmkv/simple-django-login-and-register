@@ -28,10 +28,10 @@ urlpatterns = [
     path('accounts/password/reset/done/', auth.PasswordResetDoneView.as_view(
         template_name='accounts/password_reset_done.html'), name='password_reset_done'),
 
-    path('accounts/password/<uidb64>/<token>/',
+    path('accounts/reset/<uidb64>/<token>/',
          auth.PasswordResetConfirmView.as_view(template_name='accounts/password_reset_confirm.html'),
          name='password_reset_confirm'),
-    path('accounts/password/reset/done/',
+    path('accounts/reset/done/',
          auth.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'),
          name='password_reset_complete'),
 ]
