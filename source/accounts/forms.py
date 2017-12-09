@@ -1,16 +1,12 @@
+from datetime import timedelta
+
 from django import forms
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import UserCreationForm, UsernameField
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.sites.models import Site
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.crypto import get_random_string
-from django.utils.html import strip_tags
-from django.conf import settings
+from django.utils import timezone
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
-
-from .models import Activation
 
 
 class SignInViaEmailForm(forms.Form):
@@ -102,31 +98,6 @@ class SignUpForm(UserCreationForm):
 
         return self.cleaned_data
 
-    @staticmethod
-    def send_activation_email(request, user):
-        subject = 'Profile Activation'
-
-        from_email = settings.DEFAULT_FROM_EMAIL
-        domain = Site.objects.get_current().domain
-        code = get_random_string(20)
-
-        context = {
-            'domain': domain,
-            'code': code,
-        }
-
-        act = Activation()
-        act.code = code
-        act.user = user
-        act.save()
-
-        html_content = render_to_string('email/activation_profile.html', context=context, request=request)
-        text_content = strip_tags(html_content)
-
-        msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
-        msg.attach_alternative(html_content, 'text/html')
-        msg.send()
-
 
 class ReSendActivationCodeForm(forms.Form):
     email_or_username = forms.CharField(
@@ -136,21 +107,47 @@ class ReSendActivationCodeForm(forms.Form):
 
     error_messages = {
         'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
+        'incorrect_data': _('You entered incorrect data.'),
+        'already_activated': _('This profile has already been activated.'),
     }
 
     def __init__(self, request=None, *args, **kwargs):
         self.request = request
+        self.user_cache = None
         super().__init__(*args, **kwargs)
 
     def clean(self):
         email_or_username = self.cleaned_data.get('email_or_username')
 
         if email_or_username is not None:
-            # todo: implement expire check
+            try:
+                user = User.objects.filter(
+                    Q(username=email_or_username) | Q(email=email_or_username)
+                ).get()
 
-            raise forms.ValidationError(
-                self.error_messages['non_expired'],
-                code='non_expired',
-            )
+                if user.is_active:
+                    raise forms.ValidationError(
+                        self.error_messages['already_activated'],
+                        code='already_activated',
+                    )
+                else:
+                    now_with_shift = timezone.now() - timedelta(hours=24)
+                    activation = user.activation_set.get()
+
+                    if activation.created_at > now_with_shift:
+                        raise forms.ValidationError(
+                            self.error_messages['non_expired'],
+                            code='non_expired',
+                        )
+                    else:
+                        self.user_cache = user
+            except User.DoesNotExist:
+                raise forms.ValidationError(
+                    self.error_messages['incorrect_data'],
+                    code='incorrect_data',
+                )
 
         return self.cleaned_data
+
+    def get_user(self):
+        return self.user_cache

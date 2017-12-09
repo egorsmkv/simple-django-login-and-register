@@ -8,8 +8,8 @@ from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form
-from .forms import SignUpForm,ReSendActivationCodeForm
+from .utils import get_login_form, send_activation_email
+from .forms import SignUpForm, ReSendActivationCodeForm
 from .models import Activation
 
 
@@ -56,7 +56,7 @@ class SignUpView(FormView):
             user.is_active = False
             user.save()
 
-            form.send_activation_email(self.request, user)
+            send_activation_email(self.request, user)
 
             messages.add_message(self.request, messages.SUCCESS,
                                  'You are registered. To activate the account, follow the link sent to the mail.')
@@ -126,7 +126,13 @@ class ReSendActivationCodeView(SuccessURLAllowedHostsMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
+        user = form.get_user()
 
-        # create new activation code
+        activation = user.activation_set.get()
+        activation.delete()
+
+        send_activation_email(self.request, user)
+
+        messages.add_message(self.request, messages.SUCCESS, 'A new activation code has been sent to your e-mail.')
 
         return HttpResponseRedirect(self.get_success_url())
