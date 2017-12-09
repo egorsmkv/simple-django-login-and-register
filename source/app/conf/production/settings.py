@@ -74,15 +74,8 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'simple-django-login-and-register',
-        'USER': 'prod',
-        'PASSWORD': 'prod',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-        'OPTIONS': {
-            'sql_mode': 'traditional',
-        }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
