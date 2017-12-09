@@ -1,44 +1,20 @@
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
-from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, resolve_url
-from django.utils.http import is_safe_url
+from django.shortcuts import get_object_or_404
 from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form, send_activation_email
+from .utils import get_login_form, send_activation_email, SuccessRedirectView
 from .forms import SignUpForm, ReSendActivationCodeForm
 from .models import Activation
 
 
-class SignInView(SuccessURLAllowedHostsMixin, FormView):
+class SignInView(SuccessRedirectView):
     template_name = 'accounts/login.html'
     form_class = get_login_form()
-    redirect_field_name = REDIRECT_FIELD_NAME
     success_url = '/'
-
-    def get_success_url(self):
-        url = self.get_redirect_url()
-        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
-
-    def get_redirect_url(self):
-        redirect_to = self.request.POST.get(
-            self.redirect_field_name,
-            self.request.GET.get(self.redirect_field_name, '')
-        )
-        url_is_safe = is_safe_url(
-            url=redirect_to,
-            allowed_hosts=self.get_success_url_allowed_hosts(),
-            require_https=self.request.is_secure(),
-        )
-        return redirect_to if url_is_safe else ''
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
 
     def form_valid(self, form):
         login(self.request, form.get_user())
@@ -98,32 +74,10 @@ class ActivateView(RedirectView):
         return super().get_redirect_url()
 
 
-class ReSendActivationCodeView(SuccessURLAllowedHostsMixin, FormView):
+class ReSendActivationCodeView(SuccessRedirectView):
     template_name = 'accounts/resend_activation_code.html'
     form_class = ReSendActivationCodeForm
-    redirect_field_name = REDIRECT_FIELD_NAME
     success_url = '/'
-
-    def get_success_url(self):
-        url = self.get_redirect_url()
-        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
-
-    def get_redirect_url(self):
-        redirect_to = self.request.POST.get(
-            self.redirect_field_name,
-            self.request.GET.get(self.redirect_field_name, '')
-        )
-        url_is_safe = is_safe_url(
-            url=redirect_to,
-            allowed_hosts=self.get_success_url_allowed_hosts(),
-            require_https=self.request.is_secure(),
-        )
-        return redirect_to if url_is_safe else ''
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['request'] = self.request
-        return kwargs
 
     def form_valid(self, form):
         user = form.get_user()
