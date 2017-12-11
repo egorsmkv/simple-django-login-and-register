@@ -8,7 +8,7 @@ from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form, send_activation_email, get_password_reset_form
+from .utils import get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email
 from .forms import SignUpForm, ReSendActivationCodeForm
 from .models import Activation
 
@@ -121,3 +121,8 @@ class ReSendActivationCodeView(SuccessRedirectView):
 
 class PasswordResetView(BasePasswordResetView):
     form_class = get_password_reset_form()
+
+    def form_valid(self, form):
+        send_reset_password_email(self.request, form.get_user())
+
+        return HttpResponseRedirect(self.get_success_url())

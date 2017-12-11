@@ -171,8 +171,11 @@ class ReSendActivationCodeForm(forms.Form):
 
         if email_or_username is not None:
             try:
+                username = email_or_username
+                email = email_or_username.lower()
+
                 user = User.objects.filter(
-                    Q(username=email_or_username) | Q(email=email_or_username)
+                    Q(username=username) | Q(email=email)
                 ).get()
 
                 if user.is_active:
@@ -208,3 +211,42 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
         label=_('Email or Username'),
         widget=forms.TextInput(attrs={'autofocus': True}),
     )
+
+    error_messages = {
+        'incorrect_data': _('You entered incorrect data.'),
+        'inactive': _('This account is inactive.'),
+    }
+
+    def __init__(self, *args, **kwargs):
+        self.user_cache = None
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        email_or_username = self.cleaned_data.get('email_or_username')
+
+        if email_or_username:
+            try:
+                username = email_or_username
+                email = email_or_username.lower()
+
+                user = User.objects.filter(
+                    Q(username=username) | Q(email=email)
+                ).get()
+
+                if not user.is_active:
+                    raise forms.ValidationError(
+                        self.error_messages['inactive'],
+                        code='inactive',
+                    )
+                else:
+                    self.user_cache = user
+            except User.DoesNotExist:
+                raise forms.ValidationError(
+                    self.error_messages['incorrect_data'],
+                    code='incorrect_data',
+                )
+
+        return self.cleaned_data
+
+    def get_user(self):
+        return self.user_cache
