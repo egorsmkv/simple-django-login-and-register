@@ -1,15 +1,41 @@
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib import messages
-from django.contrib.auth.views import PasswordResetView as BasePasswordResetView
+from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, resolve_url
+from django.utils.http import is_safe_url
 from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form, send_activation_email, get_password_reset_form, SuccessRedirectView
+from .utils import get_login_form, send_activation_email, get_password_reset_form
 from .forms import SignUpForm, ReSendActivationCodeForm
 from .models import Activation
+
+
+class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
+    redirect_field_name = REDIRECT_FIELD_NAME
+
+    def get_success_url(self):
+        url = self.get_redirect_url()
+        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
+
+    def get_redirect_url(self):
+        redirect_to = self.request.POST.get(
+            self.redirect_field_name,
+            self.request.GET.get(self.redirect_field_name, '')
+        )
+        url_is_safe = is_safe_url(
+            url=redirect_to,
+            allowed_hosts=self.get_success_url_allowed_hosts(),
+            require_https=self.request.is_secure(),
+        )
+        return redirect_to if url_is_safe else ''
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
 
 class SignInView(SuccessRedirectView):
