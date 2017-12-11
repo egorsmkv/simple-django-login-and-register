@@ -93,7 +93,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 ENABLE_USER_ACTIVATION = True
-LOGIN_VIA_EMAIL = True
+LOGIN_VIA_EMAIL = False
+LOGIN_VIA_EMAIL_OR_USERNAME = True
 LOGIN_REDIRECT_URL = '/'
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'

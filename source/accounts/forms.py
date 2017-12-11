@@ -9,17 +9,44 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 
-class SignInViaEmailForm(forms.Form):
+class SignIn(forms.Form):
     redirect_field_name = REDIRECT_FIELD_NAME
 
-    email = forms.EmailField(
-        label=_('Email'),
-        widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}),
-    )
     password = forms.CharField(
         label=_('Password'),
         strip=False,
         widget=forms.PasswordInput,
+    )
+
+    def __init__(self, request=None, *args, **kwargs):
+        self.request = request
+        self.user_cache = None
+        super().__init__(*args, **kwargs)
+
+    def invalid_login(self, email):
+        raise forms.ValidationError(
+            self.error_messages['invalid_login'],
+            code='invalid_login',
+            params={'email': email},
+        )
+
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            raise forms.ValidationError(
+                self.error_messages['inactive'],
+                code='inactive',
+            )
+
+    def get_user(self):
+        return self.user_cache
+
+
+class SignInViaEmailForm(SignIn):
+    field_order = ['email', 'password']
+
+    email = forms.EmailField(
+        label=_('Email'),
+        widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}),
     )
 
     error_messages = {
@@ -29,11 +56,6 @@ class SignInViaEmailForm(forms.Form):
         ),
         'inactive': _('This account is inactive.'),
     }
-
-    def __init__(self, request=None, *args, **kwargs):
-        self.request = request
-        self.user_cache = None
-        super().__init__(*args, **kwargs)
 
     def clean(self):
         email = self.cleaned_data.get('email')
@@ -52,22 +74,49 @@ class SignInViaEmailForm(forms.Form):
 
         return self.cleaned_data
 
-    def invalid_login(self, email):
-        raise forms.ValidationError(
-            self.error_messages['invalid_login'],
-            code='invalid_login',
-            params={'email': email},
-        )
 
-    def confirm_login_allowed(self, user):
-        if not user.is_active:
-            raise forms.ValidationError(
-                self.error_messages['inactive'],
-                code='inactive',
-            )
+class SignInViaEmailOrForm(SignIn):
+    field_order = ['email_or_username', 'password']
 
-    def get_user(self):
-        return self.user_cache
+    email_or_username = forms.CharField(
+        label=_('Email or Username'),
+        widget=forms.TextInput(attrs={'autofocus': True}),
+    )
+
+    error_messages = {
+        'invalid_login': _(
+            'Please enter a correct email or username and password. Note that both '
+            'fields may be case-sensitive.'
+        ),
+        'inactive': _('This account is inactive.'),
+    }
+
+    def __init__(self, request=None, *args, **kwargs):
+        self.request = request
+        self.user_cache = None
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        email_or_username = self.cleaned_data.get('email_or_username')
+        password = self.cleaned_data.get('password')
+
+        if email_or_username is not None and password:
+            email = email_or_username.lower()
+            username = email_or_username
+
+            self.user_cache = User.objects.filter(
+                Q(username=username) | Q(email=email)
+            ).first()
+
+            if self.user_cache:
+                self.confirm_login_allowed(self.user_cache)
+
+                if not self.user_cache.check_password(password):
+                    self.invalid_login(email)
+            else:
+                self.invalid_login(email)
+
+        return self.cleaned_data
 
 
 class SignUpForm(UserCreationForm):

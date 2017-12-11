@@ -12,7 +12,7 @@ from django.utils.http import is_safe_url
 from django.views.generic import FormView
 
 from .models import Activation
-from .forms import SignInViaEmailForm
+from .forms import SignInViaEmailForm, SignInViaEmailOrForm
 
 
 class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
@@ -43,6 +43,9 @@ class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
 def get_login_form():
     if hasattr(settings, 'LOGIN_VIA_EMAIL') and settings.LOGIN_VIA_EMAIL:
         return SignInViaEmailForm
+
+    if hasattr(settings, 'LOGIN_VIA_EMAIL_OR_USERNAME') and settings.LOGIN_VIA_EMAIL_OR_USERNAME:
+        return SignInViaEmailOrForm
 
     return AuthenticationForm
 
