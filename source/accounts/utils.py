@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.contrib.auth.views import SuccessURLAllowedHostsMixin
 from django.contrib.sites.models import Site
 from django.core.mail import EmailMultiAlternatives
@@ -12,7 +12,7 @@ from django.utils.http import is_safe_url
 from django.views.generic import FormView
 
 from .models import Activation
-from .forms import SignInViaEmailForm, SignInViaEmailOrForm
+from .forms import SignInViaEmailForm, SignInViaEmailOrForm, PasswordResetViaEmailOrUsernameForm
 
 
 class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
@@ -48,6 +48,13 @@ def get_login_form():
         return SignInViaEmailOrForm
 
     return AuthenticationForm
+
+
+def get_password_reset_form():
+    if hasattr(settings, 'PASSWORD_RESET_VIA_EMAIL_OR_USERNAME') and settings.PASSWORD_RESET_VIA_EMAIL_OR_USERNAME:
+        return PasswordResetViaEmailOrUsernameForm
+
+    return PasswordResetForm
 
 
 def send_activation_email(request, user):

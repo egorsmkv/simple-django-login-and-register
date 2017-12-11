@@ -201,3 +201,10 @@ class ReSendActivationCodeForm(forms.Form):
 
     def get_user(self):
         return self.user_cache
+
+
+class PasswordResetViaEmailOrUsernameForm(forms.Form):
+    email_or_username = forms.CharField(
+        label=_('Email or Username'),
+        widget=forms.TextInput(attrs={'autofocus': True}),
+    )

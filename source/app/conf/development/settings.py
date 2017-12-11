@@ -97,6 +97,8 @@ LOGIN_VIA_EMAIL = False
 LOGIN_VIA_EMAIL_OR_USERNAME = True
 LOGIN_REDIRECT_URL = '/'
 
+PASSWORD_RESET_VIA_EMAIL_OR_USERNAME = True
+
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 LANGUAGE_CODE = 'en-us'

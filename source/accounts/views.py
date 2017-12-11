@@ -1,12 +1,13 @@
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
+from django.contrib.auth.views import PasswordResetView as BasePasswordResetView
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form, send_activation_email, SuccessRedirectView
+from .utils import get_login_form, send_activation_email, get_password_reset_form, SuccessRedirectView
 from .forms import SignUpForm, ReSendActivationCodeForm
 from .models import Activation
 
@@ -90,3 +91,7 @@ class ReSendActivationCodeView(SuccessRedirectView):
         messages.add_message(self.request, messages.SUCCESS, 'A new activation code has been sent to your e-mail.')
 
         return HttpResponseRedirect(self.get_success_url())
+
+
+class PasswordResetView(BasePasswordResetView):
+    form_class = get_password_reset_form()
