@@ -4,7 +4,7 @@
 
 Now nothing.
 
-## v1.0
+## v2.0
 
 - Add password reset by a username
 - Add authentication by email
