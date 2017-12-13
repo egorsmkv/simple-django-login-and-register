@@ -8,6 +8,8 @@ from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
+from .models import Activation
+
 
 class SignIn(forms.Form):
     redirect_field_name = REDIRECT_FIELD_NAME
@@ -186,6 +188,7 @@ class ReSendActivationCodeForm(forms.Form):
                     )
                 else:
                     now_with_shift = timezone.now() - timedelta(hours=24)
+
                     activation = user.activation_set.get()
 
                     if activation.created_at > now_with_shift:
@@ -195,7 +198,7 @@ class ReSendActivationCodeForm(forms.Form):
                         )
                     else:
                         self.user_cache = user
-            except User.DoesNotExist:
+            except (User.DoesNotExist, Activation.DoesNotExist):
                 raise forms.ValidationError(
                     self.error_messages['incorrect_data'],
                     code='incorrect_data',
