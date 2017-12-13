@@ -127,7 +127,8 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'),
                                  widget=forms.TextInput(attrs={'autofocus': True}))
     last_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'))
-    email = forms.EmailField(max_length=255, help_text=_('Required. Type a valid email address.'))
+    email = forms.EmailField(max_length=255, help_text=_('Required. Type a valid email address.'),
+                             widget=forms.EmailInput(attrs={'placeholder': '@'}))
 
     error_messages = {
         'unique_email': _('You can not use this email.'),
