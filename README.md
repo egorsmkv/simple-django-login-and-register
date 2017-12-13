@@ -1,6 +1,7 @@
 # Simple Django Login and Registration
 
-An example of Django project with login, registration, password change, log out, and password reset functionality.
+An example of Django project with login, registration, profile activation, password change, log out,
+and password reset functionality.
 
 ## Screenshots
 
@@ -21,7 +22,7 @@ git clone https://github.com/egorsmkv/simple-django-login-and-register
 cd simple-django-login-and-register/source
 ```
 
-### Create virtual environment with `virtualenv`
+### Create a virtual environment with `virtualenv`
 
 ### Install dependencies
 
@@ -29,15 +30,7 @@ cd simple-django-login-and-register/source
 pip install -r requirements-dev.txt # or requirements.txt if you deploy the project on a production server
 ```
 
-### Create a MySQL database for the project
-
-For example:
-
-```
-CREATE DATABASE `simple-django-login-and-register` COLLATE 'utf8mb4_unicode_ci';
-```
-
-### Configure the settings (connection to the database, connection to the smtp server, and other options)
+### Configure the settings (connection to the database, connection to an SMTP server, and other options)
 
 1. Edit `source/app/conf/development/settings.py` if you want to develop the project.
 
@@ -49,7 +42,7 @@ CREATE DATABASE `simple-django-login-and-register` COLLATE 'utf8mb4_unicode_ci';
 ./manage.py migrate
 ```
 
-### Collect static files (only a production server)
+### Collect static files (only on a production server)
 
 ```
 ./manage.py collectstatic

@@ -1,8 +1,9 @@
 # Change log
 
-## v2.1 under development
+## v2.1
 
-Now nothing.
+- Revised the readme
+- Fixed some bugs and added a few improvements
 
 ## v2.0
 
