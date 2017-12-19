@@ -1,6 +1,6 @@
 # Change log
 
-## v2.2
+## v2.3
 
 - Added translations for Ukrainian, Russian, Spanish, French, and German languages
 
