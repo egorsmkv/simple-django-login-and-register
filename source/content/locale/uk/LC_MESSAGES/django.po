@@ -1,0 +1,273 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-19 20:25+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+
+#: accounts/forms.py:19
+msgid "Password"
+msgstr "Пароль"
+
+#: accounts/forms.py:37 accounts/forms.py:114
+msgid "Email"
+msgstr "Пошта"
+
+#: accounts/forms.py:42
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr ""
+"Будь ласка, введіть коректно пошту і пароль. Майте на увазі, що обидва поля "
+"можуть бути чутливі до регістру."
+
+#: accounts/forms.py:43 accounts/forms.py:75 accounts/forms.py:187
+msgid "This account is inactive."
+msgstr "Цей обліковий запис не активний."
+
+#: accounts/forms.py:67 accounts/forms.py:133 accounts/forms.py:181
+msgid "Email or Username"
+msgstr "Пошта або логін"
+
+#: accounts/forms.py:73
+msgid ""
+"Please enter a correct email or username and password. Note that both fields "
+"may be case-sensitive."
+msgstr ""
+"Будь ласка, введіть коректно пошту або логін і пароль. Майте на увазі, що "
+"обидва поля можуть бути чутливі до регістру."
+
+#: accounts/forms.py:111 accounts/forms.py:219
+msgid "First Name"
+msgstr "Прізвище"
+
+#: accounts/forms.py:111 accounts/forms.py:113 accounts/forms.py:219
+#: accounts/forms.py:221
+msgid "Optional."
+msgstr "Не обов'язково."
+
+#: accounts/forms.py:113 accounts/forms.py:221
+msgid "Last Name"
+msgstr "Ім'я"
+
+#: accounts/forms.py:114
+msgid "Required. Type a valid email address."
+msgstr "Обов'язково. Введіть правильну електронну пошту."
+
+#: accounts/forms.py:118
+msgid "You can not use this email."
+msgstr "Ви не можете використовувати цю пошту."
+
+#: accounts/forms.py:138
+msgid ""
+"Activation code has already been sent. You can request a new code in 24 "
+"hours."
+msgstr ""
+"Код активації вже був відправлений. Ви можете запросити новий код через 24 години."
+
+#: accounts/forms.py:139 accounts/forms.py:186
+msgid "You entered incorrect data."
+msgstr "Ви ввели некоректні дані."
+
+#: accounts/forms.py:140
+msgid "This profile has already been activated."
+msgstr "Це профіль вже активований."
+
+#: accounts/forms.py:228
+msgid "You can not use this mail."
+msgstr "Ви не можете використовувати цю пошту."
+
+#: accounts/forms.py:229
+msgid "Please enter another email."
+msgstr "Будь ласка, введіть іншу пошту."
+
+#: accounts/utils.py:36 content/templates/email/activation_profile.html:8
+msgid "Profile Activation"
+msgstr "Активація профілю"
+
+#: accounts/views.py:88
+msgid ""
+"You are registered. To activate the account, follow the link sent to the "
+"mail."
+msgstr ""
+"Ви зареєстровані. Для активації облікового запису, перейдіть за посиланням з листа."
+
+#: accounts/views.py:98
+msgid "You are successfully registered!"
+msgstr "Ви успішно зареєстровані!"
+
+#: accounts/views.py:121
+msgid "You have successfully activated your account!"
+msgstr "Ви успішно активували свій аккаунт!"
+
+#: accounts/views.py:140
+msgid "A new activation code has been sent to your e-mail."
+msgstr "Новий код активації відправлений на вашу пошту."
+
+#: accounts/views.py:177
+msgid "Profile data has been successfully updated."
+msgstr "Дані профілю були успішно оновлені."
+
+#: accounts/views.py:213
+msgid "To complete the change of mail, click on the link sent to it."
+msgstr "Для завершення зміни пошти, перейдіть за посиланням з листа."
+
+#: accounts/views.py:218
+msgid "Email successfully changed."
+msgstr "Пошта успішно змінена."
+
+#: accounts/views.py:241
+msgid "You have successfully changed your email!"
+msgstr "Ви успішно змінили свою пошту!"
+
+#: content/templates/accounts/login.html:10
+#: content/templates/layouts/default/head.html:52
+msgid "Log in"
+msgstr "Авторизація"
+
+#: content/templates/accounts/login.html:17
+#: content/templates/accounts/password_reset.html:26
+#: content/templates/accounts/resend_activation_code.html:26
+msgid "Login"
+msgstr "Увійти"
+
+#: content/templates/accounts/login.html:26
+#: content/templates/accounts/password_reset.html:10
+#: content/templates/accounts/password_reset_complete.html:10
+#: content/templates/accounts/password_reset_confirm.html:10
+#: content/templates/accounts/password_reset_done.html:10
+msgid "Password reset"
+msgstr "Відновлення паролю"
+
+#: content/templates/accounts/login.html:29
+#: content/templates/accounts/resend_activation_code.html:10
+msgid "Re-send Activation Code"
+msgstr "Повторно відправити код активації"
+
+#: content/templates/accounts/logout.html:9
+msgid "Logged out"
+msgstr "Вихід"
+
+#: content/templates/accounts/logout.html:12
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr "Дякуємо, що виділили час на відвідування сайту сьогодні."
+
+#: content/templates/accounts/logout.html:16
+msgid "Log in again"
+msgstr "Повторна авторизація"
+
+#: content/templates/accounts/password_change_done.html:10
+#: content/templates/accounts/password_change_form.html:10
+msgid "Password change"
+msgstr "Змінити пароль"
+
+#: content/templates/accounts/password_change_done.html:13
+msgid "Your password was changed."
+msgstr "Ваш пароль змінено."
+
+#: content/templates/accounts/password_change_form.html:17
+#: content/templates/accounts/password_reset_confirm.html:23
+#: accounts/utils.py:62
+#: content/templates/accounts/profile/change_email.html:10
+#: content/templates/email/change_email.html:8
+#: content/templates/layouts/default/head.html:45
+msgid "Change email"
+msgstr "Змінити пошту"
+
+#: content/templates/accounts/password_reset.html:17
+#: content/templates/accounts/resend_activation_code.html:17
+msgid "Next"
+msgstr "Далі"
+
+#: content/templates/accounts/password_reset_complete.html:13
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Ваш пароль змінено. Тепер ви можете увійти."
+
+#: content/templates/accounts/password_reset_confirm.html:15
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "Будь ласка, введіть новий пароль двічі, так ми зможемо перевірити, що ви його вводите коректно."
+
+#: content/templates/accounts/password_reset_confirm.html:29
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr "Посилання для зміни пароля невалидность, можливо вона була вже використана. Будь ласка, зробіть нове відновлення пароля."
+
+#: content/templates/accounts/password_reset_done.html:13
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered."
+msgstr "Ми відправимо лист з інструкціями по зміни вашого пароля, якщо акаунт з такою поштою існує."
+
+#: content/templates/accounts/password_reset_done.html:14
+msgid "You should receive them shortly."
+msgstr "Ви повинні отримати його незабаром."
+
+#: content/templates/accounts/password_reset_done.html:18
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr "Якщо ви не отримали листа, будь ласка перевірте папку спаму або упевніться, що введена пошта є тією, яка використовувалася при реєстрації."
+
+#: content/templates/accounts/profile/edit.html:10
+#: content/templates/layouts/default/head.html:42
+msgid "Profile edit"
+msgstr "Редагування профілю"
+
+#: content/templates/accounts/profile/edit.html:17
+msgid "Edit"
+msgstr "Редагувати"
+
+#: content/templates/accounts/register.html:10
+#: content/templates/layouts/default/head.html:55
+msgid "Create an account"
+msgstr "Створити акаунт"
+
+#: content/templates/accounts/register.html:17
+msgid "Create"
+msgstr "Створити"
+
+#: content/templates/email/activation_profile.html:14
+msgid "To activate your profile, please follow this link:"
+msgstr "Для активації облікового профілю, перейдіть за цим посиланням:"
+
+#: content/templates/email/change_email.html:14
+msgid "To change the mail, please follow the link:"
+msgstr "Для зміни пошти, перейдіть за цим посиланням:"
+
+#: content/templates/layouts/default/head.html:39
+msgid "Change password"
+msgstr "Змінити пароль"
+
+#: content/templates/layouts/default/head.html:48
+msgid "Log out"
+msgstr "Вихід"
+
+#: content/templates/main/index.html:11
+msgid "You are authorized."
+msgstr "Ви авторизовані."
+
+#: content/templates/main/index.html:15
+msgid "Your username is"
+msgstr "Ваш логін"
+
+#: content/templates/main/index.html:19
+msgid "You are a guest."
+msgstr "Ви гість."
