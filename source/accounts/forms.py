@@ -108,10 +108,10 @@ class SignUpForm(UserCreationForm):
         model = UserModel
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
 
-    first_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'),
+    first_name = forms.CharField(label=_('First Name'), max_length=50, required=False, help_text=_('Optional.'),
                                  widget=forms.TextInput(attrs={'autofocus': True}))
-    last_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'))
-    email = forms.EmailField(max_length=255, help_text=_('Required. Type a valid email address.'),
+    last_name = forms.CharField(label=_('Last Name'), max_length=50, required=False, help_text=_('Optional.'))
+    email = forms.EmailField(label=_('Email'), max_length=255, help_text=_('Required. Type a valid email address.'),
                              widget=forms.EmailInput(attrs={'placeholder': '@'}))
 
     error_messages = {
@@ -216,13 +216,13 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
 
 
 class ProfileEditForm(forms.Form):
-    first_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'),
+    first_name = forms.CharField(label=_('First Name'), max_length=50, required=False, help_text=_('Optional.'),
                                  widget=forms.TextInput(attrs={'autofocus': True}))
-    last_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'))
+    last_name = forms.CharField(label=_('Last Name'), max_length=50, required=False, help_text=_('Optional.'))
 
 
 class ChangeEmailForm(forms.Form):
-    email = forms.EmailField(max_length=255, widget=forms.EmailInput(attrs={'placeholder': '@'}))
+    email = forms.EmailField(label=_('Email'), max_length=255, widget=forms.EmailInput(attrs={'placeholder': '@'}))
 
     error_messages = {
         'email_already_exists': _('You can not use this mail.'),

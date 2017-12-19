@@ -8,6 +8,7 @@ from django.utils.http import is_safe_url
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
+from django.utils.translation import gettext_lazy as _
 from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
@@ -84,7 +85,7 @@ class SignUpView(FormView):
             send_activation_email(self.request, user)
 
             messages.add_message(self.request, messages.SUCCESS,
-                                 'You are registered. To activate the account, follow the link sent to the mail.')
+                                 _('You are registered. To activate the account, follow the link sent to the mail.'))
         else:
             form.save()
 
@@ -94,7 +95,7 @@ class SignUpView(FormView):
             user = authenticate(username=username, password=raw_password)
             login(self.request, user)
 
-            messages.add_message(self.request, messages.SUCCESS, 'You are successfully registered!')
+            messages.add_message(self.request, messages.SUCCESS, _('You are successfully registered!'))
 
         return super(SignUpView, self).form_valid(form)
 
@@ -117,7 +118,7 @@ class ActivateView(RedirectView):
         # Remove activation record, it is unneeded
         act.delete()
 
-        messages.add_message(self.request, messages.SUCCESS, 'You have successfully activated your account!')
+        messages.add_message(self.request, messages.SUCCESS, _('You have successfully activated your account!'))
         login(self.request, user)
 
         return super(ActivateView, self).get_redirect_url()
@@ -136,7 +137,7 @@ class ReSendActivationCodeView(SuccessRedirectView):
 
         send_activation_email(self.request, user)
 
-        messages.add_message(self.request, messages.SUCCESS, 'A new activation code has been sent to your e-mail.')
+        messages.add_message(self.request, messages.SUCCESS, _('A new activation code has been sent to your e-mail.'))
 
         return super(ReSendActivationCodeView, self).form_valid(form)
 
@@ -173,7 +174,7 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         user.last_name = form.cleaned_data.get('last_name')
         user.save()
 
-        messages.add_message(self.request, messages.SUCCESS, 'Profile data has been successfully updated.')
+        messages.add_message(self.request, messages.SUCCESS, _('Profile data has been successfully updated.'))
 
         return super(ProfileEditView, self).form_valid(form)
 
@@ -209,12 +210,12 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
             send_activation_change_email(self.request, user, email)
 
             messages.add_message(self.request, messages.SUCCESS,
-                                 'To complete the change of mail, click on the link sent to it.')
+                                 _('To complete the change of mail, click on the link sent to it.'))
         else:
             user.email = email
             user.save()
 
-            messages.add_message(self.request, messages.SUCCESS, 'Email successfully changed.')
+            messages.add_message(self.request, messages.SUCCESS, _('Email successfully changed.'))
 
         return super(ChangeEmailView, self).form_valid(form)
 
@@ -237,6 +238,6 @@ class ChangeEmailActivateView(RedirectView):
         # Remove activation record, it is unneeded
         act.delete()
 
-        messages.add_message(self.request, messages.SUCCESS, 'You have successfully changed your email!')
+        messages.add_message(self.request, messages.SUCCESS, _('You have successfully changed your email!'))
 
         return super(ChangeEmailActivateView, self).get_redirect_url()

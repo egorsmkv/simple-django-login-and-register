@@ -102,7 +102,7 @@ EMAIL_ACTIVATION_AFTER_CHANGING = True
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru_RU'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
@@ -116,4 +116,8 @@ MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(CONTENT_DIR, 'assets'),
+]
+
+LOCALE_PATHS = [
+    os.path.join(CONTENT_DIR, 'locale')
 ]

@@ -1,19 +1,20 @@
 {% include 'layouts/default/head.html' %}
 
 {% load bootstrap4 %}
+{% load i18n %}
 
 <div class="container-fluid">
 
     <div class="mt-3">
 
-        <h4>Log in</h4>
+        <h4>{% trans 'Log in' %}</h4>
 
         <form method="post">
             {% csrf_token %}
 
             {% bootstrap_form form %}
 
-            <button class="btn btn-primary">Login</button>
+            <button class="btn btn-primary">{% trans 'Login' %}</button>
         </form>
 
     </div>
@@ -22,10 +23,10 @@
 
     <ul>
         <li>
-            <a href="{% url 'password_reset' %}">Password Reset</a>
+            <a href="{% url 'password_reset' %}">{% trans 'Password reset' %}</a>
         </li>
         <li>
-            <a href="{% url 'resend_activation_code' %}">Re-send Activation Code</a>
+            <a href="{% url 'resend_activation_code' %}">{% trans 'Re-send Activation Code' %}</a>
         </li>
     </ul>
 
