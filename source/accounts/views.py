@@ -12,8 +12,10 @@ from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email, \
+from .utils import (
+    get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email,
     send_activation_change_email
+)
 from .forms import SignUpForm, ReSendActivationCodeForm, ProfileEditForm, ChangeEmailForm
 from .models import Activation
 
