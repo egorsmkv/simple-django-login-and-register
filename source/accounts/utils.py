@@ -12,7 +12,7 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 
 from .models import Activation
-from .forms import SignInViaEmailForm, SignInViaEmailOrForm, PasswordResetViaEmailOrUsernameForm
+from .forms import SignInViaEmailForm, SignInViaEmailOrUsernameForm, PasswordResetViaEmailOrUsernameForm
 
 
 def get_login_form():
@@ -20,7 +20,7 @@ def get_login_form():
         return SignInViaEmailForm
 
     if hasattr(settings, 'LOGIN_VIA_EMAIL_OR_USERNAME') and settings.LOGIN_VIA_EMAIL_OR_USERNAME:
-        return SignInViaEmailOrForm
+        return SignInViaEmailOrUsernameForm
 
     return AuthenticationForm
 

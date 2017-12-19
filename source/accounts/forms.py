@@ -60,7 +60,7 @@ class SignInViaEmailForm(SignIn):
             self.add_error('email', self.error_messages['invalid_login'])
 
 
-class SignInViaEmailOrForm(SignIn):
+class SignInViaEmailOrUsernameForm(SignIn):
     field_order = ['email_or_username', 'password']
 
     email_or_username = forms.CharField(
@@ -81,7 +81,7 @@ class SignInViaEmailOrForm(SignIn):
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(SignInViaEmailOrForm, self).clean()
+        cleaned_data = super(SignInViaEmailOrUsernameForm, self).clean()
 
         email_or_username = cleaned_data.get('email_or_username', '')
         password = cleaned_data.get('password', '')
@@ -95,12 +95,12 @@ class SignInViaEmailOrForm(SignIn):
 
         if self.user_cache:
             if not self.user_cache.is_active:
-                self.add_error('email', self.error_messages['inactive'])
+                self.add_error('email_or_username', self.error_messages['inactive'])
 
             if not self.user_cache.check_password(password):
-                self.add_error('email', self.error_messages['invalid_login'])
+                self.add_error('email_or_username', self.error_messages['invalid_login'])
         else:
-            self.add_error('email', self.error_messages['invalid_login'])
+            self.add_error('email_or_username', self.error_messages['invalid_login'])
 
 
 class SignUpForm(UserCreationForm):
