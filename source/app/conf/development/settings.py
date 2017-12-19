@@ -102,7 +102,7 @@ EMAIL_ACTIVATION_AFTER_CHANGING = True
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'de'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
