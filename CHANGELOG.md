@@ -2,6 +2,10 @@
 
 ## v2.2
 
+- Added translations for Ukrainian, Russian, Spanish, French, and German languages
+
+## v2.2
+
 - Changed straight call of User's model
 - Added the profile editing
 - Added email changing

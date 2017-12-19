@@ -1,7 +1,6 @@
 # Simple Django Login and Registration
 
-An example of Django project with login, registration, profile activation, password change, log out,
-and password reset functionality.
+An example of Django project with basic user functionality.
 
 ## Screenshots
 
@@ -12,6 +11,23 @@ and password reset functionality.
 | Password reset | Set new password | Password change |
 | ---------------|------------------|-----------------|
 | <img src="./screenshots/password_reset.png" width="200"> | <img src="./screenshots/set_new_password.png" width="200"> | <img src="./screenshots/password_change.png" width="200"> |
+
+## Functionality
+
+- Sign In
+    - via username & password
+    - via email & password
+    - via email or username & password
+- Sign Up
+- Log Out
+- Profile Activation via Email
+- Password Reset
+- Re-send Activation Code
+- Password Changing
+- Email Changing
+- Profile Data Changing
+- Multilingual: Ukrainian, Russian, Spanish, French, and German languages
+
 
 ## Installing
 
