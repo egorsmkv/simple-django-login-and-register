@@ -1,9 +1,12 @@
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib import messages
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, resolve_url
+from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
@@ -43,9 +46,24 @@ class SignInView(SuccessRedirectView):
     form_class = get_login_form()
     success_url = '/'
 
+    @method_decorator(sensitive_post_parameters('password'))
+    @method_decorator(csrf_protect)
+    @method_decorator(never_cache)
+    def dispatch(self, request, *args, **kwargs):
+        # Sets a test cookie to make sure the user has cookies enabled
+        request.session.set_test_cookie()
+
+        return super(SignInView, self).dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
+        # If the test cookie worked, go ahead and
+        # delete it since its no longer needed
+        if self.request.session.test_cookie_worked():
+            self.request.session.delete_test_cookie()
+
         login(self.request, form.get_user())
-        return HttpResponseRedirect(self.get_success_url())
+
+        return super(SignInView, self).form_valid(form)
 
 
 class SignUpView(FormView):
@@ -74,7 +92,7 @@ class SignUpView(FormView):
 
             messages.add_message(self.request, messages.SUCCESS, 'You are successfully registered!')
 
-        return super().form_valid(form)
+        return super(SignUpView, self).form_valid(form)
 
 
 class ActivateView(RedirectView):
@@ -98,7 +116,7 @@ class ActivateView(RedirectView):
         messages.add_message(self.request, messages.SUCCESS, 'You have successfully activated your account!')
         login(self.request, user)
 
-        return super().get_redirect_url()
+        return super(ActivateView, self).get_redirect_url()
 
 
 class ReSendActivationCodeView(SuccessRedirectView):
@@ -116,7 +134,7 @@ class ReSendActivationCodeView(SuccessRedirectView):
 
         messages.add_message(self.request, messages.SUCCESS, 'A new activation code has been sent to your e-mail.')
 
-        return HttpResponseRedirect(self.get_success_url())
+        return super(ReSendActivationCodeView, self).form_valid(form)
 
 
 class PasswordResetView(BasePasswordResetView):
@@ -125,4 +143,4 @@ class PasswordResetView(BasePasswordResetView):
     def form_valid(self, form):
         send_reset_password_email(self.request, form.get_user())
 
-        return HttpResponseRedirect(self.get_success_url())
+        return super(PasswordResetView, self).form_valid(form)
