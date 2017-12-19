@@ -1,14 +1,15 @@
 from datetime import timedelta
 
 from django import forms
-from django.contrib.auth import REDIRECT_FIELD_NAME
+from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from .models import Activation
+
+UserModel = get_user_model()
 
 
 class SignIn(forms.Form):
@@ -65,7 +66,7 @@ class SignInViaEmailForm(SignIn):
 
         if email is not None and password:
             email = email.lower()
-            self.user_cache = User.objects.filter(email=email).first()
+            self.user_cache = UserModel.objects.filter(email=email).first()
             if self.user_cache:
                 self.confirm_login_allowed(self.user_cache)
 
@@ -106,7 +107,7 @@ class SignInViaEmailOrForm(SignIn):
             email = email_or_username.lower()
             username = email_or_username
 
-            self.user_cache = User.objects.filter(
+            self.user_cache = UserModel.objects.filter(
                 Q(username=username) | Q(email=email)
             ).first()
 
@@ -123,7 +124,7 @@ class SignInViaEmailOrForm(SignIn):
 
 class SignUpForm(UserCreationForm):
     class Meta:
-        model = User
+        model = UserModel
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
 
     first_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'),
@@ -141,7 +142,7 @@ class SignUpForm(UserCreationForm):
 
         if email is not None:
             email = email.lower()
-            num_users = User.objects.filter(email=email).count()
+            num_users = UserModel.objects.filter(email=email).count()
 
             if num_users > 0:
                 raise forms.ValidationError(
@@ -177,7 +178,7 @@ class ReSendActivationCodeForm(forms.Form):
                 username = email_or_username
                 email = email_or_username.lower()
 
-                user = User.objects.filter(
+                user = UserModel.objects.filter(
                     Q(username=username) | Q(email=email)
                 ).get()
 
@@ -198,7 +199,7 @@ class ReSendActivationCodeForm(forms.Form):
                         )
                     else:
                         self.user_cache = user
-            except (User.DoesNotExist, Activation.DoesNotExist):
+            except (UserModel.DoesNotExist, Activation.DoesNotExist):
                 raise forms.ValidationError(
                     self.error_messages['incorrect_data'],
                     code='incorrect_data',
@@ -233,7 +234,7 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
                 username = email_or_username
                 email = email_or_username.lower()
 
-                user = User.objects.filter(
+                user = UserModel.objects.filter(
                     Q(username=username) | Q(email=email)
                 ).get()
 
@@ -244,7 +245,7 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
                     )
                 else:
                     self.user_cache = user
-            except User.DoesNotExist:
+            except UserModel.DoesNotExist:
                 raise forms.ValidationError(
                     self.error_messages['incorrect_data'],
                     code='incorrect_data',
