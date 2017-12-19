@@ -1,5 +1,6 @@
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
 from django.shortcuts import get_object_or_404, resolve_url
 from django.utils.decorators import method_decorator
@@ -12,7 +13,7 @@ from django.views.generic.edit import FormView
 from django.conf import settings
 
 from .utils import get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email
-from .forms import SignUpForm, ReSendActivationCodeForm
+from .forms import SignUpForm, ReSendActivationCodeForm, ProfileEditForm
 from .models import Activation
 
 
@@ -144,3 +145,31 @@ class PasswordResetView(BasePasswordResetView):
         send_reset_password_email(self.request, form.get_user())
 
         return super(PasswordResetView, self).form_valid(form)
+
+
+class ProfileEditView(LoginRequiredMixin, FormView):
+    template_name = 'accounts/profile/edit.html'
+
+    form_class = ProfileEditForm
+    success_url = '/accounts/profile/edit/'
+
+    def get_initial(self):
+        initial = super(ProfileEditView, self).get_initial()
+
+        user = self.request.user
+
+        initial['first_name'] = user.first_name
+        initial['last_name'] = user.last_name
+
+        return initial
+
+    def form_valid(self, form):
+        user = self.request.user
+
+        user.first_name = form.cleaned_data.get('first_name')
+        user.last_name = form.cleaned_data.get('last_name')
+        user.save()
+
+        messages.add_message(self.request, messages.SUCCESS, 'Profile data has been successfully updated.')
+
+        return super(ProfileEditView, self).form_valid(form)
