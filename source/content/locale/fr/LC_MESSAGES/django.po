@@ -1,0 +1,268 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-19 22:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/forms.py:19
+msgid "Password"
+msgstr "Mot de passe"
+
+#: accounts/forms.py:37 accounts/forms.py:114 accounts/forms.py:225
+msgid "Email"
+msgstr "Email"
+
+#: accounts/forms.py:42
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr "Veuillez entrer un courriel et un mot de passe corrects. Noter que les deux champs peuvent être sensibles à la casse."
+
+#: accounts/forms.py:43 accounts/forms.py:75 accounts/forms.py:187
+msgid "This account is inactive."
+msgstr "Ce compte est inactif."
+
+#: accounts/forms.py:67 accounts/forms.py:133 accounts/forms.py:181
+msgid "Email or Username"
+msgstr "E-mail ou nom d'utilisateur"
+
+#: accounts/forms.py:73
+msgid ""
+"Please enter a correct email or username and password. Note that both fields "
+"may be case-sensitive."
+msgstr "Veuillez entrer un courriel ou un nom d'utilisateur et un mot de passe corrects. Noter que les deux champs peuvent être sensibles à la casse."
+
+#: accounts/forms.py:111 accounts/forms.py:219
+msgid "First Name"
+msgstr "Prénom"
+
+#: accounts/forms.py:111 accounts/forms.py:113 accounts/forms.py:219
+#: accounts/forms.py:221
+msgid "Optional."
+msgstr "Optionnel."
+
+#: accounts/forms.py:113 accounts/forms.py:221
+msgid "Last Name"
+msgstr "Nom de famille"
+
+#: accounts/forms.py:114
+msgid "Required. Type a valid email address."
+msgstr "Champs obligatoires. Saisissez une adresse e-mail valide"
+
+#: accounts/forms.py:118
+msgid "You can not use this email."
+msgstr "Vous ne pouvez pas utiliser cet e-mail."
+
+#: accounts/forms.py:138
+msgid ""
+"Activation code has already been sent. You can request a new code in 24 "
+"hours."
+msgstr "Le code d'activation a déjà été envoyé. Vous pouvez demander un nouveau code dans les 24 heures."
+
+#: accounts/forms.py:139 accounts/forms.py:186
+msgid "You entered incorrect data."
+msgstr "Vous avez entré des données incorrectes."
+
+#: accounts/forms.py:140
+msgid "This profile has already been activated."
+msgstr "Ce profil a déjà été activé."
+
+#: accounts/forms.py:228
+msgid "You can not use this mail."
+msgstr "Vous ne pouvez pas utiliser ce mail."
+
+#: accounts/forms.py:229
+msgid "Please enter another email."
+msgstr "S'il vous plaît entrer un autre email."
+
+#: accounts/utils.py:36 content/templates/email/activation_profile.html:8
+msgid "Profile Activation"
+msgstr "Activation du profil"
+
+#: accounts/utils.py:62 content/templates/accounts/profile/change_email.html:10
+#: content/templates/email/change_email.html:8
+#: content/templates/layouts/default/head.html:45
+msgid "Change email"
+msgstr "Changer l'e-mail"
+
+#: accounts/views.py:88
+msgid ""
+"You are registered. To activate the account, follow the link sent to the "
+"mail."
+msgstr "Vous êtes enregistré Pour activer le compte, suivez le lien envoyé au mail."
+
+#: accounts/views.py:98
+msgid "You are successfully registered!"
+msgstr "Vous êtes enregistré avec succès!"
+
+#: accounts/views.py:121
+msgid "You have successfully activated your account!"
+msgstr "Vous avez activé votre compte avec succès!"
+
+#: accounts/views.py:140
+msgid "A new activation code has been sent to your e-mail."
+msgstr "Un nouveau code d'activation a été envoyé à votre adresse e-mail."
+
+#: accounts/views.py:177
+msgid "Profile data has been successfully updated."
+msgstr "Les données de profil ont été mises à jour avec succès."
+
+#: accounts/views.py:213
+msgid "To complete the change of mail, click on the link sent to it."
+msgstr "Pour compléter le changement de courrier, cliquez sur le lien qui lui a été envoyé."
+
+#: accounts/views.py:218
+msgid "Email successfully changed."
+msgstr "L'email a changé avec succès."
+
+#: accounts/views.py:241
+msgid "You have successfully changed your email!"
+msgstr "Vous avez changé votre adresse email avec succès!"
+
+#: content/templates/accounts/login.html:10
+#: content/templates/layouts/default/head.html:52
+msgid "Log in"
+msgstr "S'identifier"
+
+#: content/templates/accounts/login.html:17
+#: content/templates/accounts/password_reset.html:26
+#: content/templates/accounts/resend_activation_code.html:26
+msgid "Login"
+msgstr "S'identifier"
+
+#: content/templates/accounts/login.html:26
+#: content/templates/accounts/password_reset.html:10
+#: content/templates/accounts/password_reset_complete.html:10
+#: content/templates/accounts/password_reset_confirm.html:10
+#: content/templates/accounts/password_reset_done.html:10
+msgid "Password reset"
+msgstr "Réinitialiser le mot de passe"
+
+#: content/templates/accounts/login.html:29
+#: content/templates/accounts/resend_activation_code.html:10
+msgid "Re-send Activation Code"
+msgstr "Renvoyer le code d'activation"
+
+#: content/templates/accounts/logout.html:9
+msgid "Logged out"
+msgstr "Déconnecté"
+
+#: content/templates/accounts/logout.html:12
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr "Merci d'avoir passé du temps avec le site Web aujourd'hui."
+
+#: content/templates/accounts/logout.html:16
+msgid "Log in again"
+msgstr "Reconnectez-vous"
+
+#: content/templates/accounts/password_change_done.html:10
+#: content/templates/accounts/password_change_form.html:10
+msgid "Password change"
+msgstr "Changement de mot de passe"
+
+#: content/templates/accounts/password_change_done.html:13
+msgid "Your password was changed."
+msgstr "Votre mot de passe a été changé."
+
+#: content/templates/accounts/password_change_form.html:17
+#: content/templates/accounts/password_reset_confirm.html:23
+#: content/templates/accounts/profile/change_email.html:17
+msgid "Change"
+msgstr "Changement"
+
+#: content/templates/accounts/password_reset.html:17
+#: content/templates/accounts/resend_activation_code.html:17
+msgid "Next"
+msgstr "Prochain"
+
+#: content/templates/accounts/password_reset_complete.html:13
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Votre mot de passe a été défini. Vous pouvez aller de l'avant et vous connecter maintenant."
+
+#: content/templates/accounts/password_reset_confirm.html:15
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "Veuillez entrer votre nouveau mot de passe deux fois afin que nous puissions vérifier que vous l'avez entré correctement."
+
+#: content/templates/accounts/password_reset_confirm.html:29
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr "Le lien de réinitialisation du mot de passe était invalide, peut-être parce qu'il a déjà été utilisé. Veuillez demander une nouvelle réinitialisation du mot de passe."
+
+#: content/templates/accounts/password_reset_done.html:13
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered."
+msgstr "Nous vous avons envoyé par e-mail des instructions pour définir votre mot de passe, s'il existe un compte avec l'e-mail que vous avez entré."
+
+#: content/templates/accounts/password_reset_done.html:14
+msgid "You should receive them shortly."
+msgstr "Vous devriez les recevoir sous peu."
+
+#: content/templates/accounts/password_reset_done.html:18
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr "Si vous ne recevez pas d'e-mail, assurez-vous d'avoir entré l'adresse avec laquelle vous vous êtes inscrit et vérifiez votre dossier spam."
+
+#: content/templates/accounts/profile/edit.html:10
+#: content/templates/layouts/default/head.html:42
+msgid "Profile edit"
+msgstr "Profil éditer"
+
+#: content/templates/accounts/profile/edit.html:17
+msgid "Edit"
+msgstr "Modifier"
+
+#: content/templates/accounts/register.html:10
+#: content/templates/layouts/default/head.html:55
+msgid "Create an account"
+msgstr "Créer un compte"
+
+#: content/templates/accounts/register.html:17
+msgid "Create"
+msgstr "Créer"
+
+#: content/templates/email/activation_profile.html:14
+msgid "To activate your profile, please follow this link:"
+msgstr "Pour activer votre profil, veuillez suivre ce lien:"
+
+#: content/templates/email/change_email.html:14
+msgid "To change the mail, please follow the link:"
+msgstr "Pour changer le mail, veuillez suivre le lien:"
+
+#: content/templates/layouts/default/head.html:39
+msgid "Change password"
+msgstr "Changer le mot de passe"
+
+#: content/templates/layouts/default/head.html:48
+msgid "Log out"
+msgstr "Connectez - Out"
+
+#: content/templates/main/index.html:11
+msgid "You are authorized."
+msgstr "Vous êtes autorisé"
+
+#: content/templates/main/index.html:15
+msgid "Your username is"
+msgstr "Votre nom d'utilisateur est"
+
+#: content/templates/main/index.html:19
+msgid "You are a guest."
+msgstr "Vous êtes un invité."
