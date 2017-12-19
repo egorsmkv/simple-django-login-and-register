@@ -12,8 +12,9 @@ from django.views.generic import RedirectView
 from django.views.generic.edit import FormView
 from django.conf import settings
 
-from .utils import get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email
-from .forms import SignUpForm, ReSendActivationCodeForm, ProfileEditForm
+from .utils import get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email, \
+    send_activation_change_email
+from .forms import SignUpForm, ReSendActivationCodeForm, ProfileEditForm, ChangeEmailForm
 from .models import Activation
 
 
@@ -173,3 +174,67 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         messages.add_message(self.request, messages.SUCCESS, 'Profile data has been successfully updated.')
 
         return super(ProfileEditView, self).form_valid(form)
+
+
+class ChangeEmailView(LoginRequiredMixin, FormView):
+    template_name = 'accounts/profile/change_email.html'
+
+    form_class = ChangeEmailForm
+    success_url = '/accounts/change/email/'
+
+    def get_form_kwargs(self):
+        kwargs = super(ChangeEmailView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+
+        return kwargs
+
+    def get_initial(self):
+        initial = super(ChangeEmailView, self).get_initial()
+
+        user = self.request.user
+
+        initial['email'] = user.email
+
+        return initial
+
+    def form_valid(self, form):
+        user = self.request.user
+
+        email = form.cleaned_data.get('email')
+        email = email.lower()
+
+        if hasattr(settings, 'EMAIL_ACTIVATION_AFTER_CHANGING') and settings.EMAIL_ACTIVATION_AFTER_CHANGING:
+            send_activation_change_email(self.request, user, email)
+
+            messages.add_message(self.request, messages.SUCCESS,
+                                 'To complete the change of mail, click on the link sent to it.')
+        else:
+            user.email = email
+            user.save()
+
+            messages.add_message(self.request, messages.SUCCESS, 'Email successfully changed.')
+
+        return super(ChangeEmailView, self).form_valid(form)
+
+
+class ChangeEmailActivateView(RedirectView):
+    permanent = False
+    query_string = True
+    pattern_name = 'change_email'
+
+    def get_redirect_url(self, *args, **kwargs):
+        assert 'code' in kwargs
+
+        act = get_object_or_404(Activation, code=kwargs['code'])
+
+        # Change user's email
+        user = act.user
+        user.email = act.email
+        user.save()
+
+        # Remove activation record, it is unneeded
+        act.delete()
+
+        messages.add_message(self.request, messages.SUCCESS, 'You have successfully changed your email!')
+
+        return super(ChangeEmailActivateView, self).get_redirect_url()

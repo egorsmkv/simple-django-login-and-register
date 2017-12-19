@@ -37,5 +37,8 @@ urlpatterns = [
          name='password_reset_complete'),
 
     path('accounts/profile/edit/', accounts.views.ProfileEditView.as_view(), name='profile_edit'),
+    path('accounts/change/email/', accounts.views.ChangeEmailView.as_view(), name='change_email'),
+    path('accounts/change/email/<code>/', accounts.views.ChangeEmailActivateView.as_view(),
+         name='change_email_activation'),
 
 ]

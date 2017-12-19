@@ -261,3 +261,39 @@ class ProfileEditForm(forms.Form):
     first_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'),
                                  widget=forms.TextInput(attrs={'autofocus': True}))
     last_name = forms.CharField(max_length=50, required=False, help_text=_('Optional.'))
+
+
+class ChangeEmailForm(forms.Form):
+    email = forms.EmailField(max_length=255, widget=forms.EmailInput(attrs={'placeholder': '@'}))
+
+    error_messages = {
+        'email_already_exists': _('You can not use this mail.'),
+        'same_email': _('Please enter another email.'),
+    }
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(ChangeEmailForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+
+        email = email.lower()
+
+        if email == self.user.email:
+            raise forms.ValidationError(
+                self.error_messages['same_email'],
+                code='same_email',
+            )
+        else:
+            user = UserModel.objects.filter(
+                Q(email=email) & ~Q(id=self.user.id)
+            ).exists()
+
+            if user:
+                raise forms.ValidationError(
+                    self.error_messages['email_already_exists'],
+                    code='email_already_exists',
+                )
+
+        return self.cleaned_data

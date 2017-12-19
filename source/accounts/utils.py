@@ -58,6 +58,33 @@ def send_activation_email(request, user):
     msg.send()
 
 
+def send_activation_change_email(request, user, new_email):
+    subject = _('Change email')
+
+    from_email = settings.DEFAULT_FROM_EMAIL
+    current_site = get_current_site(request)
+    domain = current_site.domain
+    code = get_random_string(20)
+
+    context = {
+        'domain': domain,
+        'code': code,
+    }
+
+    act = Activation()
+    act.code = code
+    act.user = user
+    act.email = new_email
+    act.save()
+
+    html_content = render_to_string('email/change_email.html', context=context, request=request)
+    text_content = strip_tags(html_content)
+
+    msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
+    msg.attach_alternative(html_content, 'text/html')
+    msg.send()
+
+
 def send_reset_password_email(request, user):
     from_email = settings.DEFAULT_FROM_EMAIL
     current_site = get_current_site(request)
