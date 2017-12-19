@@ -1,5 +1,14 @@
 # Change log
 
+## v2.2
+
+- Changed straight call of User's model
+- Added the profile editing
+- Added email changing
+- Changed validation handles
+- Improve sign in view
+- Renamed SignInViaEmailOrForm to SignInViaEmailOrUsernameForm
+
 ## v2.1
 
 - Revised the readme
