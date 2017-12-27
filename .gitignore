@@ -1,8 +1,11 @@
 .idea/
+.vscode/
 
 __pycache__/
 
 source/content/media/
 source/content/static/
+
+env/
 
 db.sqlite3
