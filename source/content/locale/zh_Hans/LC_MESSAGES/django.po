@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-27 15:43+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Wentao Han <wentao.han@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: Simplified Chinese\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: accounts/forms.py:19
+msgid "Password"
+msgstr "密码"
+
+#: accounts/forms.py:37 accounts/forms.py:114 accounts/forms.py:225
+msgid "Email"
+msgstr "电子邮箱"
+
+#: accounts/forms.py:42
+msgid ""
+"Please enter a correct email and password. Note that both fields may be case-"
+"sensitive."
+msgstr "请输入正确的电子邮箱和密码。注意这两个字段可能是大小写敏感的。"
+
+#: accounts/forms.py:43 accounts/forms.py:75 accounts/forms.py:187
+msgid "This account is inactive."
+msgstr "此账号已被禁用。"
+
+#: accounts/forms.py:67 accounts/forms.py:133 accounts/forms.py:181
+msgid "Email or Username"
+msgstr "电子邮箱或用户名"
+
+#: accounts/forms.py:73
+msgid ""
+"Please enter a correct email or username and password. Note that both fields "
+"may be case-sensitive."
+msgstr "请输入正确的电子邮箱和密码。注意这两个字段可能是大小写敏感的。"
+
+#: accounts/forms.py:111 accounts/forms.py:219
+msgid "First Name"
+msgstr "名"
+
+#: accounts/forms.py:111 accounts/forms.py:113 accounts/forms.py:219
+#: accounts/forms.py:221
+msgid "Optional."
+msgstr "选填。"
+
+#: accounts/forms.py:113 accounts/forms.py:221
+msgid "Last Name"
+msgstr "姓"
+
+#: accounts/forms.py:114
+msgid "Required. Type a valid email address."
+msgstr "必填。输入一个合法的电子邮箱地址。"
+
+#: accounts/forms.py:118
+msgid "You can not use this email."
+msgstr "不能使用这个电子邮箱。"
+
+#: accounts/forms.py:138
+msgid ""
+"Activation code has already been sent. You can request a new code in 24 "
+"hours."
+msgstr "激活码已经发送。你可以在24小时内再次请求新的激活码。"
+
+#: accounts/forms.py:139 accounts/forms.py:186
+msgid "You entered incorrect data."
+msgstr "输入了不正确的数据。"
+
+#: accounts/forms.py:140
+msgid "This profile has already been activated."
+msgstr "该账号已经激活。"
+
+#: accounts/forms.py:228
+msgid "You can not use this mail."
+msgstr "你不能使用这个邮箱。"
+
+#: accounts/forms.py:229
+msgid "Please enter another email."
+msgstr "请输入一个新的电子邮箱。"
+
+#: accounts/utils.py:36 content/templates/email/activation_profile.html:8
+msgid "Profile Activation"
+msgstr "账号激活"
+
+#: accounts/utils.py:62 content/templates/accounts/profile/change_email.html:10
+#: content/templates/email/change_email.html:8
+#: content/templates/layouts/default/head.html:45
+msgid "Change email"
+msgstr "修改电子邮箱"
+
+#: accounts/views.py:88
+msgid ""
+"You are registered. To activate the account, follow the link sent to the "
+"mail."
+msgstr "你已经完成注册。若要激活账号，请访问刚发送的邮件中的链接。"
+
+#: accounts/views.py:98
+msgid "You are successfully registered!"
+msgstr "你已成功注册！"
+
+#: accounts/views.py:121
+msgid "You have successfully activated your account!"
+msgstr "你已成功激活你的账号！"
+
+#: accounts/views.py:140
+msgid "A new activation code has been sent to your e-mail."
+msgstr "新的激活码已经发送到你的电子邮箱。"
+
+#: accounts/views.py:177
+msgid "Profile data has been successfully updated."
+msgstr "已经成功更新了个人信息数据。"
+
+#: accounts/views.py:213
+msgid "To complete the change of mail, click on the link sent to it."
+msgstr "若要完成邮箱地址修改，请点击发送到当前邮箱的链接。"
+
+#: accounts/views.py:218
+msgid "Email successfully changed."
+msgstr "电子邮箱地址修改成功。"
+
+#: accounts/views.py:241
+msgid "You have successfully changed your email!"
+msgstr "你成功修改了你的电子邮箱地址！"
+
+#: content/templates/accounts/login.html:10
+#: content/templates/layouts/default/head.html:52
+msgid "Log in"
+msgstr "登录"
+
+#: content/templates/accounts/login.html:17
+#: content/templates/accounts/password_reset.html:26
+#: content/templates/accounts/resend_activation_code.html:26
+msgid "Login"
+msgstr "登录"
+
+#: content/templates/accounts/login.html:26
+#: content/templates/accounts/password_reset.html:10
+#: content/templates/accounts/password_reset_complete.html:10
+#: content/templates/accounts/password_reset_confirm.html:10
+#: content/templates/accounts/password_reset_done.html:10
+msgid "Password reset"
+msgstr "密码重设"
+
+#: content/templates/accounts/login.html:29
+#: content/templates/accounts/resend_activation_code.html:10
+msgid "Re-send Activation Code"
+msgstr "重新发送激活码"
+
+#: content/templates/accounts/logout.html:9
+msgid "Logged out"
+msgstr "已经登出"
+
+#: content/templates/accounts/logout.html:12
+msgid "Thanks for spending some quality time with the Web site today."
+msgstr "感谢您访问本网站。"
+
+#: content/templates/accounts/logout.html:16
+msgid "Log in again"
+msgstr "再次登录"
+
+#: content/templates/accounts/password_change_done.html:10
+#: content/templates/accounts/password_change_form.html:10
+msgid "Password change"
+msgstr "密码修改"
+
+#: content/templates/accounts/password_change_done.html:13
+msgid "Your password was changed."
+msgstr "你的密码已被修改。"
+
+#: content/templates/accounts/password_change_form.html:17
+#: content/templates/accounts/password_reset_confirm.html:23
+#: content/templates/accounts/profile/change_email.html:17
+msgid "Change"
+msgstr "修改"
+
+#: content/templates/accounts/password_reset.html:17
+#: content/templates/accounts/resend_activation_code.html:17
+msgid "Next"
+msgstr "下一步"
+
+#: content/templates/accounts/password_reset_complete.html:13
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "你的密码已经重设。现在可以继续登录。"
+
+#: content/templates/accounts/password_reset_confirm.html:15
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr "请输入两次你的新密码，以确保你输入正确。"
+
+#: content/templates/accounts/password_reset_confirm.html:29
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr "密码重设链接非法，可能已被使用。请重新请求密码重设。"
+
+#: content/templates/accounts/password_reset_done.html:13
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered."
+msgstr "如果你输入的电子邮箱地址存在，我们已经把设置密码的说明发送到该邮箱中。"
+
+#: content/templates/accounts/password_reset_done.html:14
+msgid "You should receive them shortly."
+msgstr "你应该很快就能收到邮件。"
+
+#: content/templates/accounts/password_reset_done.html:18
+msgid ""
+"If you don't receive an email, please make sure you've entered the address "
+"you registered with, and check your spam folder."
+msgstr "如果你没有收到邮件，请检查你输入的是注册时提供的邮箱地址，并检查你的垃圾邮件文件夹。"
+
+#: content/templates/accounts/profile/edit.html:10
+#: content/templates/layouts/default/head.html:42
+msgid "Profile edit"
+msgstr "修改个人信息"
+
+#: content/templates/accounts/profile/edit.html:17
+msgid "Edit"
+msgstr "修改"
+
+#: content/templates/accounts/register.html:10
+#: content/templates/layouts/default/head.html:55
+msgid "Create an account"
+msgstr "创建账号"
+
+#: content/templates/accounts/register.html:17
+msgid "Create"
+msgstr "创建"
+
+#: content/templates/email/activation_profile.html:14
+msgid "To activate your profile, please follow this link:"
+msgstr "若要激活你的账号，请访问以下链接："
+
+#: content/templates/email/change_email.html:14
+msgid "To change the mail, please follow the link:"
+msgstr "若要修改邮箱地址，请访问以下链接："
+
+#: content/templates/layouts/default/head.html:39
+msgid "Change password"
+msgstr "修改密码"
+
+#: content/templates/layouts/default/head.html:48
+msgid "Log out"
+msgstr "登出"
+
+#: content/templates/main/index.html:11
+msgid "You are authorized."
+msgstr "你已被授权。"
+
+#: content/templates/main/index.html:15
+msgid "Your username is"
+msgstr "你的用户名是"
+
+#: content/templates/main/index.html:19
+msgid "You are a guest."
+msgstr "你目前的身份是访客。"
