@@ -1,5 +1,9 @@
 # Change log
 
+## v2.4
+
+- Added the Simplified Chinese translation by [hanwentao][1] ([#27][2])
+
 ## v2.3
 
 - Added translations for Ukrainian, Russian, Spanish, French, and German languages
@@ -31,3 +35,7 @@
 ## v1.0
 
 Initial version.
+
+
+[1]: https://github.com/hanwentao
+[2]: https://github.com/egorsmkv/simple-django-login-and-register/pull/27
