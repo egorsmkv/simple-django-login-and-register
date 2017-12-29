@@ -2,25 +2,21 @@
 
 {% load i18n %}
 
-<div class="container-fluid">
+<div class="container-fluid mt-3">
 
-    <div class="mt-3">
-        <div>
-            {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
 
-                {% trans 'You are authorized.' %}
+        {% trans 'You are authorized.' %}
 
-                <br>
+        <br>
 
-                {% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
+        {% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
 
-            {% else %}
+    {% else %}
 
-                {% trans 'You are a guest.' %}
+        {% trans 'You are a guest.' %}
 
-            {% endif %}
-        </div>
-    </div>
+    {% endif %}
 
 </div>
 

@@ -3,21 +3,17 @@
 {% load bootstrap4 %}
 {% load i18n %}
 
-<div class="container-fluid">
+<div class="container-fluid mt-3">
 
-    <div class="mt-3">
+    <h4>{% trans 'Change email' %}</h4>
 
-        <h4>{% trans 'Change email' %}</h4>
+    <form method="post">
+        {% csrf_token %}
 
-        <form method="post">
-            {% csrf_token %}
+        {% bootstrap_form form %}
 
-            {% bootstrap_form form %}
-
-            <button class="btn btn-success">{% trans 'Change' %}</button>
-        </form>
-
-    </div>
+        <button class="btn btn-success">{% trans 'Change' %}</button>
+    </form>
 
 </div>
 
