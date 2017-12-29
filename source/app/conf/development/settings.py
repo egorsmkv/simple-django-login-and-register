@@ -1,6 +1,6 @@
 import os
 import warnings
-
+from django.utils.translation import ugettext_lazy as _
 from os.path import dirname
 
 warnings.simplefilter('error', DeprecationWarning)
@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -103,10 +104,20 @@ EMAIL_ACTIVATION_AFTER_CHANGING = True
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
+LANGUAGE_CODE = 'en-us'
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    ('fr', _('French')),
+    ('de', _('Deutsch')),
+    ('uk', _('Ukrainian')),
+    ('ru', _('Russian')),
+    ('zh_Hans', _('Simplified Chinese')),
+)
+
+TIME_ZONE = 'UTC'
 USE_TZ = True
 
 STATIC_ROOT = os.path.join(CONTENT_DIR, 'static')

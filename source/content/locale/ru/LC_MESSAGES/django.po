@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 20:07+0000\n"
+"POT-Creation-Date: 2017-12-29 18:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,16 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:19
+#: accounts/forms.py:27
 msgid "Password"
 msgstr "Пароль"
 
-#: accounts/forms.py:37 accounts/forms.py:114
+#: accounts/forms.py:45 accounts/forms.py:122 accounts/forms.py:189
+#: accounts/forms.py:278
 msgid "Email"
 msgstr "Почта"
 
-#: accounts/forms.py:42
+#: accounts/forms.py:50
 msgid ""
 "Please enter a correct email and password. Note that both fields may be case-"
 "sensitive."
@@ -33,15 +34,15 @@ msgstr ""
 "Пожалуйста, введите корректно почту и пароль. Имейте в виду, что оба поля "
 "могут быть чувствительны к регистру."
 
-#: accounts/forms.py:43 accounts/forms.py:75 accounts/forms.py:187
+#: accounts/forms.py:51 accounts/forms.py:83 accounts/forms.py:240
 msgid "This account is inactive."
 msgstr "Этот аккаунт не активен."
 
-#: accounts/forms.py:67 accounts/forms.py:133 accounts/forms.py:181
+#: accounts/forms.py:75 accounts/forms.py:141 accounts/forms.py:234
 msgid "Email or Username"
 msgstr "Почта или логин"
 
-#: accounts/forms.py:73
+#: accounts/forms.py:81
 msgid ""
 "Please enter a correct email or username and password. Note that both fields "
 "may be case-sensitive."
@@ -49,195 +50,236 @@ msgstr ""
 "Пожалуйста, введите корректно почту или логин и пароль. Имейте в виду, что "
 "оба поля могут быть чувствительны к регистру."
 
-#: accounts/forms.py:111 accounts/forms.py:219
+#: accounts/forms.py:119 accounts/forms.py:272
 msgid "First Name"
 msgstr "Фамилия"
 
-#: accounts/forms.py:111 accounts/forms.py:113 accounts/forms.py:219
-#: accounts/forms.py:221
+#: accounts/forms.py:119 accounts/forms.py:121 accounts/forms.py:272
+#: accounts/forms.py:274
 msgid "Optional."
 msgstr "Не обязательно."
 
-#: accounts/forms.py:113 accounts/forms.py:221
+#: accounts/forms.py:121 accounts/forms.py:274
 msgid "Last Name"
 msgstr "Имя"
 
-#: accounts/forms.py:114
+#: accounts/forms.py:122
 msgid "Required. Type a valid email address."
 msgstr "Обязательно. Введите правильную электронную почту."
 
-#: accounts/forms.py:118
+#: accounts/forms.py:126
 msgid "You can not use this email."
 msgstr "Вы не можете использовать эту почту."
 
-#: accounts/forms.py:138
+#: accounts/forms.py:146 accounts/forms.py:194
 msgid ""
 "Activation code has already been sent. You can request a new code in 24 "
 "hours."
 msgstr ""
 "Код активации уже был отправлен. Вы можете запросить новый код через 24 часа."
 
-#: accounts/forms.py:139 accounts/forms.py:186
+#: accounts/forms.py:147 accounts/forms.py:195 accounts/forms.py:239
 msgid "You entered incorrect data."
 msgstr "Вы ввели некорректные данные."
 
-#: accounts/forms.py:140
+#: accounts/forms.py:148 accounts/forms.py:196
 msgid "This profile has already been activated."
 msgstr "Этот профиль уже активирован."
 
-#: accounts/forms.py:228
+#: accounts/forms.py:281
 msgid "You can not use this mail."
 msgstr "Вы не можете использовать эту почту."
 
-#: accounts/forms.py:229
+#: accounts/forms.py:282
 msgid "Please enter another email."
 msgstr "Пожалуйста, введите другую почту."
 
-#: accounts/utils.py:36 content/templates/email/activation_profile.html:8
+#: accounts/utils.py:53 content/templates/email/activation_profile.html:8
 msgid "Profile Activation"
 msgstr "Активация профиля"
 
-#: accounts/views.py:88
+#: accounts/utils.py:79 content/templates/accounts/profile/change_email.html:8
+#: content/templates/email/change_email.html:8
+#: content/templates/layouts/default/head.html:45
+msgid "Change email"
+msgstr "Изменить почту"
+
+#: accounts/views.py:105
 msgid ""
 "You are registered. To activate the account, follow the link sent to the "
 "mail."
 msgstr ""
 "Вы зарегистрированы. Для активации аккаунта, перейдите по ссылке из письма."
 
-#: accounts/views.py:98
+#: accounts/views.py:112
 msgid "You are successfully registered!"
 msgstr "Вы успешно зарегистрированы!"
 
-#: accounts/views.py:121
+#: accounts/views.py:135
 msgid "You have successfully activated your account!"
 msgstr "Вы успешно активировали свой аккаунт!"
 
-#: accounts/views.py:140
+#: accounts/views.py:154
 msgid "A new activation code has been sent to your e-mail."
 msgstr "Новый код активации отправлен на вашу почту."
 
-#: accounts/views.py:177
+#: accounts/views.py:191
 msgid "Profile data has been successfully updated."
 msgstr "Данные профиля были успешно обновлены."
 
-#: accounts/views.py:213
+#: accounts/views.py:227
 msgid "To complete the change of mail, click on the link sent to it."
 msgstr "Для завершения изменения почты, перейдите по ссылке из письма."
 
-#: accounts/views.py:218
+#: accounts/views.py:232
 msgid "Email successfully changed."
 msgstr "Почта успешно изменена."
 
-#: accounts/views.py:241
+#: accounts/views.py:255
 msgid "You have successfully changed your email!"
 msgstr "Вы успешно изменили свою почту!"
 
-#: content/templates/accounts/login.html:10
+#: app/conf/development/settings.py:111 app/conf/production/settings.py:114
+msgid "English"
+msgstr ""
+
+#: app/conf/development/settings.py:112 app/conf/production/settings.py:115
+msgid "Spanish"
+msgstr ""
+
+#: app/conf/development/settings.py:113 app/conf/production/settings.py:116
+msgid "French"
+msgstr ""
+
+#: app/conf/development/settings.py:114 app/conf/production/settings.py:117
+msgid "Deutsch"
+msgstr ""
+
+#: app/conf/development/settings.py:115 app/conf/production/settings.py:118
+msgid "Ukrainian"
+msgstr ""
+
+#: app/conf/development/settings.py:116 app/conf/production/settings.py:119
+msgid "Russian"
+msgstr ""
+
+#: app/conf/development/settings.py:117 app/conf/production/settings.py:120
+msgid "Simplified Chinese"
+msgstr ""
+
+#: content/templates/accounts/login.html:8
 #: content/templates/layouts/default/head.html:52
 msgid "Log in"
 msgstr "Авторизация"
 
-#: content/templates/accounts/login.html:17
-#: content/templates/accounts/password_reset.html:26
-#: content/templates/accounts/resend_activation_code.html:26
+#: content/templates/accounts/login.html:15
+#: content/templates/accounts/password_reset.html:22
+#: content/templates/accounts/resend_activation_code.html:22
 msgid "Login"
 msgstr "Войти"
 
-#: content/templates/accounts/login.html:26
-#: content/templates/accounts/password_reset.html:10
-#: content/templates/accounts/password_reset_complete.html:10
-#: content/templates/accounts/password_reset_confirm.html:10
-#: content/templates/accounts/password_reset_done.html:10
+#: content/templates/accounts/login.html:22
+#: content/templates/accounts/password_reset.html:8
+#: content/templates/accounts/password_reset_complete.html:8
+#: content/templates/accounts/password_reset_confirm.html:8
+#: content/templates/accounts/password_reset_done.html:8
 msgid "Password reset"
 msgstr "Восстановление пароля"
 
-#: content/templates/accounts/login.html:29
-#: content/templates/accounts/resend_activation_code.html:10
+#: content/templates/accounts/login.html:25
+#: content/templates/accounts/resend_activation_code.html:8
 msgid "Re-send Activation Code"
 msgstr "Повторно отправить код активации"
 
-#: content/templates/accounts/logout.html:9
+#: content/templates/accounts/logout.html:7
 msgid "Logged out"
 msgstr "Выход"
 
-#: content/templates/accounts/logout.html:12
+#: content/templates/accounts/logout.html:10
 msgid "Thanks for spending some quality time with the Web site today."
 msgstr "Спасибо, что выделили время на посещение сайта сегодня."
 
-#: content/templates/accounts/logout.html:16
+#: content/templates/accounts/logout.html:14
 msgid "Log in again"
 msgstr "Повторная авторизация"
 
-#: content/templates/accounts/password_change_done.html:10
-#: content/templates/accounts/password_change_form.html:10
+#: content/templates/accounts/password_change_done.html:8
+#: content/templates/accounts/password_change_form.html:8
 msgid "Password change"
 msgstr "Изменить пароль"
 
-#: content/templates/accounts/password_change_done.html:13
+#: content/templates/accounts/password_change_done.html:11
 msgid "Your password was changed."
 msgstr "Ваш пароль изменен."
 
-#: content/templates/accounts/password_change_form.html:17
-#: content/templates/accounts/password_reset_confirm.html:23
-#: accounts/utils.py:62
-#: content/templates/accounts/profile/change_email.html:10
-#: content/templates/email/change_email.html:8
-#: content/templates/layouts/default/head.html:45
-msgid "Change email"
-msgstr "Изменить почту"
+#: content/templates/accounts/password_change_form.html:15
+#: content/templates/accounts/password_reset_confirm.html:21
+#: content/templates/accounts/profile/change_email.html:15
+#: content/templates/main/change_language.html:29
+msgid "Change"
+msgstr "Изменить"
 
-#: content/templates/accounts/password_reset.html:17
-#: content/templates/accounts/resend_activation_code.html:17
+#: content/templates/accounts/password_reset.html:15
+#: content/templates/accounts/resend_activation_code.html:15
 msgid "Next"
 msgstr "Дальше"
 
-#: content/templates/accounts/password_reset_complete.html:13
+#: content/templates/accounts/password_reset_complete.html:11
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Ваш пароль изменен. Теперь вы можете войти."
 
-#: content/templates/accounts/password_reset_confirm.html:15
+#: content/templates/accounts/password_reset_confirm.html:13
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
-msgstr "Пожалуйста, введите новый пароль дважды, так мы сможем проверить, что вы его вводите корректно."
+msgstr ""
+"Пожалуйста, введите новый пароль дважды, так мы сможем проверить, что вы его "
+"вводите корректно."
 
-#: content/templates/accounts/password_reset_confirm.html:29
+#: content/templates/accounts/password_reset_confirm.html:27
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
-msgstr "Ссылка для изменения пароля невалидна, возможно она была уже использована. Пожалуйста, сделайте новое восстановление пароля."
+msgstr ""
+"Ссылка для изменения пароля невалидна, возможно она была уже использована. "
+"Пожалуйста, сделайте новое восстановление пароля."
 
-#: content/templates/accounts/password_reset_done.html:13
+#: content/templates/accounts/password_reset_done.html:11
 msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered."
-msgstr "Мы отправим письмо с инструкциями по изменения вашего пароля, если аккаунт с такой почтой существует."
+msgstr ""
+"Мы отправим письмо с инструкциями по изменения вашего пароля, если аккаунт с "
+"такой почтой существует."
 
-#: content/templates/accounts/password_reset_done.html:14
+#: content/templates/accounts/password_reset_done.html:12
 msgid "You should receive them shortly."
 msgstr "Вы должны получить его в скором времени."
 
-#: content/templates/accounts/password_reset_done.html:18
+#: content/templates/accounts/password_reset_done.html:16
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
-msgstr "Если вы не получили письмо, пожалуйста проверь папку спама или удостоверьтесь, что введенная почта является той, которая использовалась при регистрации."
+msgstr ""
+"Если вы не получили письмо, пожалуйста проверь папку спама или "
+"удостоверьтесь, что введенная почта является той, которая использовалась при "
+"регистрации."
 
-#: content/templates/accounts/profile/edit.html:10
+#: content/templates/accounts/profile/edit.html:8
 #: content/templates/layouts/default/head.html:42
 msgid "Profile edit"
 msgstr "Редактирование профиля"
 
-#: content/templates/accounts/profile/edit.html:17
+#: content/templates/accounts/profile/edit.html:15
 msgid "Edit"
 msgstr "Редактировать"
 
-#: content/templates/accounts/register.html:10
+#: content/templates/accounts/register.html:8
 #: content/templates/layouts/default/head.html:55
 msgid "Create an account"
 msgstr "Создать аккаунт"
 
-#: content/templates/accounts/register.html:17
+#: content/templates/accounts/register.html:15
 msgid "Create"
 msgstr "Создать"
 
@@ -257,14 +299,23 @@ msgstr "Изменить пароль"
 msgid "Log out"
 msgstr "Выход"
 
-#: content/templates/main/index.html:11
+#: content/templates/layouts/default/head.html:62
+#: content/templates/main/change_language.html:10
+msgid "Change language"
+msgstr "Изменить язык"
+
+#: content/templates/main/change_language.html:19
+msgid "Select the language"
+msgstr "Выбрать язык"
+
+#: content/templates/main/index.html:9
 msgid "You are authorized."
 msgstr "Вы авторизованы."
 
-#: content/templates/main/index.html:15
+#: content/templates/main/index.html:13
 msgid "Your username is"
 msgstr "Ваш логин"
 
-#: content/templates/main/index.html:19
+#: content/templates/main/index.html:17
 msgid "You are a guest."
 msgstr "Вы гость."

@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth
-from django.urls import path
+from django.urls import path, include
+from django.conf.urls.i18n import i18n_patterns
 
 import main.views
 import accounts.views
@@ -9,6 +10,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', main.views.IndexPageView.as_view(), name='index'),
+
+    path('i18n/', include('django.conf.urls.i18n')),
+    path('language/', main.views.ChangeLanguageView.as_view(), name='change_language'),
 
     path('accounts/login/', accounts.views.SignInView.as_view(), name='login'),
     path('accounts/logout/', auth.LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
@@ -42,3 +46,5 @@ urlpatterns = [
          name='change_email_activation'),
 
 ]
+
+urlpatterns += i18n_patterns()

@@ -1,0 +1,35 @@
+{% include 'layouts/default/head.html' %}
+
+{% load i18n %}
+
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+
+<div class="container-fluid mt-3">
+
+    <h4>{% trans 'Change language' %}</h4>
+
+    <form action="{% url 'set_language' %}" method="post">
+
+        {% csrf_token %}
+
+        <input name="next" type="hidden" value="{{ redirect_to }}"/>
+
+        <div class="form-group">
+            <label class="form-control-label" for="language-field">{% trans 'Select the language' %}</label>
+            <select name="language" class="form-control" id="language-field">
+                {% for code, name in LANGUAGES %}
+                    <option value="{{ code }}" {% if code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                        {{ name }} ({{ code }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button class="btn btn-success">{% trans 'Change' %}</button>
+
+    </form>
+
+</div>
+
+{% include 'layouts/default/foot.html' %}
