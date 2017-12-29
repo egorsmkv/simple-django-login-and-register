@@ -12,7 +12,10 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 
 from .models import Activation
-from .forms import SignInViaEmailForm, SignInViaEmailOrUsernameForm, PasswordResetViaEmailOrUsernameForm
+from .forms import (
+    SignInViaEmailForm, SignInViaEmailOrUsernameForm, PasswordResetViaEmailOrUsernameForm,
+    ReSendActivationCodeForm, ReSendActivationCodeViaEmailForm
+)
 
 
 def get_login_form():
@@ -25,11 +28,25 @@ def get_login_form():
     return AuthenticationForm
 
 
+def is_username_disabled():
+    return hasattr(settings, 'DISABLE_USERNAME') and settings.DISABLE_USERNAME
+
+
 def get_password_reset_form():
+    if is_username_disabled():
+        return PasswordResetForm
+
     if hasattr(settings, 'PASSWORD_RESET_VIA_EMAIL_OR_USERNAME') and settings.PASSWORD_RESET_VIA_EMAIL_OR_USERNAME:
         return PasswordResetViaEmailOrUsernameForm
 
     return PasswordResetForm
+
+
+def get_resend_ac_form():
+    if is_username_disabled():
+        return ReSendActivationCodeViaEmailForm
+
+    return ReSendActivationCodeForm
 
 
 def send_activation_email(request, user):

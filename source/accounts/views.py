@@ -1,8 +1,9 @@
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME, get_user_model
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
 from django.shortcuts import get_object_or_404, resolve_url
+from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
 from django.views.decorators.cache import never_cache
@@ -15,10 +16,12 @@ from django.conf import settings
 
 from .utils import (
     get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email,
-    send_activation_change_email
+    send_activation_change_email, is_username_disabled, get_resend_ac_form
 )
-from .forms import SignUpForm, ReSendActivationCodeForm, ProfileEditForm, ChangeEmailForm
+from .forms import SignUpForm, ProfileEditForm, ChangeEmailForm
 from .models import Activation
+
+UserModel = get_user_model()
 
 
 class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
@@ -77,22 +80,33 @@ class SignUpView(FormView):
     success_url = '/'
 
     def form_valid(self, form):
+        user = form.save(commit=False)
+
+        if is_username_disabled():
+            # Set temporary username
+            user.username = get_random_string()
+        else:
+            user.username = form.cleaned_data.get('username')
+
         if settings.ENABLE_USER_ACTIVATION:
-            user = form.save(commit=False)
             user.is_active = False
+
+        user.save()
+
+        # Change the username to "user_ID" form
+        if is_username_disabled():
+            user.username = 'user_{}'.format(user.id)
             user.save()
 
+        if settings.ENABLE_USER_ACTIVATION:
             send_activation_email(self.request, user)
 
             messages.add_message(self.request, messages.SUCCESS,
                                  _('You are registered. To activate the account, follow the link sent to the mail.'))
         else:
-            form.save()
-
-            username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
 
-            user = authenticate(username=username, password=raw_password)
+            user = authenticate(username=user.username, password=raw_password)
             login(self.request, user)
 
             messages.add_message(self.request, messages.SUCCESS, _('You are successfully registered!'))
@@ -126,7 +140,7 @@ class ActivateView(RedirectView):
 
 class ReSendActivationCodeView(SuccessRedirectView):
     template_name = 'accounts/resend_activation_code.html'
-    form_class = ReSendActivationCodeForm
+    form_class = get_resend_ac_form()
     success_url = '/'
 
     def form_valid(self, form):

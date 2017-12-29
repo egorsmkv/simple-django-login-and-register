@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django import forms
+from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
@@ -10,6 +11,13 @@ from django.utils.translation import gettext_lazy as _
 from .models import Activation
 
 UserModel = get_user_model()
+
+
+def get_sign_up_fields():
+    if hasattr(settings, 'DISABLE_USERNAME') and settings.DISABLE_USERNAME:
+        return ['first_name', 'last_name', 'email', 'password1', 'password2']
+
+    return ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 
 class SignIn(forms.Form):
@@ -106,7 +114,7 @@ class SignInViaEmailOrUsernameForm(SignIn):
 class SignUpForm(UserCreationForm):
     class Meta:
         model = UserModel
-        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2',)
+        fields = get_sign_up_fields()
 
     first_name = forms.CharField(label=_('First Name'), max_length=50, required=False, help_text=_('Optional.'),
                                  widget=forms.TextInput(attrs={'autofocus': True}))
@@ -171,6 +179,51 @@ class ReSendActivationCodeForm(forms.Form):
                     self.user_cache = user
         except (UserModel.DoesNotExist, Activation.DoesNotExist):
             self.add_error('email_or_username', self.error_messages['incorrect_data'])
+
+    def get_user(self):
+        return self.user_cache
+
+
+class ReSendActivationCodeViaEmailForm(forms.Form):
+    email = forms.EmailField(
+        label=_('Email'),
+        widget=forms.EmailInput(attrs={'autofocus': True}),
+    )
+
+    error_messages = {
+        'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
+        'incorrect_data': _('You entered incorrect data.'),
+        'already_activated': _('This profile has already been activated.'),
+    }
+
+    def __init__(self, request=None, *args, **kwargs):
+        self.request = request
+        self.user_cache = None
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super(ReSendActivationCodeViaEmailForm, self).clean()
+
+        email = cleaned_data.get('email', '')
+
+        try:
+            email = email.lower()
+
+            user = UserModel.objects.filter(email=email).get()
+
+            if user.is_active:
+                self.add_error('email', self.error_messages['already_activated'])
+            else:
+                now_with_shift = timezone.now() - timedelta(hours=24)
+
+                activation = user.activation_set.get()
+
+                if activation.created_at > now_with_shift:
+                    self.add_error('email', self.error_messages['non_expired'])
+                else:
+                    self.user_cache = user
+        except (UserModel.DoesNotExist, Activation.DoesNotExist):
+            self.add_error('email', self.error_messages['incorrect_data'])
 
     def get_user(self):
         return self.user_cache
