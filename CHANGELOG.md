@@ -1,5 +1,11 @@
 # Change log
 
+## v2.5
+
+- Updated Bootstrap to 4.0.0 version & updated django-bootstrap4 dependency
+- Updated Django to 2.0.2 version
+- Renamed zh_Hans to zh_hans locale
+
 ## v2.4
 
 - Added the Simplified Chinese translation by [hanwentao][1] ([#27][2])
