@@ -3,6 +3,7 @@
 ## v2.6
 
 - Updated Django to 2.0.3 version
+- Fixed a bug with the incorrect query in forms. Thanks [karanrajpal14][3] ([#33][4])
 
 ## v2.5
 
@@ -49,3 +50,5 @@ Initial version.
 
 [1]: https://github.com/hanwentao
 [2]: https://github.com/egorsmkv/simple-django-login-and-register/pull/27
+[3]: https://github.com/karanrajpal14
+[4]: https://github.com/egorsmkv/simple-django-login-and-register/issues/33
