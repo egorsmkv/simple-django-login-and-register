@@ -1,5 +1,9 @@
 # Change log
 
+## v2.6
+
+- Updated Django to 2.0.3 version
+
 ## v2.5
 
 - Updated Bootstrap to 4.0.0 version & updated django-bootstrap4 dependency
