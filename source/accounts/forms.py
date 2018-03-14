@@ -164,7 +164,7 @@ class ReSendActivationCodeForm(forms.Form):
 
             user = UserModel.objects.filter(
                 Q(username=username) | Q(email=email)
-            ).get()
+            ).first()
 
             if user.is_active:
                 self.add_error('email_or_username', self.error_messages['already_activated'])
@@ -255,7 +255,7 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
 
             user = UserModel.objects.filter(
                 Q(username=username) | Q(email=email)
-            ).get()
+            ).first()
 
             if not user.is_active:
                 self.add_error('email_or_username', self.error_messages['inactive'])
