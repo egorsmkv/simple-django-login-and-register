@@ -1,13 +1,17 @@
 # Change log
 
-## v2.8
+## v2.9
 
 - Updated Bootstrap to 4.1.0 version
 
-## v2.7
+## v2.8
 
 - Updated Django to 2.0.4 version
 - Added the support to serve media files in debug mode
+
+## v2.7
+
+- Added the pipenv & cleaned up the readme
 
 ## v2.6
 
