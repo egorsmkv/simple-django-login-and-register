@@ -2,7 +2,7 @@ from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME, get_us
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
-from django.shortcuts import get_object_or_404, resolve_url
+from django.shortcuts import get_object_or_404, resolve_url, redirect
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
@@ -49,7 +49,16 @@ class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
         return kwargs
 
 
-class SignInView(SuccessRedirectView):
+class GuestOnlyView(FormView):
+    def dispatch(self, request, *args, **kwargs):
+        # Redirect to the index page if the user already authenticated
+        if request.user.is_authenticated:
+            return redirect('index')
+
+        return super(GuestOnlyView, self).dispatch(request, *args, **kwargs)
+
+
+class SignInView(GuestOnlyView, SuccessRedirectView):
     template_name = 'accounts/login.html'
     form_class = get_login_form()
     success_url = '/'
@@ -74,7 +83,7 @@ class SignInView(SuccessRedirectView):
         return super(SignInView, self).form_valid(form)
 
 
-class SignUpView(FormView):
+class SignUpView(GuestOnlyView):
     template_name = 'accounts/register.html'
     form_class = SignUpForm
     success_url = '/'
@@ -114,7 +123,7 @@ class SignUpView(FormView):
         return super(SignUpView, self).form_valid(form)
 
 
-class ActivateView(RedirectView):
+class ActivateView(GuestOnlyView, RedirectView):
     permanent = False
     query_string = True
     pattern_name = 'index'
@@ -138,7 +147,7 @@ class ActivateView(RedirectView):
         return super(ActivateView, self).get_redirect_url()
 
 
-class ReSendActivationCodeView(SuccessRedirectView):
+class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
     template_name = 'accounts/resend_activation_code.html'
     form_class = get_resend_ac_form()
     success_url = '/'
@@ -156,7 +165,7 @@ class ReSendActivationCodeView(SuccessRedirectView):
         return super(ReSendActivationCodeView, self).form_valid(form)
 
 
-class PasswordResetView(BasePasswordResetView):
+class PasswordResetView(GuestOnlyView, BasePasswordResetView):
     form_class = get_password_reset_form()
 
     def form_valid(self, form):
@@ -234,7 +243,7 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
         return super(ChangeEmailView, self).form_valid(form)
 
 
-class ChangeEmailActivateView(RedirectView):
+class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
     permanent = False
     query_string = True
     pattern_name = 'change_email'
