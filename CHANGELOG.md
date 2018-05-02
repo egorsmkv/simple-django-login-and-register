@@ -1,5 +1,13 @@
 # Change log
 
+## v2.10
+
+- Removed i18n_patterns from urls.py
+- Added the GuestOnlyView for checks on pages like SignInView, SignUpView, etc
+- Removed gunicorn from dependencies
+- Updated Django to 2.0.5
+- Updated Bootstrap to 4.1.1, jQuery to 3.3.1, PopperJS to 1.14.3
+
 ## v2.9
 
 - Updated Bootstrap to 4.1.0 version
