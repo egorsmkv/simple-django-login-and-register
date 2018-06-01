@@ -141,31 +141,31 @@ msgstr "Вы успешно изменили свою почту!"
 
 #: app/conf/development/settings.py:111 app/conf/production/settings.py:114
 msgid "English"
-msgstr ""
+msgstr "Английский"
 
 #: app/conf/development/settings.py:112 app/conf/production/settings.py:115
 msgid "Spanish"
-msgstr ""
+msgstr "Испанский"
 
 #: app/conf/development/settings.py:113 app/conf/production/settings.py:116
 msgid "French"
-msgstr ""
+msgstr "Французский"
 
 #: app/conf/development/settings.py:114 app/conf/production/settings.py:117
 msgid "Deutsch"
-msgstr ""
+msgstr "Немецкий"
 
 #: app/conf/development/settings.py:115 app/conf/production/settings.py:118
 msgid "Ukrainian"
-msgstr ""
+msgstr "Украинский"
 
 #: app/conf/development/settings.py:116 app/conf/production/settings.py:119
 msgid "Russian"
-msgstr ""
+msgstr "Русский"
 
 #: app/conf/development/settings.py:117 app/conf/production/settings.py:120
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "Китайский (упрощённый)"
 
 #: content/templates/accounts/login.html:8
 #: content/templates/layouts/default/head.html:52
@@ -261,7 +261,7 @@ msgid ""
 "If you don't receive an email, please make sure you've entered the address "
 "you registered with, and check your spam folder."
 msgstr ""
-"Если вы не получили письмо, пожалуйста проверь папку спама или "
+"Если вы не получили письмо, пожалуйста проверьте папку спама или "
 "удостоверьтесь, что введенная почта является той, которая использовалась при "
 "регистрации."
 
