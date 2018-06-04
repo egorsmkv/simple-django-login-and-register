@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_HOST_USER = 'test@example.com'
-EMAIL_FILE_PATH = 'tmp/app-messages'
+EMAIL_FILE_PATH = os.path.join(CONTENT_DIR, 'tmp/app-messages')
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
