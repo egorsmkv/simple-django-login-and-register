@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.utils.translation import gettext_lazy as _
 from django.views.generic import RedirectView
+from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django.conf import settings
 
@@ -47,7 +48,7 @@ class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
         return kwargs
 
 
-class GuestOnlyView(FormView):
+class GuestOnlyView(View):
     def dispatch(self, request, *args, **kwargs):
         # Redirect to the index page if the user already authenticated
         if request.user.is_authenticated:
@@ -81,7 +82,7 @@ class SignInView(GuestOnlyView, SuccessRedirectView):
         return super(SignInView, self).form_valid(form)
 
 
-class SignUpView(GuestOnlyView):
+class SignUpView(GuestOnlyView, FormView):
     template_name = 'accounts/register.html'
     form_class = SignUpForm
     success_url = '/'
