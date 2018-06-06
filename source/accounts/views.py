@@ -1,4 +1,4 @@
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME, get_user_model
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
@@ -20,8 +20,6 @@ from .utils import (
 )
 from .forms import SignUpForm, ProfileEditForm, ChangeEmailForm
 from .models import Activation
-
-UserModel = get_user_model()
 
 
 class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
