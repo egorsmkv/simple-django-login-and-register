@@ -5,18 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>{% trans 'Change email' %}</title>
+    <title>{% trans 'Profile Activation' %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
 <body>
 
-{% trans 'To change the mail, please follow the link:' %}<br/>
+{% trans 'To activate your profile, please follow this link:' %}
+
+<br/>
 
 {% if request.is_secure %}
-    <a href="https://{{ domain }}/accounts/change/email/{{ code }}/">https://{{ domain }}/accounts/change/email/{{ code }}/</a>
+    <a href="https://{{ domain }}/accounts/activate/{{ code }}/">https://{{ domain }}/accounts/activate/{{ code }}/</a>
 {% else %}
-    <a href="http://{{ domain }}/accounts/change/email/{{ code }}/">http://{{ domain }}/accounts/change/email/{{ code }}/</a>
+    <a href="http://{{ domain }}/accounts/activate/{{ code }}/">http://{{ domain }}/accounts/activate/{{ code }}/</a>
 {% endif %}
 
 </body>

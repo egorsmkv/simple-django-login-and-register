@@ -3,11 +3,9 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
-from django.template import loader
 from django.template.loader import render_to_string
 from django.utils.crypto import get_random_string
 from django.utils.encoding import force_bytes
-from django.utils.html import strip_tags
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 
@@ -67,8 +65,8 @@ def send_activation_email(request, user):
     act.user = user
     act.save()
 
-    html_content = render_to_string('email/activation_profile.html', context=context, request=request)
-    text_content = strip_tags(html_content)
+    html_content = render_to_string('accounts/email/activation_profile.html', context=context, request=request)
+    text_content = render_to_string('accounts/email/activation_profile.txt', context=context, request=request)
 
     msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
     msg.attach_alternative(html_content, 'text/html')
@@ -94,8 +92,8 @@ def send_activation_change_email(request, user, new_email):
     act.email = new_email
     act.save()
 
-    html_content = render_to_string('email/change_email.html', context=context, request=request)
-    text_content = strip_tags(html_content)
+    html_content = render_to_string('accounts/email/change_email.html', context=context, request=request)
+    text_content = render_to_string('accounts/email/change_email.txt', context=context, request=request)
 
     msg = EmailMultiAlternatives(subject, text_content, from_email, [user.email])
     msg.attach_alternative(html_content, 'text/html')
@@ -121,9 +119,9 @@ def send_reset_password_email(request, user):
         'protocol': 'https' if use_https else 'http',
     }
 
-    subject = loader.render_to_string('registration/password_reset_subject.txt', context)
+    subject = render_to_string('registration/password_reset_subject.txt', context)
     subject = ''.join(subject.splitlines())
-    body = loader.render_to_string('registration/password_reset_email.html', context)
+    body = render_to_string('registration/password_reset_email.html', context)
 
     email_message = EmailMultiAlternatives(subject, body, from_email, [user.email])
     email_message.send()
