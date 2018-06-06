@@ -165,17 +165,20 @@ class ReSendActivationCodeForm(forms.Form):
                 Q(username=username) | Q(email=email)
             ).first()
 
-            if user.is_active:
-                self.add_error('email_or_username', self.error_messages['already_activated'])
+            if not user:
+                self.add_error('email_or_username', self.error_messages['incorrect_data'])
             else:
-                now_with_shift = timezone.now() - timedelta(hours=24)
-
-                activation = user.activation_set.get()
-
-                if activation.created_at > now_with_shift:
-                    self.add_error('email_or_username', self.error_messages['non_expired'])
+                if user.is_active:
+                    self.add_error('email_or_username', self.error_messages['already_activated'])
                 else:
-                    self.user_cache = user
+                    now_with_shift = timezone.now() - timedelta(hours=24)
+
+                    activation = user.activation_set.get()
+
+                    if activation.created_at > now_with_shift:
+                        self.add_error('email_or_username', self.error_messages['non_expired'])
+                    else:
+                        self.user_cache = user
         except (User.DoesNotExist, Activation.DoesNotExist):
             self.add_error('email_or_username', self.error_messages['incorrect_data'])
 
