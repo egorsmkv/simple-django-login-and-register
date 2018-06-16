@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMultiAlternatives
@@ -11,7 +10,8 @@ from django.utils.translation import gettext_lazy as _
 
 from .models import Activation
 from .forms import (
-    SignInViaUsernameForm, SignInViaEmailForm, SignInViaEmailOrUsernameForm, PasswordResetViaEmailOrUsernameForm,
+    SignInViaUsernameForm, SignInViaEmailForm, SignInViaEmailOrUsernameForm,
+    PasswordResetViaEmailOrUsernameForm, PasswordResetForm,
     ReSendActivationCodeForm, ReSendActivationCodeViaEmailForm
 )
 
@@ -35,9 +35,6 @@ def is_use_remember_me():
 
 
 def get_password_reset_form():
-    if is_username_disabled():
-        return PasswordResetForm
-
     if hasattr(settings, 'PASSWORD_RESET_VIA_EMAIL_OR_USERNAME') and settings.PASSWORD_RESET_VIA_EMAIL_OR_USERNAME:
         return PasswordResetViaEmailOrUsernameForm
 

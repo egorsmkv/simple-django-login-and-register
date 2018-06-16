@@ -5,6 +5,7 @@ from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
 from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
@@ -263,6 +264,30 @@ class ReSendActivationCodeViaEmailForm(forms.Form):
         return self.user_cache
 
 
+class PasswordResetForm(BasePasswordResetForm):
+    error_messages = {
+        'incorrect_data': _('You entered incorrect data.'),
+    }
+
+    def __init__(self, *args, **kwargs):
+        self.user_cache = None
+        super().__init__(*args, **kwargs)
+
+    def clean(self):
+        cleaned_data = super(PasswordResetForm, self).clean()
+
+        email = cleaned_data.get('email', '')
+        users = list(self.get_users(email))
+
+        if not len(users):
+            self.add_error('email', self.error_messages['incorrect_data'])
+        else:
+            self.user_cache = users[0]
+
+    def get_user(self):
+        return self.user_cache
+
+
 class PasswordResetViaEmailOrUsernameForm(forms.Form):
     email_or_username = forms.CharField(
         label=_('Email or Username'),
@@ -291,10 +316,13 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
                 Q(username=username) | Q(email=email)
             ).first()
 
-            if not user.is_active:
-                self.add_error('email_or_username', self.error_messages['inactive'])
+            if not user:
+                self.add_error('email_or_username', self.error_messages['incorrect_data'])
             else:
-                self.user_cache = user
+                if not user.is_active:
+                    self.add_error('email_or_username', self.error_messages['inactive'])
+                else:
+                    self.user_cache = user
         except User.DoesNotExist:
             self.add_error('email_or_username', self.error_messages['incorrect_data'])
 

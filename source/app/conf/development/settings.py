@@ -107,7 +107,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 USE_I18N = True
 USE_L10N = True
 LANGUAGE_CODE = 'en-us'
-LANGUAGES = (
+LANGUAGES = [
     ('en', _('English')),
     ('es', _('Spanish')),
     ('fr', _('French')),
@@ -115,7 +115,7 @@ LANGUAGES = (
     ('uk', _('Ukrainian')),
     ('ru', _('Russian')),
     ('zh_hans', _('Simplified Chinese')),
-)
+]
 
 TIME_ZONE = 'UTC'
 USE_TZ = True
