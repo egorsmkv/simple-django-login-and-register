@@ -1,5 +1,5 @@
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib import messages
+from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
 from django.http import HttpResponseRedirect
@@ -7,13 +7,11 @@ from django.shortcuts import get_object_or_404, resolve_url, redirect
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
+from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import RedirectView
-from django.views.generic.base import View
-from django.views.generic.edit import FormView
+from django.views.generic import View, FormView, RedirectView
 from django.conf import settings
 
 from .utils import (
@@ -106,11 +104,12 @@ class SignUpView(GuestOnlyView, FormView):
         if settings.ENABLE_USER_ACTIVATION:
             user.is_active = False
 
+        # Create a user record
         user.save()
 
-        # Change the username to "user_ID" form
+        # Change the username to the "user_ID" form
         if is_username_disabled():
-            user.username = 'user_{}'.format(user.id)
+            user.username = f'user_{user.id}'
             user.save()
 
         if settings.ENABLE_USER_ACTIVATION:
@@ -135,8 +134,6 @@ class ActivateView(GuestOnlyView, RedirectView):
     pattern_name = 'index'
 
     def get_redirect_url(self, *args, **kwargs):
-        assert 'code' in kwargs
-
         act = get_object_or_404(Activation, code=kwargs['code'])
 
         # Activate user's profile
@@ -182,7 +179,6 @@ class PasswordResetView(GuestOnlyView, BasePasswordResetView):
 
 class ProfileEditView(LoginRequiredMixin, FormView):
     template_name = 'accounts/profile/edit.html'
-
     form_class = ProfileEditForm
     success_url = '/accounts/profile/edit/'
 
@@ -210,7 +206,6 @@ class ProfileEditView(LoginRequiredMixin, FormView):
 
 class ChangeEmailView(LoginRequiredMixin, FormView):
     template_name = 'accounts/profile/change_email.html'
-
     form_class = ChangeEmailForm
     success_url = '/accounts/change/email/'
 
@@ -255,8 +250,6 @@ class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
     pattern_name = 'change_email'
 
     def get_redirect_url(self, *args, **kwargs):
-        assert 'code' in kwargs
-
         act = get_object_or_404(Activation, code=kwargs['code'])
 
         # Change user's email

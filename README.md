@@ -18,6 +18,7 @@ An example of Django project with basic user functionality.
     - via username & password
     - via email & password
     - via email or username & password
+    - with a remember me checkbox (optional)
 - Sign Up
 - Log Out
 - Profile Activation via Email

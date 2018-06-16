@@ -335,7 +335,8 @@ class ProfileEditForm(forms.Form):
 
 
 class ChangeEmailForm(forms.Form):
-    email = forms.EmailField(label=_('Email'), max_length=255, widget=forms.EmailInput(attrs={'placeholder': '@'}))
+    email = forms.EmailField(label=_('Email'), max_length=255, widget=forms.EmailInput(
+        attrs={'placeholder': '@', 'autofocus': True}))
 
     error_messages = {
         'email_already_exists': _('You can not use this mail.'),
