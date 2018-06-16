@@ -17,7 +17,7 @@ from django.conf import settings
 
 from .utils import (
     get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email,
-    send_activation_change_email, is_username_disabled, get_resend_ac_form
+    send_activation_change_email, is_username_disabled, get_resend_ac_form, is_use_remember_me,
 )
 from .forms import SignUpForm, ProfileEditForm, ChangeEmailForm
 from .models import Activation
@@ -76,6 +76,12 @@ class SignInView(GuestOnlyView, SuccessRedirectView):
         # delete it since its no longer needed
         if self.request.session.test_cookie_worked():
             self.request.session.delete_test_cookie()
+
+        # The default Django's "remember me" lifetime is 2 weeks and can be changed by modifying
+        # the SESSION_COOKIE_AGE settings' option.
+        if is_use_remember_me():
+            if not form.cleaned_data.get('remember_me'):
+                self.request.session.set_expiry(0)
 
         login(self.request, form.get_user())
 

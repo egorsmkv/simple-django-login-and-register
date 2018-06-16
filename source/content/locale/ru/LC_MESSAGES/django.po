@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-29 18:53+0000\n"
+"POT-Creation-Date: 2018-06-16 10:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: accounts/forms.py:27
+#: accounts/forms.py:34
 msgid "Password"
 msgstr "Пароль"
 
-#: accounts/forms.py:45 accounts/forms.py:122 accounts/forms.py:189
-#: accounts/forms.py:278
+#: accounts/forms.py:46
+msgid "Remember me"
+msgstr "Запомнить меня"
+
+#: accounts/forms.py:65 accounts/forms.py:153 accounts/forms.py:223
+#: accounts/forms.py:312
 msgid "Email"
 msgstr "Почта"
 
-#: accounts/forms.py:50
+#: accounts/forms.py:70
 msgid ""
 "Please enter a correct email and password. Note that both fields may be case-"
 "sensitive."
@@ -34,15 +38,15 @@ msgstr ""
 "Пожалуйста, введите корректно почту и пароль. Имейте в виду, что оба поля "
 "могут быть чувствительны к регистру."
 
-#: accounts/forms.py:51 accounts/forms.py:83 accounts/forms.py:240
+#: accounts/forms.py:71 accounts/forms.py:111 accounts/forms.py:274
 msgid "This account is inactive."
 msgstr "Этот аккаунт не активен."
 
-#: accounts/forms.py:75 accounts/forms.py:141 accounts/forms.py:234
+#: accounts/forms.py:103 accounts/forms.py:172 accounts/forms.py:268
 msgid "Email or Username"
 msgstr "Почта или логин"
 
-#: accounts/forms.py:81
+#: accounts/forms.py:109
 msgid ""
 "Please enter a correct email or username and password. Note that both fields "
 "may be case-sensitive."
@@ -50,92 +54,93 @@ msgstr ""
 "Пожалуйста, введите корректно почту или логин и пароль. Имейте в виду, что "
 "оба поля могут быть чувствительны к регистру."
 
-#: accounts/forms.py:119 accounts/forms.py:272
+#: accounts/forms.py:150 accounts/forms.py:306
 msgid "First Name"
 msgstr "Фамилия"
 
-#: accounts/forms.py:119 accounts/forms.py:121 accounts/forms.py:272
-#: accounts/forms.py:274
+#: accounts/forms.py:150 accounts/forms.py:152 accounts/forms.py:306
+#: accounts/forms.py:308
 msgid "Optional."
 msgstr "Не обязательно."
 
-#: accounts/forms.py:121 accounts/forms.py:274
+#: accounts/forms.py:152 accounts/forms.py:308
 msgid "Last Name"
 msgstr "Имя"
 
-#: accounts/forms.py:122
+#: accounts/forms.py:153
 msgid "Required. Type a valid email address."
 msgstr "Обязательно. Введите правильную электронную почту."
 
-#: accounts/forms.py:126
+#: accounts/forms.py:157
 msgid "You can not use this email."
 msgstr "Вы не можете использовать эту почту."
 
-#: accounts/forms.py:146 accounts/forms.py:194
+#: accounts/forms.py:177 accounts/forms.py:228
 msgid ""
 "Activation code has already been sent. You can request a new code in 24 "
 "hours."
 msgstr ""
 "Код активации уже был отправлен. Вы можете запросить новый код через 24 часа."
 
-#: accounts/forms.py:147 accounts/forms.py:195 accounts/forms.py:239
+#: accounts/forms.py:178 accounts/forms.py:229 accounts/forms.py:273
 msgid "You entered incorrect data."
 msgstr "Вы ввели некорректные данные."
 
-#: accounts/forms.py:148 accounts/forms.py:196
+#: accounts/forms.py:179 accounts/forms.py:230
 msgid "This profile has already been activated."
 msgstr "Этот профиль уже активирован."
 
-#: accounts/forms.py:281
+#: accounts/forms.py:315
 msgid "You can not use this mail."
 msgstr "Вы не можете использовать эту почту."
 
-#: accounts/forms.py:282
+#: accounts/forms.py:316
 msgid "Please enter another email."
 msgstr "Пожалуйста, введите другую почту."
 
-#: accounts/utils.py:53 content/templates/email/activation_profile.html:8
+#: accounts/utils.py:55
+#: content/templates/accounts/email/activation_profile.html:8
 msgid "Profile Activation"
 msgstr "Активация профиля"
 
-#: accounts/utils.py:79 content/templates/accounts/profile/change_email.html:8
-#: content/templates/email/change_email.html:8
+#: accounts/utils.py:81 content/templates/accounts/email/change_email.html:8
+#: content/templates/accounts/profile/change_email.html:8
 #: content/templates/layouts/default/head.html:45
 msgid "Change email"
 msgstr "Изменить почту"
 
-#: accounts/views.py:105
+#: accounts/views.py:119
 msgid ""
 "You are registered. To activate the account, follow the link sent to the "
 "mail."
 msgstr ""
 "Вы зарегистрированы. Для активации аккаунта, перейдите по ссылке из письма."
 
-#: accounts/views.py:112
+#: accounts/views.py:126
 msgid "You are successfully registered!"
 msgstr "Вы успешно зарегистрированы!"
 
-#: accounts/views.py:135
+#: accounts/views.py:149
 msgid "You have successfully activated your account!"
 msgstr "Вы успешно активировали свой аккаунт!"
 
-#: accounts/views.py:154
+#: accounts/views.py:168
 msgid "A new activation code has been sent to your e-mail."
 msgstr "Новый код активации отправлен на вашу почту."
 
-#: accounts/views.py:191
+#: accounts/views.py:205
 msgid "Profile data has been successfully updated."
 msgstr "Данные профиля были успешно обновлены."
 
-#: accounts/views.py:227
+#: accounts/views.py:241
 msgid "To complete the change of mail, click on the link sent to it."
 msgstr "Для завершения изменения почты, перейдите по ссылке из письма."
 
-#: accounts/views.py:232
+#: accounts/views.py:246
 msgid "Email successfully changed."
 msgstr "Почта успешно изменена."
 
-#: accounts/views.py:255
+#: accounts/views.py:269
 msgid "You have successfully changed your email!"
 msgstr "Вы успешно изменили свою почту!"
 
@@ -166,6 +171,16 @@ msgstr "Русский"
 #: app/conf/development/settings.py:117 app/conf/production/settings.py:120
 msgid "Simplified Chinese"
 msgstr "Китайский (упрощённый)"
+
+#: content/templates/accounts/email/activation_profile.html:14
+#: content/templates/accounts/email/activation_profile.txt:3
+msgid "To activate your profile, please follow this link:"
+msgstr "Для активации вашего профиля, перейдите по этой ссылке:"
+
+#: content/templates/accounts/email/change_email.html:14
+#: content/templates/accounts/email/change_email.txt:3
+msgid "To change the mail, please follow the link:"
+msgstr "Для изменения почты, перейдите по этой ссылке:"
 
 #: content/templates/accounts/login.html:8
 #: content/templates/layouts/default/head.html:52
@@ -282,14 +297,6 @@ msgstr "Создать аккаунт"
 #: content/templates/accounts/register.html:15
 msgid "Create"
 msgstr "Создать"
-
-#: content/templates/email/activation_profile.html:14
-msgid "To activate your profile, please follow this link:"
-msgstr "Для активации вашего профиля, перейдите по этой ссылке:"
-
-#: content/templates/email/change_email.html:14
-msgid "To change the mail, please follow the link:"
-msgstr "Для изменения почты, перейдите по этой ссылке:"
 
 #: content/templates/layouts/default/head.html:39
 msgid "Change password"

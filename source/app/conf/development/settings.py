@@ -66,10 +66,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_HOST_USER = 'test@example.com'
 EMAIL_FILE_PATH = os.path.join(CONTENT_DIR, 'tmp/emails')
-
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+EMAIL_HOST_USER = 'test@example.com'
+DEFAULT_FROM_EMAIL = 'test@example.com'
 
 DATABASES = {
     'default': {
@@ -95,9 +94,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 ENABLE_USER_ACTIVATION = True
 DISABLE_USERNAME = False
-LOGIN_VIA_EMAIL = True
+LOGIN_VIA_EMAIL = False
 LOGIN_VIA_EMAIL_OR_USERNAME = False
 LOGIN_REDIRECT_URL = '/'
+USE_REMEMBER_ME = True
 
 PASSWORD_RESET_VIA_EMAIL_OR_USERNAME = True
 EMAIL_ACTIVATION_AFTER_CHANGING = True

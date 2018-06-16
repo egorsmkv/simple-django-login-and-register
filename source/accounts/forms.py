@@ -4,7 +4,7 @@ from django import forms
 from django.conf import settings
 from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
@@ -12,8 +12,16 @@ from django.utils.translation import gettext_lazy as _
 from .models import Activation
 
 
+def is_use_remember_me():
+    return hasattr(settings, 'USE_REMEMBER_ME') and settings.USE_REMEMBER_ME
+
+
+def is_username_disabled():
+    return hasattr(settings, 'DISABLE_USERNAME') and settings.DISABLE_USERNAME
+
+
 def get_sign_up_fields():
-    if hasattr(settings, 'DISABLE_USERNAME') and settings.DISABLE_USERNAME:
+    if is_username_disabled():
         return ['first_name', 'last_name', 'email', 'password1', 'password2']
 
     return ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
@@ -29,17 +37,30 @@ class SignIn(forms.Form):
     )
 
     def __init__(self, request=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
         self.request = request
         self.user_cache = None
-        super().__init__(*args, **kwargs)
+
+        if is_use_remember_me():
+            self.fields['remember_me'] = forms.BooleanField(label=_('Remember me'), required=False,
+                                                            widget=forms.CheckboxInput())
 
     def get_user(self):
         return self.user_cache
 
 
-class SignInViaEmailForm(SignIn):
-    field_order = ['email', 'password']
+class SignInViaUsernameForm(AuthenticationForm, SignIn):
+    def __init__(self, *args, **kwargs):
+        if is_use_remember_me():
+            self.field_order = ['username', 'password', 'remember_me']
+        else:
+            self.field_order = ['username', 'password']
 
+        super().__init__(*args, **kwargs)
+
+
+class SignInViaEmailForm(SignIn):
     email = forms.EmailField(
         label=_('Email'),
         widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}),
@@ -49,6 +70,14 @@ class SignInViaEmailForm(SignIn):
         'invalid_login': _('Please enter a correct email and password. Note that both fields may be case-sensitive.'),
         'inactive': _('This account is inactive.'),
     }
+
+    def __init__(self, *args, **kwargs):
+        if is_use_remember_me():
+            self.field_order = ['email', 'password', 'remember_me']
+        else:
+            self.field_order = ['email', 'password']
+
+        super().__init__(*args, **kwargs)
 
     def clean(self):
         cleaned_data = super(SignInViaEmailForm, self).clean()
@@ -82,9 +111,12 @@ class SignInViaEmailOrUsernameForm(SignIn):
         'inactive': _('This account is inactive.'),
     }
 
-    def __init__(self, request=None, *args, **kwargs):
-        self.request = request
-        self.user_cache = None
+    def __init__(self, *args, **kwargs):
+        if is_use_remember_me():
+            self.field_order = ['email_or_username', 'password', 'remember_me']
+        else:
+            self.field_order = ['email_or_username', 'password']
+
         super().__init__(*args, **kwargs)
 
     def clean(self):
