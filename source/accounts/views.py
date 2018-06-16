@@ -2,6 +2,7 @@ from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordResetView as BasePasswordResetView, SuccessURLAllowedHostsMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, resolve_url, redirect
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
@@ -176,7 +177,7 @@ class PasswordResetView(GuestOnlyView, BasePasswordResetView):
     def form_valid(self, form):
         send_reset_password_email(self.request, form.get_user())
 
-        return super(PasswordResetView, self).form_valid(form)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class ProfileEditView(LoginRequiredMixin, FormView):
