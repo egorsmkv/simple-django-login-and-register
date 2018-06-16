@@ -55,7 +55,7 @@ class GuestOnlyView(View):
         if request.user.is_authenticated:
             return redirect('index')
 
-        return super(GuestOnlyView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
 
 class SignInView(GuestOnlyView, SuccessRedirectView):
@@ -70,7 +70,7 @@ class SignInView(GuestOnlyView, SuccessRedirectView):
         # Sets a test cookie to make sure the user has cookies enabled
         request.session.set_test_cookie()
 
-        return super(SignInView, self).dispatch(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         # If the test cookie worked, go ahead and
@@ -86,7 +86,7 @@ class SignInView(GuestOnlyView, SuccessRedirectView):
 
         login(self.request, form.get_user())
 
-        return super(SignInView, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class SignUpView(GuestOnlyView, FormView):
@@ -126,7 +126,7 @@ class SignUpView(GuestOnlyView, FormView):
 
             messages.add_message(self.request, messages.SUCCESS, _('You are successfully registered!'))
 
-        return super(SignUpView, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class ActivateView(GuestOnlyView, RedirectView):
@@ -150,7 +150,7 @@ class ActivateView(GuestOnlyView, RedirectView):
         messages.add_message(self.request, messages.SUCCESS, _('You have successfully activated your account!'))
         login(self.request, user)
 
-        return super(ActivateView, self).get_redirect_url()
+        return super().get_redirect_url()
 
 
 class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
@@ -168,7 +168,7 @@ class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
 
         messages.add_message(self.request, messages.SUCCESS, _('A new activation code has been sent to your e-mail.'))
 
-        return super(ReSendActivationCodeView, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class PasswordResetView(GuestOnlyView, BasePasswordResetView):
@@ -187,7 +187,7 @@ class ProfileEditView(LoginRequiredMixin, FormView):
     success_url = '/accounts/profile/edit/'
 
     def get_initial(self):
-        initial = super(ProfileEditView, self).get_initial()
+        initial = super().get_initial()
 
         user = self.request.user
 
@@ -205,7 +205,7 @@ class ProfileEditView(LoginRequiredMixin, FormView):
 
         messages.add_message(self.request, messages.SUCCESS, _('Profile data has been successfully updated.'))
 
-        return super(ProfileEditView, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class ChangeEmailView(LoginRequiredMixin, FormView):
@@ -215,13 +215,13 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
     success_url = '/accounts/change/email/'
 
     def get_form_kwargs(self):
-        kwargs = super(ChangeEmailView, self).get_form_kwargs()
+        kwargs = super().get_form_kwargs()
         kwargs['user'] = self.request.user
 
         return kwargs
 
     def get_initial(self):
-        initial = super(ChangeEmailView, self).get_initial()
+        initial = super().get_initial()
 
         user = self.request.user
 
@@ -246,7 +246,7 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
 
             messages.add_message(self.request, messages.SUCCESS, _('Email successfully changed.'))
 
-        return super(ChangeEmailView, self).form_valid(form)
+        return super().form_valid(form)
 
 
 class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
@@ -269,4 +269,4 @@ class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
 
         messages.add_message(self.request, messages.SUCCESS, _('You have successfully changed your email!'))
 
-        return super(ChangeEmailActivateView, self).get_redirect_url()
+        return super().get_redirect_url()

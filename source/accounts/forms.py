@@ -53,10 +53,9 @@ class SignIn(forms.Form):
 
 class SignInViaUsernameForm(AuthenticationForm, SignIn):
     def __init__(self, *args, **kwargs):
+        self.field_order = ['username', 'password']
         if is_use_remember_me():
             self.field_order = ['username', 'password', 'remember_me']
-        else:
-            self.field_order = ['username', 'password']
 
         super().__init__(*args, **kwargs)
 
@@ -73,15 +72,14 @@ class SignInViaEmailForm(SignIn):
     }
 
     def __init__(self, *args, **kwargs):
+        self.field_order = ['email', 'password']
         if is_use_remember_me():
             self.field_order = ['email', 'password', 'remember_me']
-        else:
-            self.field_order = ['email', 'password']
 
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(SignInViaEmailForm, self).clean()
+        cleaned_data = super().clean()
 
         email = cleaned_data.get('email', '').lower()
         password = cleaned_data.get('password', '')
@@ -113,15 +111,14 @@ class SignInViaEmailOrUsernameForm(SignIn):
     }
 
     def __init__(self, *args, **kwargs):
+        self.field_order = ['email_or_username', 'password']
         if is_use_remember_me():
             self.field_order = ['email_or_username', 'password', 'remember_me']
-        else:
-            self.field_order = ['email_or_username', 'password']
 
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(SignInViaEmailOrUsernameForm, self).clean()
+        cleaned_data = super().clean()
 
         email_or_username = cleaned_data.get('email_or_username', '')
         password = cleaned_data.get('password', '')
@@ -159,7 +156,7 @@ class SignUpForm(UserCreationForm):
     }
 
     def clean(self):
-        cleaned_data = super(SignUpForm, self).clean()
+        cleaned_data = super().clean()
 
         email = cleaned_data.get('email', '').lower()
 
@@ -186,7 +183,7 @@ class ReSendActivationCodeForm(forms.Form):
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(ReSendActivationCodeForm, self).clean()
+        cleaned_data = super().clean()
 
         email_or_username = cleaned_data.get('email_or_username', '')
 
@@ -234,15 +231,14 @@ class ReSendActivationCodeViaEmailForm(forms.Form):
     def __init__(self, request=None, *args, **kwargs):
         self.request = request
         self.user_cache = None
+
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(ReSendActivationCodeViaEmailForm, self).clean()
-
-        email = cleaned_data.get('email', '')
+        cleaned_data = super().clean()
 
         try:
-            email = email.lower()
+            email = cleaned_data.get('email', '').lower()
 
             user = User.objects.filter(email=email).get()
 
@@ -271,10 +267,11 @@ class PasswordResetForm(BasePasswordResetForm):
 
     def __init__(self, *args, **kwargs):
         self.user_cache = None
+
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(PasswordResetForm, self).clean()
+        cleaned_data = super().clean()
 
         email = cleaned_data.get('email', '')
         users = list(self.get_users(email))
@@ -301,10 +298,11 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.user_cache = None
+
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(PasswordResetViaEmailOrUsernameForm, self).clean()
+        cleaned_data = super().clean()
 
         email_or_username = cleaned_data.get('email_or_username', '')
 
@@ -346,10 +344,11 @@ class ChangeEmailForm(forms.Form):
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
-        super(ChangeEmailForm, self).__init__(*args, **kwargs)
+
+        super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super(ChangeEmailForm, self).clean()
+        cleaned_data = super().clean()
 
         email = cleaned_data.get('email', '').lower()
 
