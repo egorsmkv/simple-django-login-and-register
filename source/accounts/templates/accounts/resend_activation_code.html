@@ -1,18 +1,19 @@
-{% include 'layouts/default/head.html' %}
+{% extends 'layouts/default/page.html' %}
 
 {% load bootstrap4 %}
 {% load i18n %}
 
-<div class="container-fluid mt-3">
+{% block content %}
 
     <h4>{% trans 'Re-send Activation Code' %}</h4>
 
     <form method="post">
-        {% csrf_token %}
 
+        {% csrf_token %}
         {% bootstrap_form form %}
 
         <button class="btn btn-primary">{% trans 'Next' %}</button>
+
     </form>
 
     <hr>
@@ -23,6 +24,4 @@
         </li>
     </ul>
 
-</div>
-
-{% include 'layouts/default/foot.html' %}
+{% endblock %}

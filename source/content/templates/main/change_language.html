@@ -1,11 +1,11 @@
-{% include 'layouts/default/head.html' %}
+{% extends 'layouts/default/page.html' %}
 
 {% load i18n %}
 
-{% get_current_language as LANGUAGE_CODE %}
-{% get_available_languages as LANGUAGES %}
+{% block content %}
 
-<div class="container-fluid mt-3">
+    {% get_current_language as language_code %}
+    {% get_available_languages as languages %}
 
     <h4>{% trans 'Change language' %}</h4>
 
@@ -18,8 +18,8 @@
         <div class="form-group">
             <label class="form-control-label" for="language-field">{% trans 'Select the language' %}</label>
             <select name="language" class="form-control" id="language-field">
-                {% for code, name in LANGUAGES %}
-                    <option value="{{ code }}" {% if code == LANGUAGE_CODE %} selected="selected"{% endif %}>
+                {% for code, name in languages %}
+                    <option value="{{ code }}" {% if code == language_code %} selected="selected"{% endif %}>
                         {{ name }} ({{ code }})
                     </option>
                 {% endfor %}
@@ -30,6 +30,4 @@
 
     </form>
 
-</div>
-
-{% include 'layouts/default/foot.html' %}
+{% endblock %}

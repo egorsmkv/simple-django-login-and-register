@@ -8,8 +8,7 @@
     <meta charset="utf-8">
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description"
-          content="An example of Django project with login, registration, log out and password reset functionality.">
+    <meta name="description" content="An example of Django project with basic user functionality.">
     <meta name="author" content="Yehor Smoliakov">
 
     <link rel="icon" href="{% static 'favicon.ico' %}">
@@ -27,8 +26,7 @@
 
     <a class="navbar-brand" href="/">Demo</a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault">
         <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -66,8 +64,23 @@
 
 </nav>
 
-{% if messages %}
-    <div class="container-fluid mt-3">
+<div class="container-fluid mt-3">
+
+    {% if messages %}
         {% include 'bootstrap4/messages.html' %}
-    </div>
-{% endif %}
+    {% endif %}
+
+    {% block content %}
+        No content.
+    {% endblock %}
+
+</div>
+
+<script src="{% static 'vendor/jquery/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+<script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
+
+</body>
+</html>

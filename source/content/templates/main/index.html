@@ -1,8 +1,8 @@
-{% include 'layouts/default/head.html' %}
+{% extends 'layouts/default/page.html' %}
 
 {% load i18n %}
 
-<div class="container-fluid mt-3">
+{% block content %}
 
     {% if request.user.is_authenticated %}
 
@@ -18,6 +18,4 @@
 
     {% endif %}
 
-</div>
-
-{% include 'layouts/default/foot.html' %}
+{% endblock %}
