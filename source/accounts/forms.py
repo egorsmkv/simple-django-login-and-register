@@ -364,7 +364,7 @@ class ChangeEmailForm(forms.Form):
                 self.add_error('email', self.error_messages['email_already_exists'])
 
 
-class UsernameForgotForm(forms.Form):
+class RecoverUsernameForm(forms.Form):
     email = forms.EmailField(label=_('Email'), max_length=255,
                              widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}))
 

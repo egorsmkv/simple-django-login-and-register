@@ -24,7 +24,7 @@ from .utils import (
     get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email, send_forgotten_username,
     send_activation_change_email, is_username_disabled, get_resend_ac_form, is_use_remember_me,
 )
-from .forms import SignUpForm, ChangeProfileForm, ChangeEmailForm, UsernameForgotForm
+from .forms import SignUpForm, ChangeProfileForm, ChangeEmailForm, RecoverUsernameForm
 from .models import Activation
 
 
@@ -284,9 +284,9 @@ class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
         return super().get_redirect_url()
 
 
-class UsernameForgotView(GuestOnlyView, FormView):
-    template_name = 'accounts/username_forgot.html'
-    form_class = UsernameForgotForm
+class RecoverUsernameView(GuestOnlyView, FormView):
+    template_name = 'accounts/recover_username.html'
+    form_class = RecoverUsernameForm
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email', '').lower()
@@ -299,7 +299,7 @@ class UsernameForgotView(GuestOnlyView, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('accounts:username_forgot')
+        return reverse('accounts:recover_username')
 
 
 class LogoutView(LoginRequiredMixin, BaseLogoutView):

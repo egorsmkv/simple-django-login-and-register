@@ -2,10 +2,9 @@ from django.urls import path
 
 from .views import (
     SignInView, ReSendActivationCodeView, SignUpView, ActivateView,
-    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView,
+    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView, RecoverUsernameView,
     LogoutView, PasswordResetView, PasswordChangeView, PasswordChangeDoneView,
     PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView,
-    UsernameForgotView,
 )
 
 app_name = 'accounts'
@@ -25,7 +24,7 @@ urlpatterns = [
     path('password/reset/', PasswordResetView.as_view(), name='password_reset'),
     path('password/reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
 
-    path('username/forgot', UsernameForgotView.as_view(), name='username_forgot'),
+    path('recover/username/', RecoverUsernameView.as_view(), name='recover_username'),
 
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
