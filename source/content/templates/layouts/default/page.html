@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load bootstrap4 %}
 {% load i18n %}
 
 <!DOCTYPE html>
@@ -66,9 +67,7 @@
 
 <div class="container-fluid mt-3">
 
-    {% if messages %}
-        {% include 'bootstrap4/messages.html' %}
-    {% endif %}
+    {% bootstrap_messages %}
 
     {% block content %}
         No content.

@@ -45,7 +45,7 @@ class SignIn(forms.Form):
 
         if is_use_remember_me():
             self.fields['remember_me'] = forms.BooleanField(label=_('Remember me'), required=False,
-                                                            widget=forms.CheckboxInput())
+                                                            widget=forms.CheckboxInput)
 
     def get_user(self):
         return self.user_cache
