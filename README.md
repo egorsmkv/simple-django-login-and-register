@@ -4,9 +4,9 @@ An example of Django project with basic user functionality.
 
 ## Screenshots
 
-| Log In | Registration | Authorized page |
+| Log In | Create an account | Authorized page |
 | -------|--------------|-----------------|
-| <img src="./screenshots/login.png" width="200"> | <img src="./screenshots/register.png" width="200"> | <img src="./screenshots/authorized_page.png" width="200"> |
+| <img src="./screenshots/login.png" width="200"> | <img src="./screenshots/create_an_account.png" width="200"> | <img src="./screenshots/authorized_page.png" width="200"> |
 
 | Password reset | Set new password | Password change |
 | ---------------|------------------|-----------------|
@@ -14,19 +14,20 @@ An example of Django project with basic user functionality.
 
 ## Functionality
 
-- Sign In
+- Log in
     - via username & password
     - via email & password
     - via email or username & password
     - with a remember me checkbox (optional)
-- Sign Up
-- Log Out
-- Profile Activation via Email
-- Password Reset
-- Re-send Activation Code
-- Password Changing
-- Email Changing
-- Profile Data Changing
+- Create an account
+- Log out
+- Profile activation via email
+- Password reset
+- Recover a username
+- Resend activation code
+- Password changing
+- Email changing
+- Profile data changing
 - Multilingual: English, Russian, Ukrainian, and Simplified Chinese
 
 
