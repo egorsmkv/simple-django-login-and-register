@@ -19,15 +19,15 @@ An example of Django project with basic user functionality.
     - via email & password
     - via email or username & password
     - with a remember me checkbox (optional)
-- Create an account
+- Registration
 - Log out
 - Profile activation via email
 - Password reset
 - Recover a username
-- Resend activation code
-- Password changing
-- Email changing
-- Profile data changing
+- Resend an activation code
+- Change password
+- Change email
+- Change profile
 - Multilingual: English, Russian, Ukrainian, and Simplified Chinese
 
 
