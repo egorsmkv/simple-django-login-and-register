@@ -65,7 +65,6 @@ class GuestOnlyView(View):
 class SignInView(GuestOnlyView, SuccessRedirectView):
     template_name = 'accounts/login.html'
     form_class = get_login_form()
-    success_url = '/'
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
@@ -92,11 +91,13 @@ class SignInView(GuestOnlyView, SuccessRedirectView):
 
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse('index')
+
 
 class SignUpView(GuestOnlyView, FormView):
     template_name = 'accounts/register.html'
     form_class = SignUpForm
-    success_url = '/'
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -133,6 +134,9 @@ class SignUpView(GuestOnlyView, FormView):
 
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse('index')
+
 
 class ActivateView(GuestOnlyView, RedirectView):
     permanent = False
@@ -159,7 +163,6 @@ class ActivateView(GuestOnlyView, RedirectView):
 class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
     template_name = 'accounts/resend_activation_code.html'
     form_class = get_resend_ac_form()
-    success_url = '/'
 
     def form_valid(self, form):
         user = form.get_user()
@@ -172,6 +175,9 @@ class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
         messages.add_message(self.request, messages.SUCCESS, _('A new activation code has been sent to your e-mail.'))
 
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('index')
 
 
 class PasswordResetView(GuestOnlyView, BasePasswordResetView):
@@ -216,7 +222,6 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
 class ChangeEmailView(LoginRequiredMixin, FormView):
     template_name = 'accounts/profile/change_email.html'
     form_class = ChangeEmailForm
-    success_url = '/accounts/change/email/'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -251,6 +256,9 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
             messages.add_message(self.request, messages.SUCCESS, _('Email successfully changed.'))
 
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('change_email')
 
 
 class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
