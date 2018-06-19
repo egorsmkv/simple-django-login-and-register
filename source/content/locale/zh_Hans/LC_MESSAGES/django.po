@@ -183,18 +183,14 @@ msgstr "你已成功注册！"
 msgid "You have successfully activated your account!"
 msgstr "你已成功激活你的账号！"
 
-#, fuzzy
-#| msgid "A new activation code has been sent to your e-mail."
 msgid "A new activation code has been sent to your email address."
-msgstr "新的激活码已经发送到你的电子邮箱。"
+msgstr "新的激活码已发送到您的电子邮件地址。"
 
 msgid "Profile data has been successfully updated."
 msgstr "已经成功更新了个人信息数据。"
 
-#, fuzzy
-#| msgid "To complete the change of mail, click on the link sent to it."
 msgid "To complete the change of email address, click on the link sent to it."
-msgstr "若要完成邮箱地址修改，请点击发送到当前邮箱的链接。"
+msgstr "要完成电子邮件地址的更改，请点击发送给它的链接。"
 
 msgid "Email successfully changed."
 msgstr "电子邮箱地址修改成功。"
