@@ -165,7 +165,7 @@ class SignUpForm(UserCreationForm):
             self.add_error('email', self.error_messages['unique_email'])
 
 
-class ReSendActivationCodeForm(forms.Form):
+class ResendActivationCodeForm(forms.Form):
     email_or_username = forms.CharField(
         label=_('Email or Username'),
         widget=forms.TextInput(attrs={'autofocus': True}),
@@ -174,7 +174,7 @@ class ReSendActivationCodeForm(forms.Form):
     error_messages = {
         'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
         'incorrect_data': _('You entered incorrect data.'),
-        'already_activated': _('This profile has already been activated.'),
+        'already_activated': _('This account has already been activated.'),
     }
 
     def __init__(self, request=None, *args, **kwargs):
@@ -216,7 +216,7 @@ class ReSendActivationCodeForm(forms.Form):
         return self.user_cache
 
 
-class ReSendActivationCodeViaEmailForm(forms.Form):
+class ResendActivationCodeViaEmailForm(forms.Form):
     email = forms.EmailField(
         label=_('Email'),
         widget=forms.EmailInput(attrs={'autofocus': True}),
@@ -225,7 +225,7 @@ class ReSendActivationCodeViaEmailForm(forms.Form):
     error_messages = {
         'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
         'incorrect_data': _('You entered incorrect data.'),
-        'already_activated': _('This profile has already been activated.'),
+        'already_activated': _('This account has already been activated.'),
     }
 
     def __init__(self, request=None, *args, **kwargs):
@@ -260,7 +260,7 @@ class ReSendActivationCodeViaEmailForm(forms.Form):
         return self.user_cache
 
 
-class PasswordResetForm(BasePasswordResetForm):
+class RestorePasswordForm(BasePasswordResetForm):
     error_messages = {
         'incorrect_data': _('You entered incorrect data.'),
     }
@@ -285,7 +285,7 @@ class PasswordResetForm(BasePasswordResetForm):
         return self.user_cache
 
 
-class PasswordResetViaEmailOrUsernameForm(forms.Form):
+class RestorePasswordViaEmailOrUsernameForm(forms.Form):
     email_or_username = forms.CharField(
         label=_('Email or Username'),
         widget=forms.TextInput(attrs={'autofocus': True}),
@@ -364,7 +364,7 @@ class ChangeEmailForm(forms.Form):
                 self.add_error('email', self.error_messages['email_already_exists'])
 
 
-class RecoverUsernameForm(forms.Form):
+class RemindUsernameForm(forms.Form):
     email = forms.EmailField(label=_('Email'), max_length=255,
                              widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}))
 

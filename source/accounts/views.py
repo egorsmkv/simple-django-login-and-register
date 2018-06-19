@@ -21,19 +21,20 @@ from django.views.generic import View, FormView, RedirectView
 from django.conf import settings
 
 from .utils import (
-    get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email, send_forgotten_username,
-    send_activation_change_email, is_username_disabled, get_resend_ac_form, is_use_remember_me,
+    send_activation_email, send_reset_password_email, send_forgotten_username, send_activation_change_email,
+    is_username_disabled, is_use_remember_me, is_restore_password_via_email_or_username,
 )
-from .forms import SignUpForm, ChangeProfileForm, ChangeEmailForm, RecoverUsernameForm
+from .forms import (
+    SignInViaEmailForm, SignInViaEmailOrUsernameForm, SignInViaUsernameForm,
+    SignUpForm, ChangeProfileForm, ChangeEmailForm, RemindUsernameForm,
+    RestorePasswordForm, RestorePasswordViaEmailOrUsernameForm,
+    ResendActivationCodeForm, ResendActivationCodeViaEmailForm,
+)
 from .models import Activation
 
 
 class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
     redirect_field_name = REDIRECT_FIELD_NAME
-
-    def get_success_url(self):
-        url = self.get_redirect_url()
-        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
 
     def get_redirect_url(self):
         redirect_to = self.request.POST.get(
@@ -46,6 +47,10 @@ class SuccessRedirectView(SuccessURLAllowedHostsMixin, FormView):
             require_https=self.request.is_secure(),
         )
         return redirect_to if url_is_safe else ''
+
+    def get_success_url(self):
+        url = self.get_redirect_url()
+        return url or resolve_url(settings.LOGIN_REDIRECT_URL)
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -62,9 +67,17 @@ class GuestOnlyView(View):
         return super().dispatch(request, *args, **kwargs)
 
 
-class SignInView(GuestOnlyView, SuccessRedirectView):
-    template_name = 'accounts/login.html'
-    form_class = get_login_form()
+class LogInView(GuestOnlyView, SuccessRedirectView):
+    template_name = 'accounts/log_in.html'
+
+    def get_form_class(self):
+        if hasattr(settings, 'LOGIN_VIA_EMAIL') and settings.LOGIN_VIA_EMAIL:
+            return SignInViaEmailForm
+
+        if hasattr(settings, 'LOGIN_VIA_EMAIL_OR_USERNAME') and settings.LOGIN_VIA_EMAIL_OR_USERNAME:
+            return SignInViaEmailOrUsernameForm
+
+        return SignInViaUsernameForm
 
     @method_decorator(sensitive_post_parameters('password'))
     @method_decorator(csrf_protect)
@@ -96,7 +109,7 @@ class SignInView(GuestOnlyView, SuccessRedirectView):
 
 
 class SignUpView(GuestOnlyView, FormView):
-    template_name = 'accounts/register.html'
+    template_name = 'accounts/sign_up.html'
     form_class = SignUpForm
 
     def form_valid(self, form):
@@ -160,9 +173,14 @@ class ActivateView(GuestOnlyView, RedirectView):
         return super().get_redirect_url()
 
 
-class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
+class ResendActivationCodeView(GuestOnlyView, SuccessRedirectView):
     template_name = 'accounts/resend_activation_code.html'
-    form_class = get_resend_ac_form()
+
+    def get_form_class(self):
+        if is_username_disabled():
+            return ResendActivationCodeViaEmailForm
+
+        return ResendActivationCodeForm
 
     def form_valid(self, form):
         user = form.get_user()
@@ -181,9 +199,14 @@ class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
         return reverse('index')
 
 
-class PasswordResetView(GuestOnlyView, BasePasswordResetView):
-    template_name = 'accounts/password_reset.html'
-    form_class = get_password_reset_form()
+class RestorePasswordView(GuestOnlyView, BasePasswordResetView):
+    template_name = 'accounts/restore_password.html'
+
+    def get_form_class(self):
+        if is_restore_password_via_email_or_username():
+            return RestorePasswordViaEmailOrUsernameForm
+
+        return RestorePasswordForm
 
     def form_valid(self, form):
         send_reset_password_email(self.request, form.get_user())
@@ -191,7 +214,7 @@ class PasswordResetView(GuestOnlyView, BasePasswordResetView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('accounts:password_reset_done')
+        return reverse('accounts:restore_password_done')
 
 
 class ChangeProfileView(LoginRequiredMixin, FormView):
@@ -285,9 +308,9 @@ class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
         return super().get_redirect_url()
 
 
-class RecoverUsernameView(GuestOnlyView, FormView):
-    template_name = 'accounts/recover_username.html'
-    form_class = RecoverUsernameForm
+class RemindUsernameView(GuestOnlyView, FormView):
+    template_name = 'accounts/remind_username.html'
+    form_class = RemindUsernameForm
 
     def form_valid(self, form):
         email = form.cleaned_data.get('email', '').lower()
@@ -300,31 +323,31 @@ class RecoverUsernameView(GuestOnlyView, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('accounts:recover_username')
+        return reverse('accounts:remind_username')
 
 
-class LogoutView(LoginRequiredMixin, BaseLogoutView):
-    template_name = 'accounts/logout.html'
+class LogOutView(LoginRequiredMixin, BaseLogoutView):
+    template_name = 'accounts/log_out.html'
 
 
-class PasswordChangeView(BasePasswordChangeView):
-    template_name = 'accounts/password_change.html'
+class ChangePasswordView(BasePasswordChangeView):
+    template_name = 'accounts/change_password.html'
 
     def get_success_url(self):
-        return reverse('accounts:password_change_done')
+        return reverse('accounts:change_password_done')
 
 
-class PasswordChangeDoneView(BasePasswordChangeDoneView):
-    template_name = 'accounts/password_change_done.html'
+class ChangePasswordDoneView(BasePasswordChangeDoneView):
+    template_name = 'accounts/change_password_done.html'
 
 
-class PasswordResetDoneView(BasePasswordResetDoneView):
-    template_name = 'accounts/password_reset_done.html'
+class RestorePasswordDoneView(BasePasswordResetDoneView):
+    template_name = 'accounts/restore_password_done.html'
 
 
-class PasswordResetConfirmView(BasePasswordResetConfirmView):
-    template_name = 'accounts/password_reset_confirm.html'
+class RestorePasswordConfirmView(BasePasswordResetConfirmView):
+    template_name = 'accounts/restore_password_confirm.html'
 
 
-class PasswordResetCompleteView(BasePasswordResetCompleteView):
-    template_name = 'accounts/password_reset_complete.html'
+class RestorePasswordCompleteView(BasePasswordResetCompleteView):
+    template_name = 'accounts/restore_password_complete.html'

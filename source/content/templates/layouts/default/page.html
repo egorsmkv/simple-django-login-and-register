@@ -37,7 +37,7 @@
         <ul class="navbar-nav mr-auto">
             {% if request.user.is_authenticated %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:password_change' %}">{% trans 'Change password' %}</a>
+                    <a class="nav-link" href="{% url 'accounts:change_password' %}">{% trans 'Change password' %}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'accounts:change_profile' %}">{% trans 'Change profile' %}</a>
@@ -46,14 +46,14 @@
                     <a class="nav-link" href="{% url 'accounts:change_email' %}">{% trans 'Change email' %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:logout' %}">{% trans 'Log out' %}</a>
+                    <a class="nav-link" href="{% url 'accounts:log_out' %}">{% trans 'Log out' %}</a>
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:login' %}">{% trans 'Log in' %}</a>
+                    <a class="nav-link" href="{% url 'accounts:log_in' %}">{% trans 'Log in' %}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'accounts:register' %}">{% trans 'Create an account' %}</a>
+                    <a class="nav-link" href="{% url 'accounts:sign_up' %}">{% trans 'Create an account' %}</a>
                 </li>
             {% endif %}
         </ul>

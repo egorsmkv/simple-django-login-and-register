@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 17:30+0000\n"
+"POT-Creation-Date: 2018-06-19 22:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,14 +64,23 @@ msgstr ""
 msgid "You entered incorrect data."
 msgstr "Ви ввели некоректні дані."
 
-msgid "This profile has already been activated."
-msgstr "Це профіль вже активований."
+msgid "This account has already been activated."
+msgstr "Цей обліковий запис вже активований."
 
 msgid "You can not use this mail."
 msgstr "Ви не можете використовувати цю пошту."
 
 msgid "Please enter another email."
 msgstr "Будь ласка, введіть іншу пошту."
+
+msgid "Change password"
+msgstr "Змінити пароль"
+
+msgid "Change"
+msgstr "Змінити"
+
+msgid "Your password was changed."
+msgstr "Ваш пароль було змінено."
 
 msgid "To activate your profile, please follow this link:"
 msgstr ""
@@ -96,13 +105,10 @@ msgstr "Будь ласка, перейдіть на цю сторінку, та
 msgid "Log in"
 msgstr "Вхід"
 
-msgid "Enter"
-msgstr "Увійти"
-
-msgid "Forgot the password?"
+msgid "Forgot your password?"
 msgstr "Забули пароль?"
 
-msgid "Forgot the username?"
+msgid "Forgot your username?"
 msgstr "Забули ім'я користувача?"
 
 msgid "Resend an activation code"
@@ -117,20 +123,20 @@ msgstr "Дякуємо, що виділили час на відвідуванн
 msgid "Log in again"
 msgstr "Увійти знову"
 
-msgid "Password change"
-msgstr "Зміна паролю"
+msgid "Change email"
+msgstr "Змінити пошту"
 
-msgid "Change"
-msgstr "Змінити"
+msgid "Change profile"
+msgstr "Змінити профіль"
 
-msgid "Your password was changed."
-msgstr "Ваш пароль було змінено."
-
-msgid "Password reset"
-msgstr "Скинути пароль"
+msgid "Remind a username"
+msgstr "Нагадати ім'я користувача"
 
 msgid "Next"
 msgstr "Далі"
+
+msgid "Restore password"
+msgstr "Забули пароль"
 
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "Пароль встановлено. Ви можете увійти зараз."
@@ -165,15 +171,6 @@ msgid ""
 msgstr ""
 "Якщо ви не отримали листа, будь ласка перевірте папку спаму або упевніться, "
 "що введена пошта є тією, яка використовувалася при реєстрації."
-
-msgid "Change email"
-msgstr "Змінити пошту"
-
-msgid "Change profile"
-msgstr "Змінити профіль"
-
-msgid "Recover a username"
-msgstr "Відновити ім'я користувача"
 
 msgid "Create an account"
 msgstr "Створити обліковий запис"
@@ -234,9 +231,6 @@ msgstr "Китайська (спрощена)"
 
 msgid "Home"
 msgstr ""
-
-msgid "Change password"
-msgstr "Змінити пароль"
 
 msgid "Log out"
 msgstr "Вихід"

@@ -12,7 +12,7 @@
         {% csrf_token %}
         {% bootstrap_form form %}
 
-        <button class="btn btn-primary">{% trans 'Enter' %}</button>
+        <button class="btn btn-primary">{% trans 'Log in' %}</button>
 
     </form>
 
@@ -20,10 +20,10 @@
 
     <ul>
         <li>
-            <a href="{% url 'accounts:password_reset' %}">{% trans 'Forgot the password?' %}</a>
+            <a href="{% url 'accounts:restore_password' %}">{% trans 'Forgot your password?' %}</a>
         </li>
         <li>
-            <a href="{% url 'accounts:recover_username' %}">{% trans 'Forgot the username?' %}</a>
+            <a href="{% url 'accounts:remind_username' %}">{% trans 'Forgot your username?' %}</a>
         </li>
         <li>
             <a href="{% url 'accounts:resend_activation_code' %}">{% trans 'Resend an activation code' %}</a>

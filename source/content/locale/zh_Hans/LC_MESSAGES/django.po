@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 17:30+0000\n"
+"POT-Creation-Date: 2018-06-19 22:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Wentao Han <wentao.han@gmail.com>\n"
 "Language: zh_CN\n"
@@ -58,14 +58,23 @@ msgstr "激活码已经发送。你可以在24小时内再次请求新的激活�
 msgid "You entered incorrect data."
 msgstr "输入了不正确的数据。"
 
-msgid "This profile has already been activated."
-msgstr "该账号已经激活。"
+msgid "This account has already been activated."
+msgstr "该帐户已被激活。"
 
 msgid "You can not use this mail."
 msgstr "你不能使用这个邮箱。"
 
 msgid "Please enter another email."
 msgstr "请输入一个新的电子邮箱。"
+
+msgid "Change password"
+msgstr "修改密码"
+
+msgid "Change"
+msgstr "修改"
+
+msgid "Your password was changed."
+msgstr "你的密码已被修改。"
 
 msgid "To activate your profile, please follow this link:"
 msgstr "若要激活你的账号，请访问以下链接："
@@ -87,14 +96,11 @@ msgstr "请转到以下页面并选择一个新密码："
 msgid "Log in"
 msgstr "登录"
 
-msgid "Enter"
-msgstr "输入"
+msgid "Forgot your password?"
+msgstr "忘记密码了吗？"
 
-msgid "Forgot the password?"
-msgstr "忘记密码？"
-
-msgid "Forgot the username?"
-msgstr "忘记用户名？"
+msgid "Forgot your username?"
+msgstr "忘记了你的用户名？"
 
 msgid "Resend an activation code"
 msgstr "重新发送激活码"
@@ -108,20 +114,20 @@ msgstr "感谢您访问本网站。"
 msgid "Log in again"
 msgstr "再次登录"
 
-msgid "Password change"
-msgstr "密码修改"
+msgid "Change email"
+msgstr "修改电子邮箱"
 
-msgid "Change"
-msgstr "修改"
+msgid "Change profile"
+msgstr "更改档案"
 
-msgid "Your password was changed."
-msgstr "你的密码已被修改。"
-
-msgid "Password reset"
-msgstr "密码重设"
+msgid "Remind a username"
+msgstr "提醒用户名"
 
 msgid "Next"
 msgstr "下一步"
+
+msgid "Restore password"
+msgstr "恢复密码"
 
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr "你的密码已经重设。现在可以继续登录。"
@@ -150,15 +156,6 @@ msgid ""
 msgstr ""
 "如果你没有收到邮件，请检查你输入的是注册时提供的邮箱地址，并检查你的垃圾邮件"
 "文件夹。"
-
-msgid "Change email"
-msgstr "修改电子邮箱"
-
-msgid "Change profile"
-msgstr "更改档案"
-
-msgid "Recover a username"
-msgstr "恢复用户名"
 
 msgid "Create an account"
 msgstr "创建账号"
@@ -215,9 +212,6 @@ msgstr "简体中文"
 
 msgid "Home"
 msgstr ""
-
-msgid "Change password"
-msgstr "修改密码"
 
 msgid "Log out"
 msgstr "登出"

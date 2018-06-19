@@ -1,33 +1,33 @@
 from django.urls import path
 
 from .views import (
-    SignInView, ReSendActivationCodeView, SignUpView, ActivateView,
-    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView, RecoverUsernameView,
-    LogoutView, PasswordResetView, PasswordChangeView, PasswordChangeDoneView,
-    PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView,
+    LogInView, ResendActivationCodeView, SignUpView, ActivateView,
+    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView, RemindUsernameView,
+    LogOutView, ChangePasswordView, ChangePasswordDoneView,
+    RestorePasswordView, RestorePasswordDoneView, RestorePasswordConfirmView, RestorePasswordCompleteView,
 )
 
 app_name = 'accounts'
 
 urlpatterns = [
-    path('login/', SignInView.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('log-in/', LogInView.as_view(), name='log_in'),
+    path('log-out/', LogOutView.as_view(), name='log_out'),
 
-    path('activate/resend/', ReSendActivationCodeView.as_view(), name='resend_activation_code'),
+    path('resend/activation-code/', ResendActivationCodeView.as_view(), name='resend_activation_code'),
 
-    path('register/', SignUpView.as_view(), name='register'),
+    path('sign-up/', SignUpView.as_view(), name='sign_up'),
     path('activate/<code>/', ActivateView.as_view(), name='activate'),
 
-    path('password/change/', PasswordChangeView.as_view(), name='password_change'),
-    path('password/change/done/', PasswordChangeDoneView.as_view(), name='password_change_done'),
+    path('change/password/', ChangePasswordView.as_view(), name='change_password'),
+    path('change/password/done/', ChangePasswordDoneView.as_view(), name='change_password_done'),
 
-    path('password/reset/', PasswordResetView.as_view(), name='password_reset'),
-    path('password/reset/done/', PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('restore/password/', RestorePasswordView.as_view(), name='restore_password'),
+    path('restore/password/done/', RestorePasswordDoneView.as_view(), name='restore_password_done'),
 
-    path('recover/username/', RecoverUsernameView.as_view(), name='recover_username'),
+    path('restore/<uidb64>/<token>/', RestorePasswordConfirmView.as_view(), name='restore_password_confirm'),
+    path('restore/done/', RestorePasswordCompleteView.as_view(), name='restore_password_complete'),
 
-    path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
-    path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
+    path('remind/username/', RemindUsernameView.as_view(), name='remind_username'),
 
     path('change/profile/', ChangeProfileView.as_view(), name='change_profile'),
 

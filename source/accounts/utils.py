@@ -10,21 +10,6 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 
 from .models import Activation
-from .forms import (
-    SignInViaUsernameForm, SignInViaEmailForm, SignInViaEmailOrUsernameForm,
-    PasswordResetViaEmailOrUsernameForm, PasswordResetForm,
-    ReSendActivationCodeForm, ReSendActivationCodeViaEmailForm
-)
-
-
-def get_login_form():
-    if hasattr(settings, 'LOGIN_VIA_EMAIL') and settings.LOGIN_VIA_EMAIL:
-        return SignInViaEmailForm
-
-    if hasattr(settings, 'LOGIN_VIA_EMAIL_OR_USERNAME') and settings.LOGIN_VIA_EMAIL_OR_USERNAME:
-        return SignInViaEmailOrUsernameForm
-
-    return SignInViaUsernameForm
 
 
 def is_username_disabled():
@@ -35,18 +20,9 @@ def is_use_remember_me():
     return hasattr(settings, 'USE_REMEMBER_ME') and settings.USE_REMEMBER_ME
 
 
-def get_password_reset_form():
-    if hasattr(settings, 'PASSWORD_RESET_VIA_EMAIL_OR_USERNAME') and settings.PASSWORD_RESET_VIA_EMAIL_OR_USERNAME:
-        return PasswordResetViaEmailOrUsernameForm
-
-    return PasswordResetForm
-
-
-def get_resend_ac_form():
-    if is_username_disabled():
-        return ReSendActivationCodeViaEmailForm
-
-    return ReSendActivationCodeForm
+def is_restore_password_via_email_or_username():
+    return hasattr(settings, 'RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME') and \
+           settings.RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME
 
 
 def send_activation_email(request, user):
@@ -63,8 +39,8 @@ def send_activation_email(request, user):
         'uri': request.build_absolute_uri(reverse('accounts:activate', kwargs={'code': code})),
     }
 
-    html_content = render_to_string('accounts/email/activation_profile.html', context)
-    text_content = render_to_string('accounts/email/activation_profile.txt', context)
+    html_content = render_to_string('accounts/email/activate_profile.html', context)
+    text_content = render_to_string('accounts/email/activate_profile.txt', context)
 
     msg = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
     msg.attach_alternative(html_content, 'text/html')
@@ -98,15 +74,15 @@ def send_reset_password_email(request, user):
     token = default_token_generator.make_token(user)
     uid = urlsafe_base64_encode(force_bytes(user.pk)).decode()
 
-    subject = _('Password reset')
+    subject = _('Restore password')
     context = {
         'subject': subject,
         'uri': request.build_absolute_uri(
-            reverse('accounts:password_reset_confirm', kwargs={'uidb64': uid, 'token': token})),
+            reverse('accounts:restore_password_confirm', kwargs={'uidb64': uid, 'token': token})),
     }
 
-    html_content = render_to_string('accounts/email/password_reset_email.html', context)
-    text_content = render_to_string('accounts/email/password_reset_email.txt', context)
+    html_content = render_to_string('accounts/email/restore_password_email.html', context)
+    text_content = render_to_string('accounts/email/restore_password_email.txt', context)
 
     msg = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
     msg.attach_alternative(html_content, 'text/html')
