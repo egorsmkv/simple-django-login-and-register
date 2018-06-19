@@ -2,8 +2,4 @@
 
 {% trans 'To change the mail, please follow the link:' %}
 
-{% if request.is_secure %}
-https://{{ domain }}/accounts/change/email/{{ code }}/
-{% else %}
-http://{{ domain }}/accounts/change/email/{{ code }}/
-{% endif %}
+{{ uri }}

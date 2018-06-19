@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>{% trans 'Profile Activation' %}</title>
+    <title>{{ subject }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 
@@ -15,11 +15,7 @@
 
 <br/>
 
-{% if request.is_secure %}
-    <a href="https://{{ domain }}/accounts/activate/{{ code }}/">https://{{ domain }}/accounts/activate/{{ code }}/</a>
-{% else %}
-    <a href="http://{{ domain }}/accounts/activate/{{ code }}/">http://{{ domain }}/accounts/activate/{{ code }}/</a>
-{% endif %}
+<a href="{{ uri }}">{{ uri }}</a>
 
 </body>
 

@@ -20,13 +20,13 @@
 
     <ul>
         <li>
-            <a href="{% url 'password_reset' %}">{% trans 'Forget the password?' %}</a>
+            <a href="{% url 'accounts:password_reset' %}">{% trans 'Forget the password?' %}</a>
         </li>
         <li>
-            <a href="{% url 'password_reset' %}">{% trans 'Forget the username?' %}</a>
+            <a href="{% url 'accounts:password_reset' %}">{% trans 'Forget the username?' %}</a>
         </li>
         <li>
-            <a href="{% url 'resend_activation_code' %}">{% trans 'Resend an activation code' %}</a>
+            <a href="{% url 'accounts:resend_activation_code' %}">{% trans 'Resend an activation code' %}</a>
         </li>
     </ul>
 

@@ -189,6 +189,9 @@ class PasswordResetView(GuestOnlyView, BasePasswordResetView):
 
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_success_url(self):
+        return reverse('accounts:password_reset_done')
+
 
 class ChangeProfileView(LoginRequiredMixin, FormView):
     template_name = 'accounts/profile/change_profile.html'
@@ -206,9 +209,10 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = self.request.user
+        data = form.cleaned_data
 
-        user.first_name = form.cleaned_data.get('first_name')
-        user.last_name = form.cleaned_data.get('last_name')
+        user.first_name = data.get('first_name')
+        user.last_name = data.get('last_name')
         user.save()
 
         messages.add_message(self.request, messages.SUCCESS, _('Profile data has been successfully updated.'))
@@ -216,7 +220,7 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('change_profile')
+        return reverse('accounts:change_profile')
 
 
 class ChangeEmailView(LoginRequiredMixin, FormView):
@@ -258,13 +262,13 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('change_email')
+        return reverse('accounts:change_email')
 
 
 class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
     permanent = False
     query_string = True
-    pattern_name = 'change_email'
+    pattern_name = 'accounts:change_email'
 
     def get_redirect_url(self, *args, **kwargs):
         act = get_object_or_404(Activation, code=kwargs['code'])
@@ -287,7 +291,10 @@ class LogoutView(LoginRequiredMixin, BaseLogoutView):
 
 
 class PasswordChangeView(BasePasswordChangeView):
-    template_name = 'accounts/password_change_form.html'
+    template_name = 'accounts/password_change.html'
+
+    def get_success_url(self):
+        return reverse('accounts:password_change_done')
 
 
 class PasswordChangeDoneView(BasePasswordChangeDoneView):

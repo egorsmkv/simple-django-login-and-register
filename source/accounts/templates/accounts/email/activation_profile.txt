@@ -2,8 +2,4 @@
 
 {% trans 'To activate your profile, please follow this link:' %}
 
-{% if request.is_secure %}
-https://{{ domain }}/accounts/activate/{{ code }}/
-{% else %}
-http://{{ domain }}/accounts/activate/{{ code }}/
-{% endif %}
+{{ uri }}
