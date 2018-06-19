@@ -328,7 +328,7 @@ class PasswordResetViaEmailOrUsernameForm(forms.Form):
         return self.user_cache
 
 
-class ProfileEditForm(forms.Form):
+class ChangeProfileForm(forms.Form):
     first_name = forms.CharField(label=_('First Name'), max_length=50, required=False, help_text=_('Optional.'),
                                  widget=forms.TextInput(attrs={'autofocus': True}))
     last_name = forms.CharField(label=_('Last Name'), max_length=50, required=False, help_text=_('Optional.'))

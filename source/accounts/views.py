@@ -9,6 +9,7 @@ from django.contrib.auth.views import (
 )
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, resolve_url, redirect
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
@@ -23,7 +24,7 @@ from .utils import (
     get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email,
     send_activation_change_email, is_username_disabled, get_resend_ac_form, is_use_remember_me,
 )
-from .forms import SignUpForm, ProfileEditForm, ChangeEmailForm
+from .forms import SignUpForm, ChangeProfileForm, ChangeEmailForm
 from .models import Activation
 
 
@@ -183,10 +184,9 @@ class PasswordResetView(GuestOnlyView, BasePasswordResetView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class ProfileEditView(LoginRequiredMixin, FormView):
-    template_name = 'accounts/profile/edit.html'
-    form_class = ProfileEditForm
-    success_url = '/accounts/profile/edit/'
+class ChangeProfileView(LoginRequiredMixin, FormView):
+    template_name = 'accounts/profile/change_profile.html'
+    form_class = ChangeProfileForm
 
     def get_initial(self):
         initial = super().get_initial()
@@ -208,6 +208,9 @@ class ProfileEditView(LoginRequiredMixin, FormView):
         messages.add_message(self.request, messages.SUCCESS, _('Profile data has been successfully updated.'))
 
         return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('change_profile')
 
 
 class ChangeEmailView(LoginRequiredMixin, FormView):

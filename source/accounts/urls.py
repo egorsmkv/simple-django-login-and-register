@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (
     SignInView, ReSendActivationCodeView, SignUpView, ActivateView,
-    ChangeEmailView, ChangeEmailActivateView, ProfileEditView,
+    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView,
     LogoutView, PasswordResetView, PasswordChangeView, PasswordChangeDoneView,
     PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView,
 )
@@ -25,7 +25,7 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
     path('reset/done/', PasswordResetCompleteView.as_view(), name='password_reset_complete'),
 
-    path('profile/edit/', ProfileEditView.as_view(), name='profile_edit'),
+    path('change/profile/', ChangeProfileView.as_view(), name='change_profile'),
 
     path('change/email/', ChangeEmailView.as_view(), name='change_email'),
     path('change/email/<code>/', ChangeEmailActivateView.as_view(), name='change_email_activation'),
