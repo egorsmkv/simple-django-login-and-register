@@ -27,7 +27,7 @@ An example of Django project with basic user functionality.
 - Password Changing
 - Email Changing
 - Profile Data Changing
-- Multilingual: Ukrainian, Russian, Spanish, French, Simplified Chinese, and German languages
+- Multilingual: Ukrainian, Russian and Simplified Chinese
 
 
 ## Installing

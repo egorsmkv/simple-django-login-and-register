@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:01+0000\n"
+"POT-Creation-Date: 2018-06-19 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Wentao Han <wentao.han@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,7 +48,9 @@ msgstr "姓"
 msgid "Required. Type a valid email address."
 msgstr "必填。输入一个合法的电子邮箱地址。"
 
-msgid "You can not use this email."
+#, fuzzy
+#| msgid "You can not use this email."
+msgid "You can not use this email address."
 msgstr "不能使用这个电子邮箱。"
 
 msgid ""
@@ -76,6 +78,20 @@ msgstr "若要修改邮箱地址，请访问以下链接："
 
 msgid "Your username is:"
 msgstr "你的用户名是:"
+
+#, fuzzy
+#| msgid ""
+#| "You're receiving this email because you requested a password reset for "
+#| "your user account."
+msgid ""
+"You received this email because you requested a password reset for your user "
+"account."
+msgstr "您收到此电子邮件是因为您要求为您的用户帐户重置密码。"
+
+#, fuzzy
+#| msgid "Please go to the following page and choose a new password:"
+msgid "Please, go to the following page and choose a new password:"
+msgstr "请转到以下页面并选择一个新密码："
 
 msgid ""
 "You're receiving this email because you requested a password reset for your "
@@ -158,10 +174,8 @@ msgstr "修改电子邮箱"
 msgid "Change profile"
 msgstr "更改档案"
 
-#, fuzzy
-#| msgid "Your username is"
 msgid "Recover a username"
-msgstr "你的用户名是"
+msgstr "恢复用户名"
 
 msgid "Create an account"
 msgstr "创建账号"
@@ -169,10 +183,8 @@ msgstr "创建账号"
 msgid "Create"
 msgstr "创建"
 
-#, fuzzy
-#| msgid "Profile Activation"
 msgid "Profile activation"
-msgstr "账号激活"
+msgstr "简档激活"
 
 msgid "Your username"
 msgstr "您的用户名"
@@ -207,25 +219,25 @@ msgid "Your username has been successfully sent to your email."
 msgstr "您的用户名已成功发送至您的电子邮件。"
 
 msgid "English"
-msgstr ""
+msgstr "英语"
 
 msgid "Spanish"
-msgstr ""
+msgstr "西班牙语"
 
 msgid "French"
-msgstr ""
+msgstr "法国"
 
 msgid "Deutsch"
-msgstr ""
+msgstr "德语"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "乌克兰"
 
 msgid "Russian"
-msgstr ""
+msgstr "俄语"
 
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "简体中文"
 
 msgid "Change password"
 msgstr "修改密码"

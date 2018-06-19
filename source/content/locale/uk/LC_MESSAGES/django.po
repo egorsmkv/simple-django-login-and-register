@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:01+0000\n"
+"POT-Creation-Date: 2018-06-19 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,28 +29,30 @@ msgid "This account is inactive."
 msgstr "Цей обліковий запис не активний."
 
 msgid "Email or Username"
-msgstr "Пошта або логін"
+msgstr "Пошта або ім'я користувача"
 
 msgid ""
 "Please enter a correct email or username and password. Note that both fields "
 "may be case-sensitive."
 msgstr ""
-"Будь ласка, введіть коректно пошту або логін і пароль. Майте на увазі, що "
-"обидва поля можуть бути чутливі до регістру."
+"Будь ласка, введіть коректно пошту або ім'я користувача і пароль. Майте на "
+"увазі, що обидва поля можуть бути чутливі до регістру."
 
 msgid "First Name"
-msgstr "Прізвище"
+msgstr "Ім'я"
 
 msgid "Optional."
 msgstr "Не обов'язково."
 
 msgid "Last Name"
-msgstr "Ім'я"
+msgstr "Прізвище"
 
 msgid "Required. Type a valid email address."
 msgstr "Обов'язково. Введіть правильну електронну пошту."
 
-msgid "You can not use this email."
+#, fuzzy
+#| msgid "You can not use this email."
+msgid "You can not use this email address."
 msgstr "Ви не можете використовувати цю пошту."
 
 msgid ""
@@ -83,12 +85,28 @@ msgid "Your username is:"
 msgstr "Ваше ім'я користувача:"
 
 msgid ""
+"You received this email because you requested a password reset for your user "
+"account."
+msgstr ""
+"Ви отримали цей електронний лист, оскільки ви надіслали запит на скидання "
+"пароля для свого облікового запису користувача."
+
+msgid "Please, go to the following page and choose a new password:"
+msgstr "Будь ласка, перейдіть на наступну сторінку та виберіть новий пароль:"
+
+#, fuzzy
+#| msgid ""
+#| "You received this email because you requested a password reset for your "
+#| "user account."
+msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account."
 msgstr ""
-"Ви отримуєте цей електронний лист, оскільки ви надіслали запит на скидання "
+"Ви отримали цей електронний лист, оскільки ви надіслали запит на скидання "
 "пароля для свого облікового запису користувача."
 
+#, fuzzy
+#| msgid "Please, go to the following page and choose a new password:"
 msgid "Please go to the following page and choose a new password:"
 msgstr "Будь ласка, перейдіть на наступну сторінку та виберіть новий пароль:"
 
@@ -96,7 +114,7 @@ msgid "Log in"
 msgstr "Авторизація"
 
 msgid "Enter"
-msgstr ""
+msgstr "Увійти"
 
 msgid "Forgot the password?"
 msgstr "Забули пароль?"
@@ -126,7 +144,7 @@ msgid "Your password was changed."
 msgstr "Ваш пароль змінено."
 
 msgid "Password reset"
-msgstr "Відновлення паролю"
+msgstr "Скидання пароля"
 
 msgid "Next"
 msgstr "Далі"
@@ -145,15 +163,15 @@ msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
 msgstr ""
-"Посилання для зміни пароля невалидность, можливо вона була вже використана. "
-"Будь ласка, зробіть нове відновлення пароля."
+"Посилання для зміни пароля було недійсним, можливо, тому що його вже було "
+"використано. Будь ласка, зробіть нове скидання пароля."
 
 msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered."
 msgstr ""
-"Ми відправимо лист з інструкціями по зміни вашого пароля, якщо акаунт з "
-"такою поштою існує."
+"Ми надіслали вам інструкції щодо зміни пароля, якщо існує обліковий запис із "
+"введеною вами електронною поштою."
 
 msgid "You should receive them shortly."
 msgstr "Ви повинні отримати його незабаром."
@@ -175,7 +193,7 @@ msgid "Recover a username"
 msgstr "Відновити ім'я користувача"
 
 msgid "Create an account"
-msgstr "Створити акаунт"
+msgstr "Створити обліковий запис"
 
 msgid "Create"
 msgstr "Створити"
@@ -218,25 +236,25 @@ msgid "Your username has been successfully sent to your email."
 msgstr "Ваше ім'я користувача було успішно надіслано на ваш електронний лист."
 
 msgid "English"
-msgstr ""
+msgstr "Англійська"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Іспанська"
 
 msgid "French"
-msgstr ""
+msgstr "Французька"
 
 msgid "Deutsch"
-msgstr ""
+msgstr "Німецька"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Українська"
 
 msgid "Russian"
-msgstr ""
+msgstr "Російська"
 
 msgid "Simplified Chinese"
-msgstr ""
+msgstr "Китайська (спрощена)"
 
 msgid "Change password"
 msgstr "Змінити пароль"
@@ -254,7 +272,7 @@ msgid "You are authorized."
 msgstr "Ви авторизовані."
 
 msgid "Your username is"
-msgstr "Ваш логін"
+msgstr "Ваше ім'я користувача"
 
 msgid "You are a guest."
 msgstr "Ви гість."

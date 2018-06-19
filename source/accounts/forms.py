@@ -152,7 +152,7 @@ class SignUpForm(UserCreationForm):
                              widget=forms.EmailInput(attrs={'placeholder': '@'}))
 
     error_messages = {
-        'unique_email': _('You can not use this email.'),
+        'unique_email': _('You can not use this email address.'),
     }
 
     def clean(self):

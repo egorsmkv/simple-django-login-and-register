@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:01+0000\n"
+"POT-Creation-Date: 2018-06-19 14:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,32 +24,32 @@ msgstr ""
 "могут быть чувствительны к регистру."
 
 msgid "This account is inactive."
-msgstr "Этот аккаунт не активен."
+msgstr "Эта учётная запись не активна."
 
 msgid "Email or Username"
-msgstr "Почта или логин"
+msgstr "Почта или имя пользователя"
 
 msgid ""
 "Please enter a correct email or username and password. Note that both fields "
 "may be case-sensitive."
 msgstr ""
-"Пожалуйста, введите корректно почту или логин и пароль. Имейте в виду, что "
-"оба поля могут быть чувствительны к регистру."
+"Пожалуйста, введите корректно почту или имя пользователя и пароль. Имейте в "
+"виду, что оба поля могут быть чувствительны к регистру."
 
 msgid "First Name"
-msgstr "Фамилия"
+msgstr "Имя"
 
 msgid "Optional."
 msgstr "Не обязательно."
 
 msgid "Last Name"
-msgstr "Имя"
+msgstr "Фамилия"
 
 msgid "Required. Type a valid email address."
 msgstr "Обязательно. Введите правильную электронную почту."
 
-msgid "You can not use this email."
-msgstr "Вы не можете использовать эту почту."
+msgid "You can not use this email address."
+msgstr "Вы не можете использовать эту электронную почту."
 
 msgid ""
 "Activation code has already been sent. You can request a new code in 24 "
@@ -75,37 +75,47 @@ msgstr "Для активации вашего профиля, перейдит�
 msgid "To change the mail, please follow the link:"
 msgstr "Для изменения почты, перейдите по этой ссылке:"
 
-#, fuzzy
-#| msgid "Your username is"
 msgid "Your username is:"
-msgstr "Ваш логин"
+msgstr "Ваше имя пользователя:"
 
+msgid ""
+"You received this email because you requested a password reset for your user "
+"account."
+msgstr ""
+"Вы получили это электронное письмо, потому что вы запросили сброс пароля для "
+"своей учетной записи пользователя."
+
+msgid "Please, go to the following page and choose a new password:"
+msgstr "Пожалуйста, перейдите на указанную страницу и выберите новый пароль:"
+
+#, fuzzy
+#| msgid ""
+#| "You received this email because you requested a password reset for your "
+#| "user account."
 msgid ""
 "You're receiving this email because you requested a password reset for your "
 "user account."
 msgstr ""
+"Вы получили это электронное письмо, потому что вы запросили сброс пароля для "
+"своей учетной записи пользователя."
 
+#, fuzzy
+#| msgid "Please, go to the following page and choose a new password:"
 msgid "Please go to the following page and choose a new password:"
-msgstr ""
+msgstr "Пожалуйста, перейдите на указанную страницу и выберите новый пароль:"
 
 msgid "Log in"
 msgstr "Авторизация"
 
 msgid "Enter"
-msgstr ""
+msgstr "Войти"
 
-#, fuzzy
-#| msgid "Change password"
 msgid "Forgot the password?"
-msgstr "Изменить пароль"
+msgstr "Забыли пароль?"
 
-#, fuzzy
-#| msgid "Your username is"
 msgid "Forgot the username?"
-msgstr "Ваш логин"
+msgstr "Забыли имя пользователя?"
 
-#, fuzzy
-#| msgid "Re-send Activation Code"
 msgid "Resend an activation code"
 msgstr "Повторно отправить код активации"
 
@@ -154,8 +164,8 @@ msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered."
 msgstr ""
-"Мы отправим письмо с инструкциями по изменения вашего пароля, если аккаунт с "
-"такой почтой существует."
+"Мы отправим письмо с инструкциями по изменению вашего пароля, если учетная "
+"запись с такой почтой существует."
 
 msgid "You should receive them shortly."
 msgstr "Вы должны получить его в скором времени."
@@ -174,26 +184,20 @@ msgstr "Изменить почту"
 msgid "Change profile"
 msgstr "Изменить профиль"
 
-#, fuzzy
-#| msgid "Your username is"
 msgid "Recover a username"
-msgstr "Ваш логин"
+msgstr "Восстановить имя пользователя"
 
 msgid "Create an account"
-msgstr "Создать аккаунт"
+msgstr "Создать учетную запись"
 
 msgid "Create"
 msgstr "Создать"
 
-#, fuzzy
-#| msgid "Profile Activation"
 msgid "Profile activation"
 msgstr "Активация профиля"
 
-#, fuzzy
-#| msgid "Your username is"
 msgid "Your username"
-msgstr "Ваш логин"
+msgstr "Ваше имя пользователя"
 
 msgid ""
 "You are registered. To activate the account, follow the link sent to the "
@@ -222,10 +226,9 @@ msgstr "Почта успешно изменена."
 msgid "You have successfully changed your email!"
 msgstr "Вы успешно изменили свою почту!"
 
-#, fuzzy
-#| msgid "You have successfully changed your email!"
 msgid "Your username has been successfully sent to your email."
-msgstr "Вы успешно изменили свою почту!"
+msgstr ""
+"Ваше имя пользователя успешно отправлено на ваш адрес электронной почты."
 
 msgid "English"
 msgstr "Английский"
@@ -264,10 +267,7 @@ msgid "You are authorized."
 msgstr "Вы авторизованы."
 
 msgid "Your username is"
-msgstr "Ваш логин"
+msgstr "Ваше имя пользователя"
 
 msgid "You are a guest."
 msgstr "Вы гость."
-
-#~ msgid "Login"
-#~ msgstr "Войти"
