@@ -335,8 +335,8 @@ class ChangeProfileForm(forms.Form):
 
 
 class ChangeEmailForm(forms.Form):
-    email = forms.EmailField(label=_('Email'), max_length=255, widget=forms.EmailInput(
-        attrs={'placeholder': '@', 'autofocus': True}))
+    email = forms.EmailField(label=_('Email'), max_length=255,
+                             widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}))
 
     error_messages = {
         'email_already_exists': _('You can not use this mail.'),
@@ -362,3 +362,22 @@ class ChangeEmailForm(forms.Form):
 
             if user:
                 self.add_error('email', self.error_messages['email_already_exists'])
+
+
+class UsernameForgotForm(forms.Form):
+    email = forms.EmailField(label=_('Email'), max_length=255,
+                             widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}))
+
+    error_messages = {
+        'incorrect_data': _('You entered incorrect data.'),
+    }
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        email = cleaned_data.get('email', '').lower()
+
+        user = User.objects.filter(email=email).exists()
+
+        if not user:
+            self.add_error('email', self.error_messages['incorrect_data'])

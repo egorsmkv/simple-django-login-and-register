@@ -21,10 +21,10 @@ from django.views.generic import View, FormView, RedirectView
 from django.conf import settings
 
 from .utils import (
-    get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email,
+    get_login_form, send_activation_email, get_password_reset_form, send_reset_password_email, send_forgotten_username,
     send_activation_change_email, is_username_disabled, get_resend_ac_form, is_use_remember_me,
 )
-from .forms import SignUpForm, ChangeProfileForm, ChangeEmailForm
+from .forms import SignUpForm, ChangeProfileForm, ChangeEmailForm, UsernameForgotForm
 from .models import Activation
 
 
@@ -244,9 +244,7 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = self.request.user
-
-        email = form.cleaned_data.get('email')
-        email = email.lower()
+        email = form.cleaned_data.get('email', '').lower()
 
         if hasattr(settings, 'EMAIL_ACTIVATION_AFTER_CHANGING') and settings.EMAIL_ACTIVATION_AFTER_CHANGING:
             send_activation_change_email(self.request, user, email)
@@ -284,6 +282,24 @@ class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
         messages.add_message(self.request, messages.SUCCESS, _('You have successfully changed your email!'))
 
         return super().get_redirect_url()
+
+
+class UsernameForgotView(GuestOnlyView, FormView):
+    template_name = 'accounts/username_forgot.html'
+    form_class = UsernameForgotForm
+
+    def form_valid(self, form):
+        email = form.cleaned_data.get('email', '').lower()
+
+        send_forgotten_username(email)
+
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Your username has been successfully sent to your email.'))
+
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('accounts:username_forgot')
 
 
 class LogoutView(LoginRequiredMixin, BaseLogoutView):

@@ -12,15 +12,11 @@
 <body>
 
 <p>
-    {% trans "You're receiving this email because you requested a password reset for your user account." %}
+    {% trans 'Your username is:' %}
 </p>
 
 <p>
-    {% trans 'Please go to the following page and choose a new password:' %}
-</p>
-
-<p>
-    <a href="{{ uri }}">{{ uri }}</a>
+    {{ username }}
 </p>
 
 </body>

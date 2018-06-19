@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -62,8 +63,8 @@ def send_activation_email(request, user):
         'uri': request.build_absolute_uri(reverse('accounts:activate', kwargs={'code': code})),
     }
 
-    html_content = render_to_string('accounts/email/activation_profile.html', context, request)
-    text_content = render_to_string('accounts/email/activation_profile.txt', context, request)
+    html_content = render_to_string('accounts/email/activation_profile.html', context)
+    text_content = render_to_string('accounts/email/activation_profile.txt', context)
 
     msg = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
     msg.attach_alternative(html_content, 'text/html')
@@ -85,8 +86,8 @@ def send_activation_change_email(request, user, new_email):
         'uri': request.build_absolute_uri(reverse('accounts:change_email_activation', kwargs={'code': code})),
     }
 
-    html_content = render_to_string('accounts/email/change_email.html', context, request)
-    text_content = render_to_string('accounts/email/change_email.txt', context, request)
+    html_content = render_to_string('accounts/email/change_email.html', context)
+    text_content = render_to_string('accounts/email/change_email.txt', context)
 
     msg = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
     msg.attach_alternative(html_content, 'text/html')
@@ -105,8 +106,25 @@ def send_reset_password_email(request, user):
     }
 
     html_content = render_to_string('accounts/email/password_reset_email.html', context)
-    text_content = render_to_string('accounts/email/password_reset_email.txt', context, request)
+    text_content = render_to_string('accounts/email/password_reset_email.txt', context)
 
     msg = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [user.email])
+    msg.attach_alternative(html_content, 'text/html')
+    msg.send()
+
+
+def send_forgotten_username(email):
+    user = User.objects.filter(email=email).first()
+
+    subject = _('Your username')
+    context = {
+        'subject': subject,
+        'username': user.username,
+    }
+
+    html_content = render_to_string('accounts/email/forgotten_username.html', context)
+    text_content = render_to_string('accounts/email/forgotten_username.txt', context)
+
+    msg = EmailMultiAlternatives(subject, text_content, settings.DEFAULT_FROM_EMAIL, [email])
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
