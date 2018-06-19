@@ -1,5 +1,11 @@
 # Change log
 
+## v2.11
+
+- Added the "remember me" checkbox to the log in page
+- Added the username recovering
+- Code improvements
+
 ## v2.10
 
 - Removed i18n_patterns from urls.py
