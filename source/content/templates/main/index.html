@@ -6,10 +6,6 @@
 
     {% if request.user.is_authenticated %}
 
-        {% trans 'You are authorized.' %}
-
-        <br>
-
         {% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
 
     {% else %}

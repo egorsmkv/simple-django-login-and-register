@@ -1,15 +1,14 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:44+0000\n"
+"POT-Creation-Date: 2018-06-19 17:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Wentao Han <wentao.han@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: Simplified Chinese\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "Password"
 msgstr "密码"
@@ -48,10 +47,8 @@ msgstr "姓"
 msgid "Required. Type a valid email address."
 msgstr "必填。输入一个合法的电子邮箱地址。"
 
-#, fuzzy
-#| msgid "You can not use this email."
 msgid "You can not use this email address."
-msgstr "不能使用这个电子邮箱。"
+msgstr "你不能使用这个电子邮件地址。"
 
 msgid ""
 "Activation code has already been sent. You can request a new code in 24 "
@@ -79,26 +76,12 @@ msgstr "若要修改邮箱地址，请访问以下链接："
 msgid "Your username is:"
 msgstr "你的用户名是:"
 
-#, fuzzy
-#| msgid ""
-#| "You're receiving this email because you requested a password reset for "
-#| "your user account."
 msgid ""
 "You received this email because you requested a password reset for your user "
 "account."
 msgstr "您收到此电子邮件是因为您要求为您的用户帐户重置密码。"
 
-#, fuzzy
-#| msgid "Please go to the following page and choose a new password:"
 msgid "Please, go to the following page and choose a new password:"
-msgstr "请转到以下页面并选择一个新密码："
-
-msgid ""
-"You're receiving this email because you requested a password reset for your "
-"user account."
-msgstr "您收到此电子邮件是因为您要求为您的用户帐户重置密码。"
-
-msgid "Please go to the following page and choose a new password:"
 msgstr "请转到以下页面并选择一个新密码："
 
 msgid "Log in"
@@ -200,13 +183,17 @@ msgstr "你已成功注册！"
 msgid "You have successfully activated your account!"
 msgstr "你已成功激活你的账号！"
 
-msgid "A new activation code has been sent to your e-mail."
+#, fuzzy
+#| msgid "A new activation code has been sent to your e-mail."
+msgid "A new activation code has been sent to your email address."
 msgstr "新的激活码已经发送到你的电子邮箱。"
 
 msgid "Profile data has been successfully updated."
 msgstr "已经成功更新了个人信息数据。"
 
-msgid "To complete the change of mail, click on the link sent to it."
+#, fuzzy
+#| msgid "To complete the change of mail, click on the link sent to it."
+msgid "To complete the change of email address, click on the link sent to it."
 msgstr "若要完成邮箱地址修改，请点击发送到当前邮箱的链接。"
 
 msgid "Email successfully changed."
@@ -221,15 +208,6 @@ msgstr "您的用户名已成功发送至您的电子邮件。"
 msgid "English"
 msgstr "英语"
 
-msgid "Spanish"
-msgstr "西班牙语"
-
-msgid "French"
-msgstr "法国"
-
-msgid "Deutsch"
-msgstr "德语"
-
 msgid "Ukrainian"
 msgstr "乌克兰"
 
@@ -238,6 +216,9 @@ msgstr "俄语"
 
 msgid "Simplified Chinese"
 msgstr "简体中文"
+
+msgid "Home"
+msgstr ""
 
 msgid "Change password"
 msgstr "修改密码"
@@ -250,9 +231,6 @@ msgstr "改变语言"
 
 msgid "Select the language"
 msgstr "选择语言"
-
-msgid "You are authorized."
-msgstr "你已被授权。"
 
 msgid "Your username is"
 msgstr "你的用户名是"

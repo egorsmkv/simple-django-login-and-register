@@ -172,7 +172,8 @@ class ReSendActivationCodeView(GuestOnlyView, SuccessRedirectView):
 
         send_activation_email(self.request, user)
 
-        messages.add_message(self.request, messages.SUCCESS, _('A new activation code has been sent to your e-mail.'))
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('A new activation code has been sent to your email address.'))
 
         return super().form_valid(form)
 
@@ -250,7 +251,7 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
             send_activation_change_email(self.request, user, email)
 
             messages.add_message(self.request, messages.SUCCESS,
-                                 _('To complete the change of mail, click on the link sent to it.'))
+                                 _('To complete the change of email address, click on the link sent to it.'))
         else:
             user.email = email
             user.save()

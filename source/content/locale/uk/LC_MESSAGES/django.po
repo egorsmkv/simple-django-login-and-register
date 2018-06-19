@@ -1,13 +1,14 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:44+0000\n"
+"POT-Creation-Date: 2018-06-19 17:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
 
 msgid "Password"
 msgstr "Пароль"
@@ -50,8 +51,6 @@ msgstr "Прізвище"
 msgid "Required. Type a valid email address."
 msgstr "Обов'язково. Введіть правильну електронну пошту."
 
-#, fuzzy
-#| msgid "You can not use this email."
 msgid "You can not use this email address."
 msgstr "Ви не можете використовувати цю пошту."
 
@@ -59,7 +58,7 @@ msgid ""
 "Activation code has already been sent. You can request a new code in 24 "
 "hours."
 msgstr ""
-"Код активації вже був відправлений. Ви можете запросити новий код через 24 "
+"Код активації вже був надісланий. Ви можете запросити новий код через 24 "
 "години."
 
 msgid "You entered incorrect data."
@@ -92,26 +91,10 @@ msgstr ""
 "пароля для свого облікового запису користувача."
 
 msgid "Please, go to the following page and choose a new password:"
-msgstr "Будь ласка, перейдіть на наступну сторінку та виберіть новий пароль:"
-
-#, fuzzy
-#| msgid ""
-#| "You received this email because you requested a password reset for your "
-#| "user account."
-msgid ""
-"You're receiving this email because you requested a password reset for your "
-"user account."
-msgstr ""
-"Ви отримали цей електронний лист, оскільки ви надіслали запит на скидання "
-"пароля для свого облікового запису користувача."
-
-#, fuzzy
-#| msgid "Please, go to the following page and choose a new password:"
-msgid "Please go to the following page and choose a new password:"
-msgstr "Будь ласка, перейдіть на наступну сторінку та виберіть новий пароль:"
+msgstr "Будь ласка, перейдіть на цю сторінку, та оберіть новий пароль:"
 
 msgid "Log in"
-msgstr "Авторизація"
+msgstr "Вхід"
 
 msgid "Enter"
 msgstr "Увійти"
@@ -123,7 +106,7 @@ msgid "Forgot the username?"
 msgstr "Забули ім'я користувача?"
 
 msgid "Resend an activation code"
-msgstr "Повторно відправити код активації"
+msgstr "Повторно надіслати код активації"
 
 msgid "Logged out"
 msgstr "Вихід"
@@ -132,32 +115,32 @@ msgid "Thanks for spending some quality time with the Web site today."
 msgstr "Дякуємо, що виділили час на відвідування сайту сьогодні."
 
 msgid "Log in again"
-msgstr "Повторна авторизація"
+msgstr "Увійти знову"
 
 msgid "Password change"
-msgstr "Змінити пароль"
+msgstr "Зміна паролю"
 
 msgid "Change"
 msgstr "Змінити"
 
 msgid "Your password was changed."
-msgstr "Ваш пароль змінено."
+msgstr "Ваш пароль було змінено."
 
 msgid "Password reset"
-msgstr "Скидання пароля"
+msgstr "Скинути пароль"
 
 msgid "Next"
 msgstr "Далі"
 
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Ваш пароль змінено. Тепер ви можете увійти."
+msgstr "Пароль встановлено. Ви можете увійти зараз."
 
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
 msgstr ""
-"Будь ласка, введіть новий пароль двічі, так ми зможемо перевірити, що ви "
-"його вводите коректно."
+"Будь ласка, введіть ваш старий пароль, задля безпеки, потім введіть ваш "
+"новий пароль двічі для перевірки."
 
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
@@ -217,14 +200,16 @@ msgstr "Ви успішно зареєстровані!"
 msgid "You have successfully activated your account!"
 msgstr "Ви успішно активували свій аккаунт!"
 
-msgid "A new activation code has been sent to your e-mail."
-msgstr "Новий код активації відправлений на вашу пошту."
+msgid "A new activation code has been sent to your email address."
+msgstr "Новий код активації надіслано на вашу адресу електронної пошти."
 
 msgid "Profile data has been successfully updated."
 msgstr "Дані профілю були успішно оновлені."
 
-msgid "To complete the change of mail, click on the link sent to it."
-msgstr "Для завершення зміни пошти, перейдіть за посиланням з листа."
+msgid "To complete the change of email address, click on the link sent to it."
+msgstr ""
+"Щоб завершити зміну електронної пошти, натисніть посилання, надіслане на "
+"нього."
 
 msgid "Email successfully changed."
 msgstr "Пошта успішно змінена."
@@ -238,15 +223,6 @@ msgstr "Ваше ім'я користувача було успішно наді
 msgid "English"
 msgstr "Англійська"
 
-msgid "Spanish"
-msgstr "Іспанська"
-
-msgid "French"
-msgstr "Французька"
-
-msgid "Deutsch"
-msgstr "Німецька"
-
 msgid "Ukrainian"
 msgstr "Українська"
 
@@ -255,6 +231,9 @@ msgstr "Російська"
 
 msgid "Simplified Chinese"
 msgstr "Китайська (спрощена)"
+
+msgid "Home"
+msgstr ""
 
 msgid "Change password"
 msgstr "Змінити пароль"
@@ -266,10 +245,7 @@ msgid "Change language"
 msgstr "Змінити мову"
 
 msgid "Select the language"
-msgstr "Виберіть мову"
-
-msgid "You are authorized."
-msgstr "Ви авторизовані."
+msgstr "Оберіть мову"
 
 msgid "Your username is"
 msgstr "Ваше ім'я користувача"

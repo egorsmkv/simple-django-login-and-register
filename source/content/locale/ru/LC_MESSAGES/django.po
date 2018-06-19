@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 14:44+0000\n"
+"POT-Creation-Date: 2018-06-19 17:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -88,24 +88,8 @@ msgstr ""
 msgid "Please, go to the following page and choose a new password:"
 msgstr "Пожалуйста, перейдите на указанную страницу и выберите новый пароль:"
 
-#, fuzzy
-#| msgid ""
-#| "You received this email because you requested a password reset for your "
-#| "user account."
-msgid ""
-"You're receiving this email because you requested a password reset for your "
-"user account."
-msgstr ""
-"Вы получили это электронное письмо, потому что вы запросили сброс пароля для "
-"своей учетной записи пользователя."
-
-#, fuzzy
-#| msgid "Please, go to the following page and choose a new password:"
-msgid "Please go to the following page and choose a new password:"
-msgstr "Пожалуйста, перейдите на указанную страницу и выберите новый пароль:"
-
 msgid "Log in"
-msgstr "Авторизация"
+msgstr "Вход"
 
 msgid "Enter"
 msgstr "Войти"
@@ -126,7 +110,7 @@ msgid "Thanks for spending some quality time with the Web site today."
 msgstr "Спасибо, что выделили время на посещение сайта сегодня."
 
 msgid "Log in again"
-msgstr "Повторная авторизация"
+msgstr "Войти повторно"
 
 msgid "Password change"
 msgstr "Изменить пароль"
@@ -188,7 +172,7 @@ msgid "Recover a username"
 msgstr "Восстановить имя пользователя"
 
 msgid "Create an account"
-msgstr "Создать учетную запись"
+msgstr "Создать учётную запись"
 
 msgid "Create"
 msgstr "Создать"
@@ -203,22 +187,25 @@ msgid ""
 "You are registered. To activate the account, follow the link sent to the "
 "mail."
 msgstr ""
-"Вы зарегистрированы. Для активации аккаунта, перейдите по ссылке из письма."
+"Вы зарегистрированы. Для активации учётной записи, перейдите по ссылке из "
+"письма."
 
 msgid "You are successfully registered!"
 msgstr "Вы успешно зарегистрированы!"
 
 msgid "You have successfully activated your account!"
-msgstr "Вы успешно активировали свой аккаунт!"
+msgstr "Вы успешно активировали свою учётную запись!"
 
-msgid "A new activation code has been sent to your e-mail."
-msgstr "Новый код активации отправлен на вашу почту."
+msgid "A new activation code has been sent to your email address."
+msgstr "Новый код активации отправлен на вашу электронную почту."
 
 msgid "Profile data has been successfully updated."
 msgstr "Данные профиля были успешно обновлены."
 
-msgid "To complete the change of mail, click on the link sent to it."
-msgstr "Для завершения изменения почты, перейдите по ссылке из письма."
+msgid "To complete the change of email address, click on the link sent to it."
+msgstr ""
+"Для завершения изменения электронной почты, перейдите по ссылке из письма, "
+"которая отправлена на него."
 
 msgid "Email successfully changed."
 msgstr "Почта успешно изменена."
@@ -233,15 +220,6 @@ msgstr ""
 msgid "English"
 msgstr "Английский"
 
-msgid "Spanish"
-msgstr "Испанский"
-
-msgid "French"
-msgstr "Французский"
-
-msgid "Deutsch"
-msgstr "Немецкий"
-
 msgid "Ukrainian"
 msgstr "Украинский"
 
@@ -251,20 +229,20 @@ msgstr "Русский"
 msgid "Simplified Chinese"
 msgstr "Китайский (упрощённый)"
 
+msgid "Home"
+msgstr ""
+
 msgid "Change password"
 msgstr "Изменить пароль"
 
 msgid "Log out"
-msgstr "Выход"
+msgstr "Выйти"
 
 msgid "Change language"
 msgstr "Изменить язык"
 
 msgid "Select the language"
 msgstr "Выбрать язык"
-
-msgid "You are authorized."
-msgstr "Вы авторизованы."
 
 msgid "Your username is"
 msgstr "Ваше имя пользователя"
