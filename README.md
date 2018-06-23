@@ -19,11 +19,11 @@ An example of Django project with basic user functionality.
     - via email & password
     - via email or username & password
     - with a remember me checkbox (optional)
-- Registration
+- Create an account
 - Log out
 - Profile activation via email
-- Password reset
-- Recover a username
+- Reset password
+- Remind a username
 - Resend an activation code
 - Change password
 - Change email
@@ -76,4 +76,3 @@ Just run this command:
 ```
 python source/manage.py runserver
 ```
-

@@ -136,14 +136,14 @@ class SignUpView(GuestOnlyView, FormView):
             send_activation_email(self.request, user)
 
             messages.add_message(self.request, messages.SUCCESS,
-                                 _('You are registered. To activate the account, follow the link sent to the mail.'))
+                                 _('You are signed up. To activate the account, follow the link sent to the mail.'))
         else:
             raw_password = form.cleaned_data.get('password1')
 
             user = authenticate(username=user.username, password=raw_password)
             login(self.request, user)
 
-            messages.add_message(self.request, messages.SUCCESS, _('You are successfully registered!'))
+            messages.add_message(self.request, messages.SUCCESS, _('You are successfully signed up!'))
 
         return super().form_valid(form)
 

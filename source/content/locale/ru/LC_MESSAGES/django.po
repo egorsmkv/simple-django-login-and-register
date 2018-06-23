@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-19 22:35+0000\n"
+"POT-Creation-Date: 2018-06-23 14:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -162,7 +162,7 @@ msgstr "Вы должны получить его в скором времени
 
 msgid ""
 "If you don't receive an email, please make sure you've entered the address "
-"you registered with, and check your spam folder."
+"you signed up with, and check your spam folder."
 msgstr ""
 "Если вы не получили письмо, пожалуйста проверьте папку спама или "
 "удостоверьтесь, что введенная почта является той, которая использовалась при "
@@ -181,13 +181,12 @@ msgid "Your username"
 msgstr "Ваше имя пользователя"
 
 msgid ""
-"You are registered. To activate the account, follow the link sent to the "
-"mail."
+"You are signed up. To activate the account, follow the link sent to the mail."
 msgstr ""
 "Вы зарегистрированы. Для активации учётной записи, перейдите по ссылке из "
 "письма."
 
-msgid "You are successfully registered!"
+msgid "You are successfully signed up!"
 msgstr "Вы успешно зарегистрированы!"
 
 msgid "You have successfully activated your account!"
