@@ -7,7 +7,6 @@ from django.contrib.auth.views import (
     PasswordChangeDoneView as BasePasswordChangeDoneView, PasswordResetDoneView as BasePasswordResetDoneView,
     PasswordResetConfirmView as BasePasswordResetConfirmView, PasswordResetCompleteView as BasePasswordResetCompleteView
 )
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, resolve_url, redirect
 from django.urls import reverse
 from django.utils.crypto import get_random_string
@@ -211,7 +210,7 @@ class RestorePasswordView(GuestOnlyView, BasePasswordResetView):
     def form_valid(self, form):
         send_reset_password_email(self.request, form.get_user())
 
-        return HttpResponseRedirect(self.get_success_url())
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('accounts:restore_password_done')
