@@ -103,9 +103,6 @@ class LogInView(GuestOnlyView, SuccessRedirectView):
 
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse('index')
-
 
 class SignUpView(GuestOnlyView, FormView):
     template_name = 'accounts/sign_up.html'
