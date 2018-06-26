@@ -205,13 +205,10 @@ class RestorePasswordView(GuestOnlyView, BasePasswordResetView):
 
         return RestorePasswordForm
 
-    def get_success_url(self):
-        return reverse('accounts:restore_password_done')
-
     def form_valid(self, form):
         send_reset_password_email(self.request, form.get_user())
 
-        return HttpResponseRedirect(self.get_success_url())
+        return redirect('accounts:restore_password_done')
 
 
 class ChangeProfileView(LoginRequiredMixin, FormView):
