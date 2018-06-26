@@ -2,9 +2,8 @@ from django.urls import path
 
 from .views import (
     LogInView, ResendActivationCodeView, SignUpView, ActivateView,
-    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView, RemindUsernameView,
-    LogOutView, ChangePasswordView, ChangePasswordDoneView,
-    RestorePasswordView, RestorePasswordDoneView, RestorePasswordConfirmView, RestorePasswordCompleteView,
+    ChangeEmailView, ChangeEmailActivateView, ChangeProfileView, RemindUsernameView, LogOutView, ChangePasswordView,
+    RestorePasswordView, RestorePasswordDoneView, RestorePasswordConfirmView,
 )
 
 app_name = 'accounts'
@@ -19,13 +18,10 @@ urlpatterns = [
     path('activate/<code>/', ActivateView.as_view(), name='activate'),
 
     path('change/password/', ChangePasswordView.as_view(), name='change_password'),
-    path('change/password/done/', ChangePasswordDoneView.as_view(), name='change_password_done'),
 
     path('restore/password/', RestorePasswordView.as_view(), name='restore_password'),
     path('restore/password/done/', RestorePasswordDoneView.as_view(), name='restore_password_done'),
-
     path('restore/<uidb64>/<token>/', RestorePasswordConfirmView.as_view(), name='restore_password_confirm'),
-    path('restore/done/', RestorePasswordCompleteView.as_view(), name='restore_password_complete'),
 
     path('remind/username/', RemindUsernameView.as_view(), name='remind_username'),
 

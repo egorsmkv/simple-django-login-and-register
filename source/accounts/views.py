@@ -2,10 +2,9 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
-    SuccessURLAllowedHostsMixin, PasswordResetView as BasePasswordResetView,
-    LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
-    PasswordChangeDoneView as BasePasswordChangeDoneView, PasswordResetDoneView as BasePasswordResetDoneView,
-    PasswordResetConfirmView as BasePasswordResetConfirmView, PasswordResetCompleteView as BasePasswordResetCompleteView
+    SuccessURLAllowedHostsMixin, PasswordResetView as BasePasswordResetView, LogoutView as BaseLogoutView,
+    PasswordChangeView as BasePasswordChangeView, PasswordResetDoneView as BasePasswordResetDoneView,
+    PasswordResetConfirmView as BasePasswordResetConfirmView,
 )
 from django.shortcuts import get_object_or_404, resolve_url, redirect
 from django.urls import reverse
@@ -88,8 +87,7 @@ class LogInView(GuestOnlyView, SuccessRedirectView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        # If the test cookie worked, go ahead and
-        # delete it since its no longer needed
+        # If the test cookie worked, go ahead and delete it since its no longer needed
         if self.request.session.test_cookie_worked():
             self.request.session.delete_test_cookie()
 
@@ -329,9 +327,10 @@ class ChangePasswordView(BasePasswordChangeView):
     def get_success_url(self):
         return reverse('accounts:change_password_done')
 
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, _('Your password was changed.'))
 
-class ChangePasswordDoneView(BasePasswordChangeDoneView):
-    template_name = 'accounts/change_password_done.html'
+        return super().form_valid(form)
 
 
 class RestorePasswordDoneView(BasePasswordResetDoneView):
@@ -341,6 +340,11 @@ class RestorePasswordDoneView(BasePasswordResetDoneView):
 class RestorePasswordConfirmView(BasePasswordResetConfirmView):
     template_name = 'accounts/restore_password_confirm.html'
 
+    def get_success_url(self):
+        return reverse('accounts:log_in')
 
-class RestorePasswordCompleteView(BasePasswordResetCompleteView):
-    template_name = 'accounts/restore_password_complete.html'
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Your password has been set. You may go ahead and log in now.'))
+
+        return super().form_valid(form)
