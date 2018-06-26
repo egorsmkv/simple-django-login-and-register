@@ -7,6 +7,7 @@ from django.contrib.auth.views import (
     PasswordChangeDoneView as BasePasswordChangeDoneView, PasswordResetDoneView as BasePasswordResetDoneView,
     PasswordResetConfirmView as BasePasswordResetConfirmView, PasswordResetCompleteView as BasePasswordResetCompleteView
 )
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, resolve_url, redirect
 from django.urls import reverse
 from django.utils.crypto import get_random_string
@@ -181,6 +182,9 @@ class ResendActivationCodeView(GuestOnlyView, SuccessRedirectView):
 
         return ResendActivationCodeForm
 
+    def get_success_url(self):
+        return reverse('accounts:resend_activation_code')
+
     def form_valid(self, form):
         user = form.get_user()
 
@@ -194,9 +198,6 @@ class ResendActivationCodeView(GuestOnlyView, SuccessRedirectView):
 
         return super().form_valid(form)
 
-    def get_success_url(self):
-        return reverse('index')
-
 
 class RestorePasswordView(GuestOnlyView, BasePasswordResetView):
     template_name = 'accounts/restore_password.html'
@@ -207,13 +208,13 @@ class RestorePasswordView(GuestOnlyView, BasePasswordResetView):
 
         return RestorePasswordForm
 
+    def get_success_url(self):
+        return reverse('accounts:restore_password_done')
+
     def form_valid(self, form):
         send_reset_password_email(self.request, form.get_user())
 
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('accounts:restore_password_done')
+        return HttpResponseRedirect(self.get_success_url())
 
 
 class ChangeProfileView(LoginRequiredMixin, FormView):
@@ -230,6 +231,9 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
 
         return initial
 
+    def get_success_url(self):
+        return reverse('accounts:change_profile')
+
     def form_valid(self, form):
         user = self.request.user
         data = form.cleaned_data
@@ -241,9 +245,6 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
         messages.add_message(self.request, messages.SUCCESS, _('Profile data has been successfully updated.'))
 
         return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('accounts:change_profile')
 
 
 class ChangeEmailView(LoginRequiredMixin, FormView):
@@ -265,6 +266,9 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
 
         return initial
 
+    def get_success_url(self):
+        return reverse('accounts:change_email')
+
     def form_valid(self, form):
         user = self.request.user
         email = form.cleaned_data.get('email', '').lower()
@@ -281,9 +285,6 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
             messages.add_message(self.request, messages.SUCCESS, _('Email successfully changed.'))
 
         return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('accounts:change_email')
 
 
 class ChangeEmailActivateView(LoginRequiredMixin, RedirectView):
@@ -311,6 +312,9 @@ class RemindUsernameView(GuestOnlyView, FormView):
     template_name = 'accounts/remind_username.html'
     form_class = RemindUsernameForm
 
+    def get_success_url(self):
+        return reverse('accounts:remind_username')
+
     def form_valid(self, form):
         email = form.cleaned_data.get('email', '').lower()
 
@@ -320,9 +324,6 @@ class RemindUsernameView(GuestOnlyView, FormView):
                              _('Your username has been successfully sent to your email.'))
 
         return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse('accounts:remind_username')
 
 
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
