@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-23 14:46+0000\n"
+"POT-Creation-Date: 2018-06-26 04:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,9 +75,6 @@ msgstr "Изменить пароль"
 msgid "Change"
 msgstr "Изменить"
 
-msgid "Your password was changed."
-msgstr "Ваш пароль изменен."
-
 msgid "To activate your profile, please follow this link:"
 msgstr "Для активации вашего профиля, перейдите по этой ссылке:"
 
@@ -132,9 +129,6 @@ msgstr "Дальше"
 
 msgid "Restore password"
 msgstr "Восстановить пароль"
-
-msgid "Your password has been set. You may go ahead and log in now."
-msgstr "Ваш пароль изменен. Теперь вы можете войти."
 
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
@@ -212,6 +206,12 @@ msgstr "Вы успешно изменили свою почту!"
 msgid "Your username has been successfully sent to your email."
 msgstr ""
 "Ваше имя пользователя успешно отправлено на ваш адрес электронной почты."
+
+msgid "Your password was changed."
+msgstr "Ваш пароль изменен."
+
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "Ваш пароль изменен. Теперь вы можете войти."
 
 msgid "English"
 msgstr "Английский"

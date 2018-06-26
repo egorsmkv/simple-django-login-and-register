@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-23 14:46+0000\n"
+"POT-Creation-Date: 2018-06-26 04:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Wentao Han <wentao.han@gmail.com>\n"
 "Language: zh_CN\n"
@@ -73,9 +73,6 @@ msgstr "修改密码"
 msgid "Change"
 msgstr "修改"
 
-msgid "Your password was changed."
-msgstr "你的密码已被修改。"
-
 msgid "To activate your profile, please follow this link:"
 msgstr "若要激活你的账号，请访问以下链接："
 
@@ -128,9 +125,6 @@ msgstr "下一步"
 
 msgid "Restore password"
 msgstr "恢复密码"
-
-msgid "Your password has been set. You may go ahead and log in now."
-msgstr "你的密码已经重设。现在可以继续登录。"
 
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
@@ -195,6 +189,12 @@ msgstr "你成功修改了你的电子邮箱地址！"
 
 msgid "Your username has been successfully sent to your email."
 msgstr "您的用户名已成功发送至您的电子邮件。"
+
+msgid "Your password was changed."
+msgstr "你的密码已被修改。"
+
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr "你的密码已经重设。现在可以继续登录。"
 
 msgid "English"
 msgstr "英语"
