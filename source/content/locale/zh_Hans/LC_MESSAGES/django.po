@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-26 04:05+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/egorsmkv/simple-django-login-and-register\n"
+"POT-Creation-Date: 2018-06-26 10:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Wentao Han <wentao.han@gmail.com>\n"
 "Language: zh_CN\n"
@@ -16,36 +16,32 @@ msgstr "密码"
 msgid "Remember me"
 msgstr "记住我"
 
+msgid "Username"
+msgstr "用户名"
+
+msgid "You entered an invalid username."
+msgstr "您输入了无效的用户名。"
+
+msgid "You entered an invalid password."
+msgstr "您输入了无效的密码。"
+
+msgid "This account is not active."
+msgstr "此帐户不活跃。"
+
 msgid "Email"
 msgstr "电子邮箱"
 
-msgid ""
-"Please enter a correct email and password. Note that both fields may be case-"
-"sensitive."
-msgstr "请输入正确的电子邮箱和密码。注意这两个字段可能是大小写敏感的。"
-
-msgid "This account is inactive."
-msgstr "此账号已被禁用。"
+msgid "You entered an invalid email address."
+msgstr "你输入了一个无效的邮箱地址。"
 
 msgid "Email or Username"
 msgstr "电子邮箱或用户名"
 
-msgid ""
-"Please enter a correct email or username and password. Note that both fields "
-"may be case-sensitive."
-msgstr "请输入正确的电子邮箱和密码。注意这两个字段可能是大小写敏感的。"
+msgid "You entered an invalid email address or username."
+msgstr "您输入了无效的电子邮件地址或用户名。"
 
-msgid "First Name"
-msgstr "名"
-
-msgid "Optional."
-msgstr "选填。"
-
-msgid "Last Name"
-msgstr "姓"
-
-msgid "Required. Type a valid email address."
-msgstr "必填。输入一个合法的电子邮箱地址。"
+msgid "Required. Enter an existing email address."
+msgstr "需要。输入现有的电子邮件地址。"
 
 msgid "You can not use this email address."
 msgstr "你不能使用这个电子邮件地址。"
@@ -55,11 +51,17 @@ msgid ""
 "hours."
 msgstr "激活码已经发送。你可以在24小时内再次请求新的激活码。"
 
-msgid "You entered incorrect data."
-msgstr "输入了不正确的数据。"
+msgid "Activation code not found."
+msgstr ""
 
 msgid "This account has already been activated."
 msgstr "该帐户已被激活。"
+
+msgid "First name"
+msgstr "名"
+
+msgid "Last name"
+msgstr "姓"
 
 msgid "You can not use this mail."
 msgstr "你不能使用这个邮箱。"
@@ -76,8 +78,8 @@ msgstr "修改"
 msgid "To activate your profile, please follow this link:"
 msgstr "若要激活你的账号，请访问以下链接："
 
-msgid "To change the mail, please follow the link:"
-msgstr "若要修改邮箱地址，请访问以下链接："
+msgid "To change your current email address, please follow the link:"
+msgstr "要更改您当前的电子邮件地址，请点击以下链接："
 
 msgid "Your username is:"
 msgstr "你的用户名是:"
@@ -105,7 +107,7 @@ msgstr "重新发送激活码"
 msgid "Logged out"
 msgstr "已经登出"
 
-msgid "Thanks for spending some quality time with the Web site today."
+msgid "Thanks for spending some quality time with the site today."
 msgstr "感谢您访问本网站。"
 
 msgid "Log in again"
@@ -199,9 +201,6 @@ msgstr "你的密码已经重设。现在可以继续登录。"
 msgid "English"
 msgstr "英语"
 
-msgid "Ukrainian"
-msgstr "乌克兰"
-
 msgid "Russian"
 msgstr "俄语"
 
@@ -209,7 +208,7 @@ msgid "Simplified Chinese"
 msgstr "简体中文"
 
 msgid "Home"
-msgstr ""
+msgstr "首页"
 
 msgid "Log out"
 msgstr "登出"

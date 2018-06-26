@@ -12,19 +12,6 @@ from django.utils.translation import gettext_lazy as _
 from .models import Activation
 
 
-def is_username_disabled():
-    return hasattr(settings, 'DISABLE_USERNAME') and settings.DISABLE_USERNAME
-
-
-def is_use_remember_me():
-    return hasattr(settings, 'USE_REMEMBER_ME') and settings.USE_REMEMBER_ME
-
-
-def is_restore_password_via_email_or_username():
-    return hasattr(settings, 'RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME') and \
-           settings.RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME
-
-
 def send_activation_email(request, user):
     code = get_random_string(20)
 

@@ -96,12 +96,12 @@ ENABLE_USER_ACTIVATION = True
 DISABLE_USERNAME = False
 LOGIN_VIA_EMAIL = False
 LOGIN_VIA_EMAIL_OR_USERNAME = False
-LOGIN_URL = '/accounts/log-in/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'index'
+LOGIN_URL = 'accounts:log_in'
 USE_REMEMBER_ME = True
 
-RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = True
-EMAIL_ACTIVATION_AFTER_CHANGING = True
+RESTORE_PASSWORD_VIA_EMAIL_OR_USERNAME = False
+ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE = True
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
@@ -110,7 +110,6 @@ USE_L10N = True
 LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ('en', _('English')),
-    ('uk', _('Ukrainian')),
     ('ru', _('Russian')),
     ('zh-Hans', _('Simplified Chinese')),
 ]

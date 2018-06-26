@@ -2,142 +2,134 @@ from datetime import timedelta
 
 from django import forms
 from django.conf import settings
-from django.contrib.auth import REDIRECT_FIELD_NAME
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.contrib.auth.forms import PasswordResetForm as BasePasswordResetForm
+from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from .models import Activation
-
-
-def is_use_remember_me():
-    return hasattr(settings, 'USE_REMEMBER_ME') and settings.USE_REMEMBER_ME
-
-
-def is_username_disabled():
-    return hasattr(settings, 'DISABLE_USERNAME') and settings.DISABLE_USERNAME
-
 
 def get_sign_up_fields():
-    if is_username_disabled():
+    if settings.DISABLE_USERNAME:
         return ['first_name', 'last_name', 'email', 'password1', 'password2']
 
     return ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 
 
 class SignIn(forms.Form):
-    redirect_field_name = REDIRECT_FIELD_NAME
+    password = forms.CharField(label=_('Password'), strip=False, widget=forms.PasswordInput)
+    user_cache = None
 
-    password = forms.CharField(
-        label=_('Password'),
-        strip=False,
-        widget=forms.PasswordInput,
-    )
-
-    def __init__(self, request=None, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        self.request = request
-        self.user_cache = None
-
-        if is_use_remember_me():
-            self.fields['remember_me'] = forms.BooleanField(label=_('Remember me'), required=False,
-                                                            widget=forms.CheckboxInput)
-
-    def get_user(self):
-        return self.user_cache
+        if settings.USE_REMEMBER_ME:
+            self.fields['remember_me'] = forms.BooleanField(label=_('Remember me'), required=False)
 
 
-class SignInViaUsernameForm(AuthenticationForm, SignIn):
+class SignInViaUsernameForm(SignIn):
+    username = forms.CharField(label=_('Username'))
+
+    error_messages = {
+        'invalid_username': _('You entered an invalid username.'),
+        'invalid_password': _('You entered an invalid password.'),
+        'inactive': _('This account is not active.'),
+    }
+
     def __init__(self, *args, **kwargs):
         self.field_order = ['username', 'password']
-        if is_use_remember_me():
+        if settings.USE_REMEMBER_ME:
             self.field_order = ['username', 'password', 'remember_me']
-
         super().__init__(*args, **kwargs)
+
+    def clean(self):
+        if not self.is_valid():
+            return
+
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        user = User.objects.filter(username=username).first()
+        if not user:
+            self.add_error('username', self.error_messages['invalid_username'])
+        else:
+            if not user.is_active:
+                self.add_error('username', self.error_messages['inactive'])
+            elif not user.check_password(password):
+                self.add_error('password', self.error_messages['invalid_password'])
+            else:
+                self.user_cache = user
 
 
 class SignInViaEmailForm(SignIn):
-    email = forms.EmailField(
-        label=_('Email'),
-        widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}),
-    )
+    email = forms.EmailField(label=_('Email'))
 
     error_messages = {
-        'invalid_login': _('Please enter a correct email and password. Note that both fields may be case-sensitive.'),
-        'inactive': _('This account is inactive.'),
+        'invalid_email': _('You entered an invalid email address.'),
+        'invalid_password': _('You entered an invalid password.'),
+        'inactive': _('This account is not active.'),
     }
 
     def __init__(self, *args, **kwargs):
         self.field_order = ['email', 'password']
-        if is_use_remember_me():
+        if settings.USE_REMEMBER_ME:
             self.field_order = ['email', 'password', 'remember_me']
-
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email = cleaned_data.get('email', '').lower()
-        password = cleaned_data.get('password', '')
+        email = self.cleaned_data.get('email').lower()
+        password = self.cleaned_data.get('password')
 
-        self.user_cache = User.objects.filter(email=email).first()
-        if self.user_cache:
-            if not self.user_cache.is_active:
-                self.add_error('email', self.error_messages['inactive'])
-
-            if not self.user_cache.check_password(password):
-                self.add_error('email', self.error_messages['invalid_login'])
+        user = User.objects.filter(email=email).first()
+        if not user:
+            self.add_error('email', self.error_messages['invalid_email'])
         else:
-            self.add_error('email', self.error_messages['invalid_login'])
+            if not user.is_active:
+                self.add_error('email', self.error_messages['inactive'])
+            elif not user.check_password(password):
+                self.add_error('password', self.error_messages['invalid_password'])
+            else:
+                self.user_cache = user
 
 
 class SignInViaEmailOrUsernameForm(SignIn):
-    field_order = ['email_or_username', 'password']
-
-    email_or_username = forms.CharField(
-        label=_('Email or Username'),
-        widget=forms.TextInput(attrs={'autofocus': True}),
-    )
+    email_or_username = forms.CharField(label=_('Email or Username'))
 
     error_messages = {
-        'invalid_login': _(
-            'Please enter a correct email or username and password. Note that both fields may be case-sensitive.'
-        ),
-        'inactive': _('This account is inactive.'),
+        'invalid_email_or_username': _('You entered an invalid email address or username.'),
+        'invalid_password': _('You entered an invalid password.'),
+        'inactive': _('This account is not active.'),
     }
 
     def __init__(self, *args, **kwargs):
         self.field_order = ['email_or_username', 'password']
-        if is_use_remember_me():
+        if settings.USE_REMEMBER_ME:
             self.field_order = ['email_or_username', 'password', 'remember_me']
-
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email_or_username = cleaned_data.get('email_or_username', '')
-        password = cleaned_data.get('password', '')
+        email_or_username = self.cleaned_data.get('email_or_username')
+        password = self.cleaned_data.get('password')
 
-        email = email_or_username.lower()
         username = email_or_username
+        email = email_or_username.lower()
 
-        self.user_cache = User.objects.filter(
-            Q(username=username) | Q(email=email)
-        ).first()
-
-        if self.user_cache:
-            if not self.user_cache.is_active:
-                self.add_error('email_or_username', self.error_messages['inactive'])
-
-            if not self.user_cache.check_password(password):
-                self.add_error('email_or_username', self.error_messages['invalid_login'])
+        user = User.objects.filter(Q(username=username) | Q(email=email)).first()
+        if not user:
+            self.add_error('email_or_username', self.error_messages['invalid_email_or_username'])
         else:
-            self.add_error('email_or_username', self.error_messages['invalid_login'])
+            if not user.is_active:
+                self.add_error('email_or_username', self.error_messages['inactive'])
+            elif not user.check_password(password):
+                self.add_error('password', self.error_messages['invalid_password'])
+            else:
+                self.user_cache = user
 
 
 class SignUpForm(UserCreationForm):
@@ -145,198 +137,151 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = get_sign_up_fields()
 
-    first_name = forms.CharField(label=_('First Name'), max_length=50, required=False, help_text=_('Optional.'),
-                                 widget=forms.TextInput(attrs={'autofocus': True}))
-    last_name = forms.CharField(label=_('Last Name'), max_length=50, required=False, help_text=_('Optional.'))
-    email = forms.EmailField(label=_('Email'), max_length=255, help_text=_('Required. Type a valid email address.'),
-                             widget=forms.EmailInput(attrs={'placeholder': '@'}))
+    email = forms.EmailField(label=_('Email'), help_text=_('Required. Enter an existing email address.'))
 
     error_messages = {
         'unique_email': _('You can not use this email address.'),
     }
 
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email = cleaned_data.get('email', '').lower()
-
-        num_users = User.objects.filter(email=email).count()
-        if num_users > 0:
+        email = self.cleaned_data.get('email').lower()
+        exists = User.objects.filter(email=email).exists()
+        if exists:
             self.add_error('email', self.error_messages['unique_email'])
 
 
 class ResendActivationCodeForm(forms.Form):
-    email_or_username = forms.CharField(
-        label=_('Email or Username'),
-        widget=forms.TextInput(attrs={'autofocus': True}),
-    )
+    email_or_username = forms.CharField(label=_('Email or Username'))
 
+    user_cache = None
     error_messages = {
         'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
-        'incorrect_data': _('You entered incorrect data.'),
+        'invalid_email_or_username': _('You entered an invalid email address or username.'),
+        'invalid_activation': _('Activation code not found.'),
         'already_activated': _('This account has already been activated.'),
     }
 
-    def __init__(self, request=None, *args, **kwargs):
-        self.request = request
-        self.user_cache = None
-        super().__init__(*args, **kwargs)
-
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email_or_username = cleaned_data.get('email_or_username', '')
+        email_or_username = self.cleaned_data.get('email_or_username')
+        username = email_or_username
+        email = email_or_username.lower()
 
-        try:
-            email = email_or_username.lower()
-            username = email_or_username
-
-            user = User.objects.filter(
-                Q(username=username) | Q(email=email)
-            ).first()
-
-            if not user:
-                self.add_error('email_or_username', self.error_messages['incorrect_data'])
+        user = User.objects.filter(Q(username=username) | Q(email=email)).first()
+        if not user:
+            self.add_error('email_or_username', self.error_messages['invalid_email_or_username'])
+        else:
+            if user.is_active:
+                self.add_error('email_or_username', self.error_messages['already_activated'])
             else:
-                if user.is_active:
-                    self.add_error('email_or_username', self.error_messages['already_activated'])
+                now_with_shift = timezone.now() - timedelta(hours=24)
+                activation = user.activation_set.first()
+                if not activation:
+                    self.add_error('email', self.error_messages['invalid_activation'])
                 else:
-                    now_with_shift = timezone.now() - timedelta(hours=24)
-
-                    activation = user.activation_set.get()
-
                     if activation.created_at > now_with_shift:
                         self.add_error('email_or_username', self.error_messages['non_expired'])
                     else:
                         self.user_cache = user
-        except (User.DoesNotExist, Activation.DoesNotExist):
-            self.add_error('email_or_username', self.error_messages['incorrect_data'])
-
-    def get_user(self):
-        return self.user_cache
 
 
 class ResendActivationCodeViaEmailForm(forms.Form):
-    email = forms.EmailField(
-        label=_('Email'),
-        widget=forms.EmailInput(attrs={'autofocus': True}),
-    )
+    email = forms.EmailField(label=_('Email'))
 
+    user_cache = None
     error_messages = {
         'non_expired': _('Activation code has already been sent. You can request a new code in 24 hours.'),
-        'incorrect_data': _('You entered incorrect data.'),
+        'invalid_activation': _('Activation code not found.'),
+        'invalid_email': _('You entered an invalid email address.'),
         'already_activated': _('This account has already been activated.'),
     }
 
-    def __init__(self, request=None, *args, **kwargs):
-        self.request = request
-        self.user_cache = None
-
-        super().__init__(*args, **kwargs)
-
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        try:
-            email = cleaned_data.get('email', '').lower()
-
-            user = User.objects.filter(email=email).get()
-
+        email = self.cleaned_data.get('email').lower()
+        user = User.objects.filter(email=email).first()
+        if not user:
+            self.add_error('email', self.error_messages['invalid_email'])
+        else:
             if user.is_active:
                 self.add_error('email', self.error_messages['already_activated'])
             else:
                 now_with_shift = timezone.now() - timedelta(hours=24)
-
-                activation = user.activation_set.get()
-
-                if activation.created_at > now_with_shift:
-                    self.add_error('email', self.error_messages['non_expired'])
+                activation = user.activation_set.first()
+                if not activation:
+                    self.add_error('email', self.error_messages['invalid_activation'])
                 else:
-                    self.user_cache = user
-        except (User.DoesNotExist, Activation.DoesNotExist):
-            self.add_error('email', self.error_messages['incorrect_data'])
-
-    def get_user(self):
-        return self.user_cache
+                    if activation.created_at > now_with_shift:
+                        self.add_error('email', self.error_messages['non_expired'])
+                    else:
+                        self.user_cache = user
 
 
-class RestorePasswordForm(BasePasswordResetForm):
+class RestorePasswordForm(forms.Form):
+    email = forms.EmailField(label=_('Email'))
+
+    user_cache = None
     error_messages = {
-        'incorrect_data': _('You entered incorrect data.'),
+        'invalid_email': _('You entered an invalid email address.'),
+        'inactive': _('This account is not active.'),
     }
 
-    def __init__(self, *args, **kwargs):
-        self.user_cache = None
-
-        super().__init__(*args, **kwargs)
-
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email = cleaned_data.get('email', '')
-        users = list(self.get_users(email))
-
-        if not len(users):
-            self.add_error('email', self.error_messages['incorrect_data'])
+        email = self.cleaned_data.get('email').lower()
+        user = User.objects.filter(email=email).first()
+        if not user:
+            self.add_error('email', self.error_messages['invalid_email'])
         else:
-            self.user_cache = users[0]
-
-    def get_user(self):
-        return self.user_cache
+            if not user.is_active:
+                self.add_error('email', self.error_messages['inactive'])
+            else:
+                self.user_cache = user
 
 
 class RestorePasswordViaEmailOrUsernameForm(forms.Form):
-    email_or_username = forms.CharField(
-        label=_('Email or Username'),
-        widget=forms.TextInput(attrs={'autofocus': True}),
-    )
+    email_or_username = forms.CharField(label=_('Email or Username'))
 
+    user_cache = None
     error_messages = {
-        'incorrect_data': _('You entered incorrect data.'),
-        'inactive': _('This account is inactive.'),
+        'invalid_email_or_username': _('You entered an invalid email address or username.'),
+        'inactive': _('This account is not active.'),
     }
 
-    def __init__(self, *args, **kwargs):
-        self.user_cache = None
-
-        super().__init__(*args, **kwargs)
-
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email_or_username = cleaned_data.get('email_or_username', '')
+        email_or_username = self.cleaned_data.get('email_or_username')
+        username = email_or_username
+        email = email_or_username.lower()
 
-        try:
-            username = email_or_username
-            email = email_or_username.lower()
-
-            user = User.objects.filter(
-                Q(username=username) | Q(email=email)
-            ).first()
-
-            if not user:
-                self.add_error('email_or_username', self.error_messages['incorrect_data'])
+        user = User.objects.filter(Q(username=username) | Q(email=email)).first()
+        if not user:
+            self.add_error('email_or_username', self.error_messages['invalid_email_or_username'])
+        else:
+            if not user.is_active:
+                self.add_error('email_or_username', self.error_messages['inactive'])
             else:
-                if not user.is_active:
-                    self.add_error('email_or_username', self.error_messages['inactive'])
-                else:
-                    self.user_cache = user
-        except User.DoesNotExist:
-            self.add_error('email_or_username', self.error_messages['incorrect_data'])
-
-    def get_user(self):
-        return self.user_cache
+                self.user_cache = user
 
 
 class ChangeProfileForm(forms.Form):
-    first_name = forms.CharField(label=_('First Name'), max_length=50, required=False, help_text=_('Optional.'),
-                                 widget=forms.TextInput(attrs={'autofocus': True}))
-    last_name = forms.CharField(label=_('Last Name'), max_length=50, required=False, help_text=_('Optional.'))
+    first_name = forms.CharField(label=_('First name'), max_length=30, required=False)
+    last_name = forms.CharField(label=_('Last name'), max_length=150, required=False)
 
 
 class ChangeEmailForm(forms.Form):
-    email = forms.EmailField(label=_('Email'), max_length=255,
-                             widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}))
+    email = forms.EmailField(label=_('Email'))
 
     error_messages = {
         'email_already_exists': _('You can not use this mail.'),
@@ -345,39 +290,33 @@ class ChangeEmailForm(forms.Form):
 
     def __init__(self, user, *args, **kwargs):
         self.user = user
-
         super().__init__(*args, **kwargs)
 
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email = cleaned_data.get('email', '').lower()
-
+        email = self.cleaned_data.get('email').lower()
         if email == self.user.email:
             self.add_error('email', self.error_messages['same_email'])
         else:
-            user = User.objects.filter(
-                Q(email=email) & ~Q(id=self.user.id)
-            ).exists()
-
+            user = User.objects.filter(Q(email=email) & ~Q(id=self.user.id)).exists()
             if user:
                 self.add_error('email', self.error_messages['email_already_exists'])
 
 
 class RemindUsernameForm(forms.Form):
-    email = forms.EmailField(label=_('Email'), max_length=255,
-                             widget=forms.EmailInput(attrs={'placeholder': '@', 'autofocus': True}))
+    email = forms.EmailField(label=_('Email'))
 
     error_messages = {
-        'incorrect_data': _('You entered incorrect data.'),
+        'invalid_email': _('You entered an invalid email address.'),
     }
 
     def clean(self):
-        cleaned_data = super().clean()
+        if not self.is_valid():
+            return
 
-        email = cleaned_data.get('email', '').lower()
-
+        email = self.cleaned_data.get('email').lower()
         user = User.objects.filter(email=email).exists()
-
         if not user:
-            self.add_error('email', self.error_messages['incorrect_data'])
+            self.add_error('email', self.error_messages['invalid_email'])
