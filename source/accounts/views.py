@@ -37,11 +37,11 @@ class GuestOnlyView(View):
         return super().dispatch(request, *args, **kwargs)
 
 
-class LogInView(GuestOnlyView):
+class LogInView(GuestOnlyView, FormView):
     template_name = 'accounts/log_in.html'
 
     @staticmethod
-    def get_form_class():
+    def get_form_class(**kwargs):
         if hasattr(settings, 'LOGIN_VIA_EMAIL') and settings.LOGIN_VIA_EMAIL:
             return SignInViaEmailForm
 
@@ -134,11 +134,11 @@ class ActivateView(View):
         return redirect(settings.LOGIN_REDIRECT_URL)
 
 
-class ResendActivationCodeView(GuestOnlyView):
+class ResendActivationCodeView(GuestOnlyView, FormView):
     template_name = 'accounts/resend_activation_code.html'
 
     @staticmethod
-    def get_form_class():
+    def get_form_class(**kwargs):
         if is_username_disabled():
             return ResendActivationCodeViaEmailForm
 
@@ -158,11 +158,11 @@ class ResendActivationCodeView(GuestOnlyView):
         return redirect('accounts:resend_activation_code')
 
 
-class RestorePasswordView(GuestOnlyView):
+class RestorePasswordView(GuestOnlyView, FormView):
     template_name = 'accounts/restore_password.html'
 
     @staticmethod
-    def get_form_class():
+    def get_form_class(**kwargs):
         if is_restore_password_via_email_or_username():
             return RestorePasswordViaEmailOrUsernameForm
 
@@ -271,21 +271,13 @@ class RemindUsernameView(GuestOnlyView, FormView):
         return redirect('accounts:remind_username')
 
 
-class LogOutView(LoginRequiredMixin, BaseLogoutView):
-    template_name = 'accounts/log_out.html'
-
-
 class ChangePasswordView(BasePasswordChangeView):
     template_name = 'accounts/change_password.html'
 
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, _('Your password was changed.'))
 
-        return redirect('accounts:change_password_done')
-
-
-class RestorePasswordDoneView(BasePasswordResetDoneView):
-    template_name = 'accounts/restore_password_done.html'
+        return redirect('accounts:change_password')
 
 
 class RestorePasswordConfirmView(BasePasswordResetConfirmView):
@@ -296,3 +288,11 @@ class RestorePasswordConfirmView(BasePasswordResetConfirmView):
                              _('Your password has been set. You may go ahead and log in now.'))
 
         return redirect('accounts:log_in')
+
+
+class RestorePasswordDoneView(BasePasswordResetDoneView):
+    template_name = 'accounts/restore_password_done.html'
+
+
+class LogOutView(LoginRequiredMixin, BaseLogoutView):
+    template_name = 'accounts/log_out.html'
