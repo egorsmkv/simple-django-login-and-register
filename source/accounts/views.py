@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
@@ -9,6 +10,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.http import is_safe_url
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
@@ -17,7 +20,7 @@ from django.views.generic import View, FormView
 from django.conf import settings
 
 from .utils import (
-    send_activation_email, send_reset_password_email, send_forgotten_username, send_activation_change_email,
+    send_activation_email, send_reset_password_email, send_forgotten_username_email, send_activation_change_email,
 )
 from .forms import (
     SignInViaUsernameForm, SignInViaEmailForm, SignInViaEmailOrUsernameForm, SignUpForm,
@@ -110,7 +113,14 @@ class SignUpView(GuestOnlyView, FormView):
             user.save()
 
         if settings.ENABLE_USER_ACTIVATION:
-            send_activation_email(self.request, user)
+            code = get_random_string(20)
+
+            act = Activation()
+            act.code = code
+            act.user = user
+            act.save()
+
+            send_activation_email(self.request, user.email, code)
 
             messages.success(
                 self.request, _('You are signed up. To activate the account, follow the link sent to the mail.'))
@@ -159,7 +169,14 @@ class ResendActivationCodeView(GuestOnlyView, FormView):
         activation = user.activation_set.first()
         activation.delete()
 
-        send_activation_email(self.request, user)
+        code = get_random_string(20)
+
+        act = Activation()
+        act.code = code
+        act.user = user
+        act.save()
+
+        send_activation_email(self.request, user.email, code)
 
         messages.success(self.request, _('A new activation code has been sent to your email address.'))
 
@@ -177,7 +194,11 @@ class RestorePasswordView(GuestOnlyView, FormView):
         return RestorePasswordForm
 
     def form_valid(self, form):
-        send_reset_password_email(self.request, form.user_cache)
+        user = form.user_cache
+        token = default_token_generator.make_token(user)
+        uid = urlsafe_base64_encode(force_bytes(user.pk)).decode()
+
+        send_reset_password_email(self.request, user.email, token, uid)
 
         return redirect('accounts:restore_password_done')
 
@@ -223,7 +244,15 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
         email = form.cleaned_data.get('email').lower()
 
         if settings.ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE:
-            send_activation_change_email(self.request, user, email)
+            code = get_random_string(20)
+
+            act = Activation()
+            act.code = code
+            act.user = user
+            act.email = email
+            act.save()
+
+            send_activation_change_email(self.request, email, code)
 
             messages.success(self.request, _('To complete the change of email address, click on the link sent to it.'))
         else:
@@ -258,9 +287,8 @@ class RemindUsernameView(GuestOnlyView, FormView):
     form_class = RemindUsernameForm
 
     def form_valid(self, form):
-        email = form.cleaned_data.get('email').lower()
-
-        send_forgotten_username(email)
+        user = form.user_cache
+        send_forgotten_username_email(user.email, user.username)
 
         messages.success(self.request, _('Your username has been successfully sent to your email.'))
 

@@ -308,8 +308,10 @@ class ChangeEmailForm(forms.Form):
 class RemindUsernameForm(forms.Form):
     email = forms.EmailField(label=_('Email'))
 
+    user_cache = None
     error_messages = {
         'invalid_email': _('You entered an invalid email address.'),
+        'inactive': _('This account is not active.'),
     }
 
     def clean(self):
@@ -317,6 +319,11 @@ class RemindUsernameForm(forms.Form):
             return
 
         email = self.cleaned_data.get('email').lower()
-        user = User.objects.filter(email=email).exists()
+        user = User.objects.filter(email=email).first()
         if not user:
             self.add_error('email', self.error_messages['invalid_email'])
+        else:
+            if not user.is_active:
+                self.add_error('email', self.error_messages['inactive'])
+            else:
+                self.user_cache = user
