@@ -170,11 +170,11 @@ class ResendActivationCodeViaEmailForm(UserCacheMixin, forms.Form):
         if user.is_active:
             raise ValidationError(_('This account has already been activated.'))
 
-        now_with_shift = timezone.now() - timedelta(hours=24)
         activation = user.activation_set.first()
         if not activation:
             raise ValidationError(_('Activation code not found.'))
 
+        now_with_shift = timezone.now() - timedelta(hours=24)
         if activation.created_at > now_with_shift:
             raise ValidationError(_('Activation code has already been sent. You can request a new code in 24 hours.'))
 
