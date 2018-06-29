@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django import forms
+from django.forms import ValidationError
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -26,13 +27,23 @@ class SignIn(forms.Form):
         if settings.USE_REMEMBER_ME:
             self.fields['remember_me'] = forms.BooleanField(label=_('Remember me'), required=False)
 
+    def clean_password(self):
+        password = self.cleaned_data['password']
+
+        if not self.user_cache:
+            return password
+
+        if not self.user_cache.check_password(password):
+            raise ValidationError(_('You entered an invalid password.'))
+
+        return password
+
 
 class SignInViaUsernameForm(SignIn):
     username = forms.CharField(label=_('Username'))
 
     error_messages = {
         'invalid_username': _('You entered an invalid username.'),
-        'invalid_password': _('You entered an invalid password.'),
         'inactive': _('This account is not active.'),
     }
 
@@ -42,23 +53,19 @@ class SignInViaUsernameForm(SignIn):
             return ['username', 'password', 'remember_me']
         return ['username', 'password']
 
-    def clean(self):
-        if not self.is_valid():
-            return
-
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
+    def clean_username(self):
+        username = self.cleaned_data['username']
 
         user = User.objects.filter(username=username).first()
         if not user:
-            self.add_error('username', self.error_messages['invalid_username'])
-        else:
-            if not user.is_active:
-                self.add_error('username', self.error_messages['inactive'])
-            elif not user.check_password(password):
-                self.add_error('password', self.error_messages['invalid_password'])
-            else:
-                self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_username'])
+
+        if not user.is_active:
+            raise ValidationError(self.error_messages['inactive'])
+
+        self.user_cache = user
+
+        return username
 
 
 class SignInViaEmailForm(SignIn):
@@ -66,7 +73,6 @@ class SignInViaEmailForm(SignIn):
 
     error_messages = {
         'invalid_email': _('You entered an invalid email address.'),
-        'invalid_password': _('You entered an invalid password.'),
         'inactive': _('This account is not active.'),
     }
 
@@ -76,23 +82,19 @@ class SignInViaEmailForm(SignIn):
             return ['email', 'password', 'remember_me']
         return ['email', 'password']
 
-    def clean(self):
-        if not self.is_valid():
-            return
-
-        email = self.cleaned_data.get('email').lower()
-        password = self.cleaned_data.get('password')
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
 
         user = User.objects.filter(email=email).first()
         if not user:
-            self.add_error('email', self.error_messages['invalid_email'])
-        else:
-            if not user.is_active:
-                self.add_error('email', self.error_messages['inactive'])
-            elif not user.check_password(password):
-                self.add_error('password', self.error_messages['invalid_password'])
-            else:
-                self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email'])
+
+        if not user.is_active:
+            raise ValidationError(self.error_messages['inactive'])
+
+        self.user_cache = user
+
+        return email
 
 
 class SignInViaEmailOrUsernameForm(SignIn):
@@ -100,7 +102,6 @@ class SignInViaEmailOrUsernameForm(SignIn):
 
     error_messages = {
         'invalid_email_or_username': _('You entered an invalid email address or username.'),
-        'invalid_password': _('You entered an invalid password.'),
         'inactive': _('This account is not active.'),
     }
 
@@ -110,26 +111,22 @@ class SignInViaEmailOrUsernameForm(SignIn):
             return ['email_or_username', 'password', 'remember_me']
         return ['email_or_username', 'password']
 
-    def clean(self):
-        if not self.is_valid():
-            return
-
-        email_or_username = self.cleaned_data.get('email_or_username')
-        password = self.cleaned_data.get('password')
+    def clean_email_or_username(self):
+        email_or_username = self.cleaned_data['email_or_username']
 
         username = email_or_username
         email = email_or_username.lower()
 
         user = User.objects.filter(Q(username=username) | Q(email=email)).first()
         if not user:
-            self.add_error('email_or_username', self.error_messages['invalid_email_or_username'])
-        else:
-            if not user.is_active:
-                self.add_error('email_or_username', self.error_messages['inactive'])
-            elif not user.check_password(password):
-                self.add_error('password', self.error_messages['invalid_password'])
-            else:
-                self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email_or_username'])
+
+        if not user.is_active:
+            raise ValidationError(self.error_messages['inactive'])
+
+        self.user_cache = user
+
+        return email_or_username
 
 
 class SignUpForm(UserCreationForm):
@@ -143,14 +140,14 @@ class SignUpForm(UserCreationForm):
         'unique_email': _('You can not use this email address.'),
     }
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
 
-        email = self.cleaned_data.get('email').lower()
-        exists = User.objects.filter(email=email).exists()
-        if exists:
-            self.add_error('email', self.error_messages['unique_email'])
+        user = User.objects.filter(email=email).exists()
+        if user:
+            raise ValidationError(self.error_messages['unique_email'])
+
+        return email
 
 
 class ResendActivationCodeForm(forms.Form):
@@ -164,30 +161,30 @@ class ResendActivationCodeForm(forms.Form):
         'already_activated': _('This account has already been activated.'),
     }
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email_or_username(self):
+        email_or_username = self.cleaned_data['email_or_username']
 
-        email_or_username = self.cleaned_data.get('email_or_username')
         username = email_or_username
         email = email_or_username.lower()
 
         user = User.objects.filter(Q(username=username) | Q(email=email)).first()
         if not user:
-            self.add_error('email_or_username', self.error_messages['invalid_email_or_username'])
-        else:
-            if user.is_active:
-                self.add_error('email_or_username', self.error_messages['already_activated'])
-            else:
-                now_with_shift = timezone.now() - timedelta(hours=24)
-                activation = user.activation_set.first()
-                if not activation:
-                    self.add_error('email_or_username', self.error_messages['invalid_activation'])
-                else:
-                    if activation.created_at > now_with_shift:
-                        self.add_error('email_or_username', self.error_messages['non_expired'])
-                    else:
-                        self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email_or_username'])
+
+        if user.is_active:
+            raise ValidationError(self.error_messages['already_activated'])
+
+        now_with_shift = timezone.now() - timedelta(hours=24)
+        activation = user.activation_set.first()
+        if not activation:
+            raise ValidationError(self.error_messages['invalid_activation'])
+
+        if activation.created_at > now_with_shift:
+            raise ValidationError(self.error_messages['non_expired'])
+
+        self.user_cache = user
+
+        return email_or_username
 
 
 class ResendActivationCodeViaEmailForm(forms.Form):
@@ -201,27 +198,27 @@ class ResendActivationCodeViaEmailForm(forms.Form):
         'already_activated': _('This account has already been activated.'),
     }
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
 
-        email = self.cleaned_data.get('email').lower()
         user = User.objects.filter(email=email).first()
         if not user:
-            self.add_error('email', self.error_messages['invalid_email'])
-        else:
-            if user.is_active:
-                self.add_error('email', self.error_messages['already_activated'])
-            else:
-                now_with_shift = timezone.now() - timedelta(hours=24)
-                activation = user.activation_set.first()
-                if not activation:
-                    self.add_error('email', self.error_messages['invalid_activation'])
-                else:
-                    if activation.created_at > now_with_shift:
-                        self.add_error('email', self.error_messages['non_expired'])
-                    else:
-                        self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email'])
+
+        if user.is_active:
+            raise ValidationError(self.error_messages['already_activated'])
+
+        now_with_shift = timezone.now() - timedelta(hours=24)
+        activation = user.activation_set.first()
+        if not activation:
+            raise ValidationError(self.error_messages['invalid_activation'])
+
+        if activation.created_at > now_with_shift:
+            raise ValidationError(self.error_messages['non_expired'])
+
+        self.user_cache = user
+
+        return email
 
 
 class RestorePasswordForm(forms.Form):
@@ -233,19 +230,19 @@ class RestorePasswordForm(forms.Form):
         'inactive': _('This account is not active.'),
     }
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
 
-        email = self.cleaned_data.get('email').lower()
         user = User.objects.filter(email=email).first()
         if not user:
-            self.add_error('email', self.error_messages['invalid_email'])
-        else:
-            if not user.is_active:
-                self.add_error('email', self.error_messages['inactive'])
-            else:
-                self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email'])
+
+        if not user.is_active:
+            raise ValidationError(self.error_messages['inactive'])
+
+        self.user_cache = user
+
+        return email
 
 
 class RestorePasswordViaEmailOrUsernameForm(forms.Form):
@@ -257,22 +254,22 @@ class RestorePasswordViaEmailOrUsernameForm(forms.Form):
         'inactive': _('This account is not active.'),
     }
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email_or_username(self):
+        email_or_username = self.cleaned_data['email_or_username']
 
-        email_or_username = self.cleaned_data.get('email_or_username')
         username = email_or_username
         email = email_or_username.lower()
 
         user = User.objects.filter(Q(username=username) | Q(email=email)).first()
         if not user:
-            self.add_error('email_or_username', self.error_messages['invalid_email_or_username'])
-        else:
-            if not user.is_active:
-                self.add_error('email_or_username', self.error_messages['inactive'])
-            else:
-                self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email_or_username'])
+
+        if not user.is_active:
+            raise ValidationError(self.error_messages['inactive'])
+
+        self.user_cache = user
+
+        return email_or_username
 
 
 class ChangeProfileForm(forms.Form):
@@ -292,17 +289,17 @@ class ChangeEmailForm(forms.Form):
         self.user = user
         super().__init__(*args, **kwargs)
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
 
-        email = self.cleaned_data.get('email').lower()
         if email == self.user.email:
-            self.add_error('email', self.error_messages['same_email'])
-        else:
-            user = User.objects.filter(Q(email=email) & ~Q(id=self.user.id)).exists()
-            if user:
-                self.add_error('email', self.error_messages['email_already_exists'])
+            raise ValidationError(self.error_messages['same_email'])
+
+        user = User.objects.filter(Q(email=email) & ~Q(id=self.user.id)).exists()
+        if user:
+            raise ValidationError(self.error_messages['email_already_exists'])
+
+        return email
 
 
 class RemindUsernameForm(forms.Form):
@@ -314,16 +311,16 @@ class RemindUsernameForm(forms.Form):
         'inactive': _('This account is not active.'),
     }
 
-    def clean(self):
-        if not self.is_valid():
-            return
+    def clean_email(self):
+        email = self.cleaned_data['email'].lower()
 
-        email = self.cleaned_data.get('email').lower()
         user = User.objects.filter(email=email).first()
         if not user:
-            self.add_error('email', self.error_messages['invalid_email'])
-        else:
-            if not user.is_active:
-                self.add_error('email', self.error_messages['inactive'])
-            else:
-                self.user_cache = user
+            raise ValidationError(self.error_messages['invalid_email'])
+
+        if not user.is_active:
+            raise ValidationError(self.error_messages['inactive'])
+
+        self.user_cache = user
+
+        return email
