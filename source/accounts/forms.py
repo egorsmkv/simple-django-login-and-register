@@ -36,11 +36,11 @@ class SignInViaUsernameForm(SignIn):
         'inactive': _('This account is not active.'),
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field_order = ['username', 'password']
+    @property
+    def field_order(self):
         if settings.USE_REMEMBER_ME:
-            self.field_order = ['username', 'password', 'remember_me']
-        super().__init__(*args, **kwargs)
+            return ['username', 'password', 'remember_me']
+        return ['username', 'password']
 
     def clean(self):
         if not self.is_valid():
@@ -70,11 +70,11 @@ class SignInViaEmailForm(SignIn):
         'inactive': _('This account is not active.'),
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field_order = ['email', 'password']
+    @property
+    def field_order(self):
         if settings.USE_REMEMBER_ME:
-            self.field_order = ['email', 'password', 'remember_me']
-        super().__init__(*args, **kwargs)
+            return ['email', 'password', 'remember_me']
+        return ['email', 'password']
 
     def clean(self):
         if not self.is_valid():
@@ -104,11 +104,11 @@ class SignInViaEmailOrUsernameForm(SignIn):
         'inactive': _('This account is not active.'),
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field_order = ['email_or_username', 'password']
+    @property
+    def field_order(self):
         if settings.USE_REMEMBER_ME:
-            self.field_order = ['email_or_username', 'password', 'remember_me']
-        super().__init__(*args, **kwargs)
+            return ['email_or_username', 'password', 'remember_me']
+        return ['email_or_username', 'password']
 
     def clean(self):
         if not self.is_valid():
@@ -182,7 +182,7 @@ class ResendActivationCodeForm(forms.Form):
                 now_with_shift = timezone.now() - timedelta(hours=24)
                 activation = user.activation_set.first()
                 if not activation:
-                    self.add_error('email', self.error_messages['invalid_activation'])
+                    self.add_error('email_or_username', self.error_messages['invalid_activation'])
                 else:
                     if activation.created_at > now_with_shift:
                         self.add_error('email_or_username', self.error_messages['non_expired'])

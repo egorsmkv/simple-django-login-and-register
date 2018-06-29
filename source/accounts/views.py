@@ -296,7 +296,7 @@ class RemindUsernameView(GuestOnlyView, FormView):
 
 
 class ChangePasswordView(BasePasswordChangeView):
-    template_name = 'accounts/change_password.html'
+    template_name = 'accounts/profile/change_password.html'
 
     def form_valid(self, form):
         messages.success(self.request, _('Your password was changed.'))
