@@ -71,7 +71,7 @@ class LogInView(GuestOnlyView, FormView):
         # The default Django's "remember me" lifetime is 2 weeks and can be changed by modifying
         # the SESSION_COOKIE_AGE settings' option.
         if settings.USE_REMEMBER_ME:
-            if not form.cleaned_data.get('remember_me'):
+            if not form.cleaned_data['remember_me']:
                 request.session.set_expiry(0)
 
         login(request, form.user_cache)
@@ -96,7 +96,7 @@ class SignUpView(GuestOnlyView, FormView):
             # Set temporary username
             user.username = get_random_string()
         else:
-            user.username = form.cleaned_data.get('username')
+            user.username = form.cleaned_data['username']
 
         if settings.ENABLE_USER_ACTIVATION:
             user.is_active = False
@@ -122,7 +122,7 @@ class SignUpView(GuestOnlyView, FormView):
             messages.success(
                 self.request, _('You are signed up. To activate the account, follow the link sent to the mail.'))
         else:
-            raw_password = form.cleaned_data.get('password1')
+            raw_password = form.cleaned_data['password1']
 
             user = authenticate(username=user.username, password=raw_password)
             login(self.request, user)
@@ -213,8 +213,8 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = self.request.user
-        user.first_name = form.cleaned_data.get('first_name')
-        user.last_name = form.cleaned_data.get('last_name')
+        user.first_name = form.cleaned_data['first_name']
+        user.last_name = form.cleaned_data['last_name']
         user.save()
 
         messages.success(self.request, _('Profile data has been successfully updated.'))
@@ -238,7 +238,7 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         user = self.request.user
-        email = form.cleaned_data.get('email').lower()
+        email = form.cleaned_data['email']
 
         if settings.ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE:
             code = get_random_string(20)
