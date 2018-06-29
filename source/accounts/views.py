@@ -44,14 +44,11 @@ class LogInView(GuestOnlyView, FormView):
 
     @staticmethod
     def get_form_class(**kwargs):
-        if settings.DISABLE_USERNAME:
+        if settings.DISABLE_USERNAME or settings.LOGIN_VIA_EMAIL:
             return SignInViaEmailForm
 
         if settings.LOGIN_VIA_EMAIL_OR_USERNAME:
             return SignInViaEmailOrUsernameForm
-
-        if settings.LOGIN_VIA_EMAIL:
-            return SignInViaEmailForm
 
         return SignInViaUsernameForm
 
