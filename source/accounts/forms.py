@@ -10,13 +10,6 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 
-def sign_up_fields():
-    if settings.DISABLE_USERNAME:
-        return ['first_name', 'last_name', 'email', 'password1', 'password2']
-
-    return ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
-
-
 class UserCacheMixin:
     user_cache = None
 
@@ -117,7 +110,7 @@ class SignInViaEmailOrUsernameForm(SignIn):
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
-        fields = sign_up_fields()
+        fields = settings.SIGN_UP_FIELDS
 
     email = forms.EmailField(label=_('Email'), help_text=_('Required. Enter an existing email address.'))
 

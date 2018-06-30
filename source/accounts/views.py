@@ -90,10 +90,11 @@ class SignUpView(GuestOnlyView, FormView):
     form_class = SignUpForm
 
     def form_valid(self, form):
+        request = self.request
         user = form.save(commit=False)
 
         if settings.DISABLE_USERNAME:
-            # Set temporary username
+            # Set a temporary username
             user.username = get_random_string()
         else:
             user.username = form.cleaned_data['username']
@@ -117,17 +118,17 @@ class SignUpView(GuestOnlyView, FormView):
             act.user = user
             act.save()
 
-            send_activation_email(self.request, user.email, code)
+            send_activation_email(request, user.email, code)
 
             messages.success(
-                self.request, _('You are signed up. To activate the account, follow the link sent to the mail.'))
+                request, _('You are signed up. To activate the account, follow the link sent to the mail.'))
         else:
             raw_password = form.cleaned_data['password1']
 
             user = authenticate(username=user.username, password=raw_password)
-            login(self.request, user)
+            login(request, user)
 
-            messages.success(self.request, _('You are successfully signed up!'))
+            messages.success(request, _('You are successfully signed up!'))
 
         return redirect('index')
 
