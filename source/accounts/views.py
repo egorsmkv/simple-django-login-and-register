@@ -306,6 +306,9 @@ class RestorePasswordConfirmView(BasePasswordResetConfirmView):
     template_name = 'accounts/restore_password_confirm.html'
 
     def form_valid(self, form):
+        # Change the password
+        form.save()
+
         messages.success(self.request, _('Your password has been set. You may go ahead and log in now.'))
 
         return redirect('accounts:log_in')
