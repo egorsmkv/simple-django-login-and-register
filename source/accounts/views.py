@@ -297,6 +297,12 @@ class ChangePasswordView(BasePasswordChangeView):
     template_name = 'accounts/profile/change_password.html'
 
     def form_valid(self, form):
+        # Change the password
+        user = form.save()
+
+        # Re-authentication
+        login(self.request, user)
+
         messages.success(self.request, _('Your password was changed.'))
 
         return redirect('accounts:change_password')
