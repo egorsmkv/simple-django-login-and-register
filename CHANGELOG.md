@@ -1,6 +1,6 @@
 # Change log
 
-## v2.12
+## v2.13
 
 - Updated Django to 2.1.2 version (this version has a vulnerability fix)
 
