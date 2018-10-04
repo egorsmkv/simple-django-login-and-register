@@ -1,5 +1,9 @@
 # Change log
 
+## v2.12
+
+- Updated Django to 2.1.2 version (this version has a vulnerability fix)
+
 ## v2.11
 
 - Added the "remember me" checkbox to the log in page
