@@ -1,5 +1,10 @@
 # Change log
 
+## v2.16
+
+- Updated Django to 2.2.12
+- Fixed a bug with decoding UID on the restore password page (#71)
+
 ## v2.15
 
 - Updated Django to 2.2.11
