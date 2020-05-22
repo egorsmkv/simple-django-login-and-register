@@ -1,5 +1,9 @@
 # Change log
 
+## v2.15
+
+- Updated Django to 2.2.11
+
 ## v2.14
 
 - Updated Django, django-bootstrap4, Bootstrap, popper.js, and jQuery to their latest versions
