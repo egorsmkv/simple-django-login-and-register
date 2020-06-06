@@ -4,5 +4,5 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-Django = "==2.2.12"
+Django = "==2.2.13"
 "django-bootstrap4" = "==1.1.1"
