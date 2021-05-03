@@ -1,5 +1,9 @@
 # Change log
 
+## v2.17
+
+- Updated Django to 2.2.20
+
 ## v2.16
 
 - Updated Django to 2.2.12
