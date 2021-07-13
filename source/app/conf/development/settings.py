@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    'translation_manager',
+    
     # Vendor apps
     'bootstrap4',
 
