@@ -23,7 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-
+    
     # Vendor apps
     'bootstrap4',
 
@@ -116,6 +116,7 @@ LANGUAGES = [
     ('en', _('English')),
     ('ru', _('Russian')),
     ('zh-Hans', _('Simplified Chinese')),
+    ('fr', _('French')),
 ]
 
 TIME_ZONE = 'UTC'
