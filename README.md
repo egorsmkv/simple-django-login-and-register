@@ -43,7 +43,7 @@ cd simple-django-login-and-register
 ## Docker Setup
 ```
 docker build -t simple-django-login-and-register .
-docker run simple-django-login-and-register
+docker run -p 8000:8000 simple-django-login-and-register
 ```
 
 ## Manual Setup
