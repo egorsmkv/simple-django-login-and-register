@@ -31,7 +31,7 @@ An example of Django project with basic user functionality.
 - Multilingual: English, French, Russian, and Simplified Chinese
 
 
-## Installing
+# Installing
 
 ### Clone the project
 
@@ -39,6 +39,14 @@ An example of Django project with basic user functionality.
 git clone https://github.com/egorsmkv/simple-django-login-and-register
 cd simple-django-login-and-register
 ```
+
+## Docker Setup
+```
+docker build -t simple-django-login-and-register .
+docker run simple-django-login-and-register
+```
+
+## Manual Setup
 
 ### Install dependencies & activate virtualenv
 
