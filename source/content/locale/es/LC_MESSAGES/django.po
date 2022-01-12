@@ -1,0 +1,251 @@
+msgid ""
+msgstr ""
+"Report-Msgid-Bugs-To: BELBRUNO Javier <javierbelbruno@gmail.com>\n"
+"POT-Creation-Date: 2022-01-12 13:04-0300\n"
+"PO-Revision-Date: 2022-01-13 13:06-3\n"
+"Last-Translator: BELBRUNO Javier <javierbelbruno@gmail.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+msgid "Change profile"
+msgstr "Cambiar el perfil"
+
+msgid "Change email"
+msgstr "Cambiar el email"
+
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+msgid "Create an account"
+msgstr "Crear una cuenta"
+
+msgid "Change language"
+msgstr "Cambiar idioma"
+
+msgid "Select the language"
+msgstr "Seleccionar el idioma"
+
+msgid "Change"
+msgstr "Cambiar"
+
+msgid "Your username is"
+msgstr "Tu nombre de usuario es"
+
+msgid "You are a guest."
+msgstr "Ha ingresado al sitio como invitado."
+
+msgid "Password"
+msgstr "Contraseña"
+
+msgid "Remember me"
+msgstr "Recordar"
+
+msgid "Username"
+msgstr "Nombre de usuario"
+
+msgid "You entered an invalid username."
+msgstr "Has introducido un nombre de usuario no válido."
+
+msgid "You entered an invalid password."
+msgstr "Has introducido una contraseña no válida."
+
+msgid "This account is not active."
+msgstr "Esta cuenta no está activa."
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "You entered an invalid email address."
+msgstr "Has introducido una dirección de email no válida."
+
+msgid "Email or Username"
+msgstr "E-mail o Nombre de usuario"
+
+msgid "You entered an invalid email address or username."
+msgstr "Has introducido una dirección de email o nombre de usuario no válidos."
+
+msgid "Required. Enter an existing email address."
+msgstr "Requerido. Introduce una dirección de email existente."
+
+msgid "You can not use this email address."
+msgstr "No puedes usar esta dirección de email."
+
+msgid ""
+"Activation code has already been sent. You can request a new code in 24 "
+"hours."
+msgstr ""
+"Ya se ha enviado un código de activación. Puedes pedir un nuevo código en "
+"24 horas."
+
+msgid "Activation code not found."
+msgstr "Código de activación no encontrado."
+
+msgid "This account has already been activated."
+msgstr "Esta cuenta ya ha sido activada."
+
+msgid "First name"
+msgstr "Nombre"
+
+msgid "Last name"
+msgstr "Apellido"
+
+msgid "You can not use this mail."
+msgstr "No puedes usar este email."
+
+msgid "Please enter another email."
+msgstr "Por favor, introduce otro email."
+
+msgid "To activate your profile, please follow this link:"
+msgstr "Para activar tu perfil, por favor sigue este enlace:"
+
+msgid "To change your current email address, please follow the link:"
+msgstr ""
+"Para cambiar tu dirección de email actual, por favor sigue el enlace:"
+""
+
+msgid "Your username is:"
+msgstr "Tu nombre de usuario es:"
+
+msgid ""
+"You received this email because you requested a password reset for your "
+"user account."
+msgstr ""
+"Has recibido este email porque solicitaste restablecer tu "
+"contraseña para tu cuenta de usuario."
+
+msgid "Please, go to the following page and choose a new password:"
+msgstr "Por favor, ve a la siguiente página y elige una nueva contraseña:"
+
+msgid "Forgot your password?"
+msgstr "¿Olvidaste tu contraseña?"
+
+msgid "Forgot your username?"
+msgstr "¿Olvidaste tu nombre de usuario?"
+
+msgid "Resend an activation code"
+msgstr "Reenviar un código de activación"
+
+msgid "Logged out"
+msgstr "Cerrar sesión"
+
+msgid "Thanks for spending some quality time with the site today."
+msgstr "Gracias por haber pasado un timepo de calidad en el sitio hoy."
+
+msgid "Log in again"
+msgstr "Iniciar sesión nuevamente"
+
+msgid "Remind a username"
+msgstr "Recordar un nombre de usuario"
+
+msgid "Next"
+msgstr "Siguiente"
+
+msgid "Restore password"
+msgstr "Restablecer contraseña"
+
+msgid ""
+"Please enter your new password twice so we can verify you typed it in "
+"correctly."
+msgstr ""
+"Por favor, introduce tu nueva contraseña dos veces para que podamos "
+"verificar que has escrito correctamente."
+
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used. Please request a new password reset."
+msgstr ""
+"El enlace para restablecer la contraseña era inválido, posiblemente por "
+"que ya ha sido usado. Por favor, solicita un nuevo restablecimiento de "
+"contraseña."
+
+msgid ""
+"We've emailed you instructions for setting your password, if an account "
+"exists with the email you entered."
+msgstr ""
+"Te hemos enviado instrucciones para establecer tu contraseña, si existe "
+"una cuenta con el email que has introducido."
+
+msgid "You should receive them shortly."
+msgstr "Deberías recibirlos en breve."
+
+msgid ""
+"If you don't receive an email, please make sure you've entered the "
+"address you signed up with, and check your spam folder."
+msgstr ""
+"Si no recibes un email, por favor, asegúrate de haber introducido la "
+"dirección que has usado para registrarte, y comprueba tu carpeta de "
+"spam."
+
+msgid "Create"
+msgstr "Crear"
+
+msgid "Profile activation"
+msgstr "Activación de perfil"
+
+msgid "Your username"
+msgstr "Tu nombre de usuario"
+
+msgid ""
+"You are signed up. To activate the account, follow the link sent to the "
+"mail."
+msgstr ""
+"Has sido registrado. Para activar la cuenta, sigue el enlace enviado al mail."
+""
+
+msgid "You are successfully signed up!"
+msgstr "¡Has sido registrado con éxito!"
+
+msgid "You have successfully activated your account!"
+msgstr "¡Has activado tu cuenta con éxito!"
+
+msgid "A new activation code has been sent to your email address."
+msgstr "Se ha enviado un nuevo código de activación al email que has "
+"introducido."
+
+msgid "Profile data has been successfully updated."
+msgstr "Los datos del perfil se han actualizado correctamente."
+
+msgid ""
+"To complete the change of email address, click on the link sent to it."
+msgstr ""
+"Para completar el cambio de email, haz clic en el enlace enviado a él."
+
+msgid "Email successfully changed."
+msgstr "El Email se cambió correctamente."
+
+msgid "You have successfully changed your email!"
+msgstr "¡Has cambiado tu email correctamente!"
+
+msgid "Your username has been successfully sent to your email."
+msgstr ""
+"Se ha enviado tu nombre de usuario al email que has introducido."
+
+msgid "Your password was changed."
+msgstr "Tu contraseña se ha cambiado."
+
+msgid "Your password has been set. You may go ahead and log in now."
+msgstr ""
+"Tu contraseña ha sido establecida. Puedes ingresar ahora."
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Russian"
+msgstr "Ruso"
+
+msgid "Simplified Chinese"
+msgstr "Chino simplificado"
+
+msgid "French"
+msgstr "Francés"

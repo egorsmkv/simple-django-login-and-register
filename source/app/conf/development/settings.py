@@ -117,6 +117,7 @@ LANGUAGES = [
     ('ru', _('Russian')),
     ('zh-Hans', _('Simplified Chinese')),
     ('fr', _('French')),
+    ('es', _('Spanish')),
 ]
 
 TIME_ZONE = 'UTC'
