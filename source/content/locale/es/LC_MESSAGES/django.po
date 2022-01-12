@@ -232,7 +232,7 @@ msgstr ""
 "Se ha enviado tu nombre de usuario al email que has introducido."
 
 msgid "Your password was changed."
-msgstr "Tu contraseña ha sido cambiada."
+msgstr "Tu contraseña se ha cambiado."
 
 msgid "Your password has been set. You may go ahead and log in now."
 msgstr ""
