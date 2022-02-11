@@ -1,5 +1,13 @@
 # Change log
 
+## v2.19
+
+- Updated Django to 2.2.27
+
+## v2.18
+
+- Added French translation by @tidji31
+
 ## v2.17
 
 - Updated Django to 2.2.20
