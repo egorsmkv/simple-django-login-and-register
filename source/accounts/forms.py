@@ -59,14 +59,8 @@ class SignInViaUsernameForm(SignIn):
         return username
 
 
-class SignInViaEmailForm(SignIn):
+class EmailForm(UserCacheMixin, forms.Form):
     email = forms.EmailField(label=_('Email'))
-
-    @property
-    def field_order(self):
-        if settings.USE_REMEMBER_ME:
-            return ['email', 'password', 'remember_me']
-        return ['email', 'password']
 
     def clean_email(self):
         email = self.cleaned_data['email']
@@ -83,14 +77,16 @@ class SignInViaEmailForm(SignIn):
         return email
 
 
-class SignInViaEmailOrUsernameForm(SignIn):
-    email_or_username = forms.CharField(label=_('Email or Username'))
-
+class SignInViaEmailForm(SignIn, EmailForm):
     @property
     def field_order(self):
         if settings.USE_REMEMBER_ME:
-            return ['email_or_username', 'password', 'remember_me']
-        return ['email_or_username', 'password']
+            return ['email', 'password', 'remember_me']
+        return ['email', 'password']
+
+
+class EmailOrUsernameForm(UserCacheMixin, forms.Form):
+    email_or_username = forms.CharField(label=_('Email or Username'))
 
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data['email_or_username']
@@ -105,6 +101,14 @@ class SignInViaEmailOrUsernameForm(SignIn):
         self.user_cache = user
 
         return email_or_username
+
+
+class SignInViaEmailOrUsernameForm(SignIn, EmailOrUsernameForm):
+    @property
+    def field_order(self):
+        if settings.USE_REMEMBER_ME:
+            return ['email_or_username', 'password', 'remember_me']
+        return ['email_or_username', 'password']
 
 
 class SignUpForm(UserCreationForm):
@@ -176,40 +180,12 @@ class ResendActivationCodeViaEmailForm(UserCacheMixin, forms.Form):
         return email
 
 
-class RestorePasswordForm(UserCacheMixin, forms.Form):
-    email = forms.EmailField(label=_('Email'))
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-
-        user = User.objects.filter(email__iexact=email).first()
-        if not user:
-            raise ValidationError(_('You entered an invalid email address.'))
-
-        if not user.is_active:
-            raise ValidationError(_('This account is not active.'))
-
-        self.user_cache = user
-
-        return email
+class RestorePasswordForm(EmailForm):
+    pass
 
 
-class RestorePasswordViaEmailOrUsernameForm(UserCacheMixin, forms.Form):
-    email_or_username = forms.CharField(label=_('Email or Username'))
-
-    def clean_email_or_username(self):
-        email_or_username = self.cleaned_data['email_or_username']
-
-        user = User.objects.filter(Q(username=email_or_username) | Q(email__iexact=email_or_username)).first()
-        if not user:
-            raise ValidationError(_('You entered an invalid email address or username.'))
-
-        if not user.is_active:
-            raise ValidationError(_('This account is not active.'))
-
-        self.user_cache = user
-
-        return email_or_username
+class RestorePasswordViaEmailOrUsernameForm(EmailOrUsernameForm):
+    pass
 
 
 class ChangeProfileForm(forms.Form):
@@ -237,19 +213,5 @@ class ChangeEmailForm(forms.Form):
         return email
 
 
-class RemindUsernameForm(UserCacheMixin, forms.Form):
-    email = forms.EmailField(label=_('Email'))
-
-    def clean_email(self):
-        email = self.cleaned_data['email']
-
-        user = User.objects.filter(email__iexact=email).first()
-        if not user:
-            raise ValidationError(_('You entered an invalid email address.'))
-
-        if not user.is_active:
-            raise ValidationError(_('This account is not active.'))
-
-        self.user_cache = user
-
-        return email
+class RemindUsernameForm(EmailForm):
+    pass
