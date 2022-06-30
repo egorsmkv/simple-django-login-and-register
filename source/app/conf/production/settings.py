@@ -1,6 +1,6 @@
 import os
 from os.path import dirname
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = dirname(dirname(dirname(dirname(os.path.abspath(__file__)))))
 CONTENT_DIR = os.path.join(BASE_DIR, 'content')
@@ -139,3 +139,5 @@ LOCALE_PATHS = [
 SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
 if DISABLE_USERNAME:
     SIGN_UP_FIELDS = ['first_name', 'last_name', 'email', 'password1', 'password2']
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

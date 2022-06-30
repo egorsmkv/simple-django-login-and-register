@@ -1,6 +1,6 @@
 import os
 import warnings
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from os.path import dirname
 
 warnings.simplefilter('error', DeprecationWarning)
@@ -136,3 +136,5 @@ STATICFILES_DIRS = [
 LOCALE_PATHS = [
     os.path.join(CONTENT_DIR, 'locale')
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
