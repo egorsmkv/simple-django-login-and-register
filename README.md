@@ -1,4 +1,5 @@
-# Simple Django Login and Registration
+onar
+
 
 An example of Django project with basic user functionality.
 
