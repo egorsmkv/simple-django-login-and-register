@@ -30,6 +30,8 @@ An example of Django project with basic user functionality.
 - Change profile
 - Multilingual: English, French, Russian, Simplified Chinese and Spanish
 
+If you need dynamic URLs with the language code, check out https://github.com/egorsmkv/simple-django-login-and-register-dynamic-lang
+
 ## Installing
 
 ### Clone the project
