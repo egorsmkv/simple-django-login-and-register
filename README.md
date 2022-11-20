@@ -36,14 +36,14 @@ If you need dynamic URLs with the language code, check out https://github.com/eg
 
 ### Clone the project
 
-```
+```bash
 git clone https://github.com/egorsmkv/simple-django-login-and-register
 cd simple-django-login-and-register
 ```
 
 ### Install dependencies & activate virtualenv
 
-```
+```bash
 pip install pipenv
 
 pipenv install
@@ -58,13 +58,13 @@ pipenv shell
 
 ### Apply migrations
 
-```
+```bash
 python source/manage.py migrate
 ```
 
 ### Collect static files (only on a production server)
 
-```
+```bash
 python source/manage.py collectstatic
 ```
 
@@ -74,6 +74,6 @@ python source/manage.py collectstatic
 
 Just run this command:
 
-```
+```bash
 python source/manage.py runserver
 ```
