@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7644f2abe70bb77d4ac7fb4df753a1e19ed5c869277bcda140b77e9f28df8c56"
+            "sha256": "0dfcafc667c25f648c075515a2f06e934b8bd087f96e97a8699c8c8314dacf8f"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -16,11 +16,11 @@
     "default": {
         "asgiref": {
             "hashes": [
-                "sha256:1d2880b792ae8757289136f1db2b7b99100ce959b2aa57fd69dab783d05afac4",
-                "sha256:4a29362a6acebe09bf1d6640db38c1dc3d9217c68e6f9f6204d72667fc19a424"
+                "sha256:71e68008da809b957b7ee4b43dbccff33d1b23519fb8344e33f049897077afac",
+                "sha256:9567dfe7bd8d3c8c892227827c41cce860b368104c3431da67a0c5a65a949506"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==3.5.2"
+            "version": "==3.6.0"
         },
         "beautifulsoup4": {
             "hashes": [
@@ -32,19 +32,19 @@
         },
         "django": {
             "hashes": [
-                "sha256:678bbfc8604eb246ed54e2063f0765f13b321a50526bdc8cb1f943eda7fa31f1",
-                "sha256:6b1de6886cae14c7c44d188f580f8ba8da05750f544c80ae5ad43375ab293cd5"
+                "sha256:0b223bfa55511f950ff741983d408d78d772351284c75e9f77d2b830b6b4d148",
+                "sha256:d38a4e108d2386cb9637da66a82dc8d0733caede4c83c4afdbda78af4214211b"
             ],
             "index": "pypi",
-            "version": "==4.1.3"
+            "version": "==4.1.4"
         },
         "django-bootstrap4": {
             "hashes": [
-                "sha256:57bcbce53530ffd57a1c8bda74c8f3b56c859e085fb1f52a0e3e3a4f982f0960",
-                "sha256:ad00ff90e6bd002155516b32047c40df15f533fac49da66d8882995adcb13552"
+                "sha256:751a7b4196e778286cc5eaa946d1e04741ea10d0b62d2762500f941ef9075dbf",
+                "sha256:c2c09d0ad93c96e85e15e5541089aa567fd51257cf80f142ea5b84bbd34dc18e"
             ],
             "index": "pypi",
-            "version": "==22.2"
+            "version": "==22.3"
         },
         "soupsieve": {
             "hashes": [
