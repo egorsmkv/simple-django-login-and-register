@@ -44,10 +44,10 @@ cd simple-django-login-and-register
 ### Install dependencies & activate virtualenv
 
 ```bash
-pip install pipenv
+pip install poetry
 
-pipenv install
-pipenv shell
+poetry install
+poetry shell
 ```
 
 ### Configure the settings (connection to the database, connection to an SMTP server, and other options)
