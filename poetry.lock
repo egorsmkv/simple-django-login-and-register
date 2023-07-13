@@ -2,14 +2,17 @@
 
 [[package]]
 name = "asgiref"
-version = "3.6.0"
+version = "3.7.2"
 description = "ASGI specs, helper code, and adapters"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "asgiref-3.6.0-py3-none-any.whl", hash = "sha256:71e68008da809b957b7ee4b43dbccff33d1b23519fb8344e33f049897077afac"},
-    {file = "asgiref-3.6.0.tar.gz", hash = "sha256:9567dfe7bd8d3c8c892227827c41cce860b368104c3431da67a0c5a65a949506"},
+    {file = "asgiref-3.7.2-py3-none-any.whl", hash = "sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e"},
+    {file = "asgiref-3.7.2.tar.gz", hash = "sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed"},
 ]
+
+[package.dependencies]
+typing-extensions = {version = ">=4", markers = "python_version < \"3.11\""}
 
 [package.extras]
 tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
@@ -44,13 +47,13 @@ tzdata = ["tzdata"]
 
 [[package]]
 name = "beautifulsoup4"
-version = "4.11.1"
+version = "4.12.2"
 description = "Screen-scraping library"
 optional = false
 python-versions = ">=3.6.0"
 files = [
-    {file = "beautifulsoup4-4.11.1-py3-none-any.whl", hash = "sha256:58d5c3d29f5a36ffeb94f02f0d786cd53014cf9b3b3951d42e0080d8a9498d30"},
-    {file = "beautifulsoup4-4.11.1.tar.gz", hash = "sha256:ad9aa55b65ef2808eb405f46cf74df7fcb7044d5cbc26487f96eb2ef2e436693"},
+    {file = "beautifulsoup4-4.12.2-py3-none-any.whl", hash = "sha256:bd2520ca0d9d7d12694a53d44ac482d181b4ec1888909b035a3dbf40d0f57d4a"},
+    {file = "beautifulsoup4-4.12.2.tar.gz", hash = "sha256:492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da"},
 ]
 
 [package.dependencies]
@@ -62,19 +65,19 @@ lxml = ["lxml"]
 
 [[package]]
 name = "django"
-version = "4.1.10"
+version = "4.2.3"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Django-4.1.10-py3-none-any.whl", hash = "sha256:26d0260c2fb8121009e62ffc548b2398dea2522b6454208a852fb0ef264c206c"},
-    {file = "Django-4.1.10.tar.gz", hash = "sha256:56343019a9fd839e2e5bf203daf45f25af79d5bffa4c71d56eae4f4404d82ade"},
+    {file = "Django-4.2.3-py3-none-any.whl", hash = "sha256:f7c7852a5ac5a3da5a8d5b35cc6168f31b605971441798dac845f17ca8028039"},
+    {file = "Django-4.2.3.tar.gz", hash = "sha256:45a747e1c5b3d6df1b141b1481e193b033fd1fdbda3ff52677dc81afdaacbaed"},
 ]
 
 [package.dependencies]
-asgiref = ">=3.5.2,<4"
+asgiref = ">=3.6.0,<4"
 "backports.zoneinfo" = {version = "*", markers = "python_version < \"3.9\""}
-sqlparse = ">=0.2.2"
+sqlparse = ">=0.3.1"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
 [package.extras]
@@ -83,28 +86,28 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-bootstrap4"
-version = "22.3"
+version = "23.2"
 description = "Bootstrap 4 for Django"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "django-bootstrap4-22.3.tar.gz", hash = "sha256:751a7b4196e778286cc5eaa946d1e04741ea10d0b62d2762500f941ef9075dbf"},
-    {file = "django_bootstrap4-22.3-py3-none-any.whl", hash = "sha256:c2c09d0ad93c96e85e15e5541089aa567fd51257cf80f142ea5b84bbd34dc18e"},
+    {file = "django_bootstrap4-23.2-py3-none-any.whl", hash = "sha256:6c895cdda58de1360bf82cc9e31014ad158dad680198ac8366ca33c19efa972f"},
+    {file = "django_bootstrap4-23.2.tar.gz", hash = "sha256:6b5080a4bce80fa666ac5ce5d4c77ad6fc3c0984d4257a0060d4077f515f62e5"},
 ]
 
 [package.dependencies]
 beautifulsoup4 = ">=4.8.0"
-Django = ">=3.2"
+django = ">=3.2"
 
 [[package]]
 name = "soupsieve"
-version = "2.3.2.post1"
+version = "2.4.1"
 description = "A modern CSS selector implementation for Beautiful Soup."
 optional = false
-python-versions = ">=3.6"
+python-versions = ">=3.7"
 files = [
-    {file = "soupsieve-2.3.2.post1-py3-none-any.whl", hash = "sha256:3b2503d3c7084a42b1ebd08116e5f81aadfaea95863628c80a3b774a11b7c759"},
-    {file = "soupsieve-2.3.2.post1.tar.gz", hash = "sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d"},
+    {file = "soupsieve-2.4.1-py3-none-any.whl", hash = "sha256:1c1bfee6819544a3447586c889157365a27e10d88cde3ad3da0cf0ddf646feb8"},
+    {file = "soupsieve-2.4.1.tar.gz", hash = "sha256:89d12b2d5dfcd2c9e8c22326da9d9aa9cb3dfab0a83a024f05704076ee8d35ea"},
 ]
 
 [[package]]
@@ -124,17 +127,28 @@ doc = ["sphinx"]
 test = ["pytest", "pytest-cov"]
 
 [[package]]
+name = "typing-extensions"
+version = "4.7.1"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "typing_extensions-4.7.1-py3-none-any.whl", hash = "sha256:440d5dd3af93b060174bf433bccd69b0babc3b15b1a8dca43789fd7f61514b36"},
+    {file = "typing_extensions-4.7.1.tar.gz", hash = "sha256:b75ddc264f0ba5615db7ba217daeb99701ad295353c45f9e95963337ceeeffb2"},
+]
+
+[[package]]
 name = "tzdata"
-version = "2022.7"
+version = "2023.3"
 description = "Provider of IANA time zone data"
 optional = false
 python-versions = ">=2"
 files = [
-    {file = "tzdata-2022.7-py2.py3-none-any.whl", hash = "sha256:2b88858b0e3120792a3c0635c23daf36a7d7eeeca657c323da299d2094402a0d"},
-    {file = "tzdata-2022.7.tar.gz", hash = "sha256:fe5f866eddd8b96e9fcba978f8e503c909b19ea7efda11e52e39494bad3a7bfa"},
+    {file = "tzdata-2023.3-py2.py3-none-any.whl", hash = "sha256:7e65763eef3120314099b6939b5546db7adce1e7d6f2e179e3df563c70511eda"},
+    {file = "tzdata-2023.3.tar.gz", hash = "sha256:11ef1e08e54acb0d4f95bdb1be05da659673de4acbd21bf9c69e94cc5e907a3a"},
 ]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8"
-content-hash = "a2efcf3ef7517daaa2ed45ee37cdcaf7c6721503050d2884cdb43f49e56a3681"
+content-hash = "bfa1a16277a3d0bdec3fb5ffb7450d69640221ad16819d802b3b2d485c31ba3f"

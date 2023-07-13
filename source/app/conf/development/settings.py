@@ -110,7 +110,6 @@ if DISABLE_USERNAME:
 MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
 
 USE_I18N = True
-USE_L10N = True
 LANGUAGE_CODE = 'en'
 LANGUAGES = [
     ('en', _('English')),
