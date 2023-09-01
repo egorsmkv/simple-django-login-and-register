@@ -1,8 +1,7 @@
 import os
 
-IS_PRODUCTION = os.environ.get('IS_PRODUCTION')
+path = "/home/danielostos21/marygourmet"
+if path not in sys.path:
+    sys.path.insert(0, path)
 
-if IS_PRODUCTION:
-    from .conf.production.settings import *
-else:
-    from .conf.development.settings import *
+os.environ["DJANGO_SETTINGS_MODULE"] = "marygourmet.settings"
