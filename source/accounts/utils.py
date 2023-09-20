@@ -1,9 +1,12 @@
+import request  # unused import
+
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
+import json # bad import spot
 
 def send_mail(to, template, context):
     html_content = render_to_string(f'accounts/emails/{template}.html', context)
@@ -49,3 +52,44 @@ def send_forgotten_username_email(email, username):
     }
 
     send_mail(email, 'forgotten_username', context)
+
+
+def test_bad_function_NAME(a, b):
+    # test bad function name
+    return a + b
+
+
+def test_function_contains_bad_syntax(a, b):
+    # this function contains bad syntax, bad parameter name, and unused parameter name
+    res = a+b
+    reSult = res + a
+    res2 = a + b
+    return reSult + res
+
+def test_bad_spacing_practice(a,b):
+    # this function is full of bad spacing
+    test1=a+b
+    test2 = a+b
+    test3 = a +b
+    return   test1 + test2 + test3
+
+
+def test_function_imported_but_unused(a, b):
+    # test this function is not used, not imported anywhere
+    return a + b
+
+
+def test_function_unused(a, b):
+    # test this function is not used, not imported anywhere
+    return a + b
+
+
+def test_function_not_used_directly(a, b):
+    # this function will be imported and used but not directly
+    return a + b
+
+def test_function_possibly_not_return(a, b):
+    if a >= 0:
+        return a
+    elif b >= 0:
+        return b

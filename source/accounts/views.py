@@ -1,3 +1,5 @@
+from typing import Any
+from django import http
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib.auth.tokens import default_token_generator
@@ -20,7 +22,7 @@ from django.views.generic import View, FormView
 from django.conf import settings
 
 from .utils import (
-    send_activation_email, send_reset_password_email, send_forgotten_username_email, send_activation_change_email,
+    send_activation_email, send_reset_password_email, send_forgotten_username_email, send_activation_change_email, test_bad_function_NAME, test_function_contains_bad_syntax, test_bad_spacing_practice, test_function_imported_but_unused, test_function_not_used_directly, test_function_possibly_not_return
 )
 from .forms import (
     SignInViaUsernameForm, SignInViaEmailForm, SignInViaEmailOrUsernameForm, SignUpForm,
@@ -28,6 +30,27 @@ from .forms import (
     ResendActivationCodeForm, ResendActivationCodeViaEmailForm, ChangeProfileForm, ChangeEmailForm,
 )
 from .models import Activation
+
+
+class Calculate_numberView(View):
+    def dispatch(self, request, *args, **kwargs):
+        if request.user_is_authenticated:
+            a = 1
+            b = 2
+            function_list = [
+                test_bad_function_NAME,
+                test_function_contains_bad_syntax,
+                test_bad_spacing_practice,
+                'test_function_not_used_directly',
+                test_function_possibly_not_return
+            ]
+            for l in function_list():
+                if isinstance(l, str):
+                    eval(l)(a, b)
+                else:
+                    l(a, b)
+
+        return super().dispatch(request, *args, **kwargs)
 
 
 class GuestOnlyView(View):
