@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
-"Report-Msgid-Bugs-To: BELBRUNO Javier <javierbelbruno@gmail.com>\n"
-"POT-Creation-Date: 2022-01-12 13:04-0300\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-10-04 13:03+0000\n"
 "PO-Revision-Date: 2022-01-13 13:06-3\n"
 "Last-Translator: BELBRUNO Javier <javierbelbruno@gmail.com>\n"
 "Language: es\n"
@@ -9,151 +9,203 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Home"
-msgstr "Inicio"
-
-msgid "Change password"
-msgstr "Cambiar contraseña"
-
-msgid "Change profile"
-msgstr "Cambiar el perfil"
-
-msgid "Change email"
-msgstr "Cambiar el email"
-
-msgid "Log out"
-msgstr "Cerrar sesión"
-
-msgid "Log in"
-msgstr "Iniciar sesión"
-
-msgid "Create an account"
-msgstr "Crear una cuenta"
-
-msgid "Change language"
-msgstr "Cambiar idioma"
-
-msgid "Select the language"
-msgstr "Seleccionar el idioma"
-
-msgid "Change"
-msgstr "Cambiar"
-
-msgid "Your username is"
-msgstr "Tu nombre de usuario es"
-
-msgid "You are a guest."
-msgstr "Ha ingresado al sitio como invitado."
-
+#: source/accounts/forms.py:18
 msgid "Password"
 msgstr "Contraseña"
 
+#: source/accounts/forms.py:24
 msgid "Remember me"
 msgstr "Recordar"
 
-msgid "Username"
-msgstr "Nombre de usuario"
-
-msgid "You entered an invalid username."
-msgstr "Has introducido un nombre de usuario no válido."
-
+#: source/accounts/forms.py:33
 msgid "You entered an invalid password."
 msgstr "Has introducido una contraseña no válida."
 
+#: source/accounts/forms.py:39
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: source/accounts/forms.py:52
+msgid "You entered an invalid username."
+msgstr "Has introducido un nombre de usuario no válido."
+
+#: source/accounts/forms.py:55 source/accounts/forms.py:73
+#: source/accounts/forms.py:99
 msgid "This account is not active."
 msgstr "Esta cuenta no está activa."
 
+#: source/accounts/forms.py:63 source/accounts/forms.py:119
+#: source/accounts/forms.py:158 source/accounts/forms.py:197
 msgid "Email"
 msgstr "E-mail"
 
+#: source/accounts/forms.py:70 source/accounts/forms.py:165
 msgid "You entered an invalid email address."
 msgstr "Has introducido una dirección de email no válida."
 
+#: source/accounts/forms.py:89 source/accounts/forms.py:132
 msgid "Email or Username"
 msgstr "E-mail o Nombre de usuario"
 
+#: source/accounts/forms.py:96 source/accounts/forms.py:139
 msgid "You entered an invalid email address or username."
 msgstr "Has introducido una dirección de email o nombre de usuario no válidos."
 
+#: source/accounts/forms.py:119
 msgid "Required. Enter an existing email address."
 msgstr "Requerido. Introduce una dirección de email existente."
 
+#: source/accounts/forms.py:126
 msgid "You can not use this email address."
 msgstr "No puedes usar esta dirección de email."
 
+#: source/accounts/forms.py:142 source/accounts/forms.py:168
+msgid "This account has already been activated."
+msgstr "Esta cuenta ya ha sido activada."
+
+#: source/accounts/forms.py:146 source/accounts/forms.py:172
+msgid "Activation code not found."
+msgstr "Código de activación no encontrado."
+
+#: source/accounts/forms.py:150 source/accounts/forms.py:176
 msgid ""
 "Activation code has already been sent. You can request a new code in 24 "
 "hours."
 msgstr ""
-"Ya se ha enviado un código de activación. Puedes pedir un nuevo código en "
-"24 horas."
+"Ya se ha enviado un código de activación. Puedes pedir un nuevo código en 24 "
+"horas."
 
-msgid "Activation code not found."
-msgstr "Código de activación no encontrado."
-
-msgid "This account has already been activated."
-msgstr "Esta cuenta ya ha sido activada."
-
+#: source/accounts/forms.py:192
 msgid "First name"
 msgstr "Nombre"
 
+#: source/accounts/forms.py:193
 msgid "Last name"
 msgstr "Apellido"
 
-msgid "You can not use this mail."
-msgstr "No puedes usar este email."
-
+#: source/accounts/forms.py:207
 msgid "Please enter another email."
 msgstr "Por favor, introduce otro email."
 
+#: source/accounts/forms.py:211
+msgid "You can not use this mail."
+msgstr "No puedes usar este email."
+
+#: source/accounts/templates/accounts/emails/activate_profile.html:15
+#: source/accounts/templates/accounts/emails/activate_profile.txt:3
 msgid "To activate your profile, please follow this link:"
 msgstr "Para activar tu perfil, por favor sigue este enlace:"
 
+#: source/accounts/templates/accounts/emails/change_email.html:15
+#: source/accounts/templates/accounts/emails/change_email.txt:3
 msgid "To change your current email address, please follow the link:"
-msgstr ""
-"Para cambiar tu dirección de email actual, por favor sigue el enlace:"
-""
+msgstr "Para cambiar tu dirección de email actual, por favor sigue el enlace:"
 
+#: source/accounts/templates/accounts/emails/forgotten_username.html:15
+#: source/accounts/templates/accounts/emails/forgotten_username.txt:3
 msgid "Your username is:"
 msgstr "Tu nombre de usuario es:"
 
+#: source/accounts/templates/accounts/emails/restore_password_email.html:15
+#: source/accounts/templates/accounts/emails/restore_password_email.txt:3
 msgid ""
-"You received this email because you requested a password reset for your "
-"user account."
+"You received this email because you requested a password reset for your user "
+"account."
 msgstr ""
-"Has recibido este email porque solicitaste restablecer tu "
-"contraseña para tu cuenta de usuario."
+"Has recibido este email porque solicitaste restablecer tu contraseña para tu "
+"cuenta de usuario."
 
+#: source/accounts/templates/accounts/emails/restore_password_email.html:19
+#: source/accounts/templates/accounts/emails/restore_password_email.txt:5
 msgid "Please, go to the following page and choose a new password:"
 msgstr "Por favor, ve a la siguiente página y elige una nueva contraseña:"
 
+#: source/accounts/templates/accounts/log_in.html:8
+#: source/accounts/templates/accounts/log_in.html:15
+#: source/accounts/templates/accounts/remind_username.html:23
+#: source/accounts/templates/accounts/resend_activation_code.html:23
+#: source/accounts/templates/accounts/restore_password.html:23
+#: source/content/templates/layouts/default/page.html:58
+msgid "Log in"
+msgstr "Iniciar sesión"
+
+#: source/accounts/templates/accounts/log_in.html:23
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu contraseña?"
 
+#: source/accounts/templates/accounts/log_in.html:26
 msgid "Forgot your username?"
 msgstr "¿Olvidaste tu nombre de usuario?"
 
+#: source/accounts/templates/accounts/log_in.html:29
+#: source/accounts/templates/accounts/resend_activation_code.html:8
 msgid "Resend an activation code"
 msgstr "Reenviar un código de activación"
 
+#: source/accounts/templates/accounts/log_out.html:7
 msgid "Logged out"
 msgstr "Cerrar sesión"
 
+#: source/accounts/templates/accounts/log_out.html:10
 msgid "Thanks for spending some quality time with the site today."
 msgstr "Gracias por haber pasado un timepo de calidad en el sitio hoy."
 
+#: source/accounts/templates/accounts/log_out.html:14
 msgid "Log in again"
 msgstr "Iniciar sesión nuevamente"
 
+#: source/accounts/templates/accounts/log_out_confirm.html:7
+#: source/accounts/templates/accounts/log_out_confirm.html:15
+#: source/content/templates/layouts/default/page.html:54
+msgid "Log out"
+msgstr "Cerrar sesión"
+
+#: source/accounts/templates/accounts/log_out_confirm.html:10
+msgid "Confirm this action:"
+msgstr "Confirma esta acción:"
+
+#: source/accounts/templates/accounts/profile/change_email.html:8
+#: source/accounts/utils.py:28
+#: source/content/templates/layouts/default/page.html:51
+msgid "Change email"
+msgstr "Cambiar el email"
+
+#: source/accounts/templates/accounts/profile/change_email.html:15
+#: source/accounts/templates/accounts/profile/change_password.html:15
+#: source/accounts/templates/accounts/profile/change_profile.html:15
+#: source/accounts/templates/accounts/restore_password_confirm.html:21
+#: source/content/templates/main/change_language.html:29
+msgid "Change"
+msgstr "Cambiar"
+
+#: source/accounts/templates/accounts/profile/change_password.html:8
+#: source/content/templates/layouts/default/page.html:45
+msgid "Change password"
+msgstr "Cambiar contraseña"
+
+#: source/accounts/templates/accounts/profile/change_profile.html:8
+#: source/content/templates/layouts/default/page.html:48
+msgid "Change profile"
+msgstr "Cambiar el perfil"
+
+#: source/accounts/templates/accounts/remind_username.html:8
 msgid "Remind a username"
 msgstr "Recordar un nombre de usuario"
 
+#: source/accounts/templates/accounts/remind_username.html:15
+#: source/accounts/templates/accounts/resend_activation_code.html:15
+#: source/accounts/templates/accounts/restore_password.html:15
 msgid "Next"
 msgstr "Siguiente"
 
+#: source/accounts/templates/accounts/restore_password.html:8
+#: source/accounts/templates/accounts/restore_password_confirm.html:8
+#: source/accounts/templates/accounts/restore_password_done.html:7
+#: source/accounts/utils.py:37
 msgid "Restore password"
 msgstr "Restablecer contraseña"
 
+#: source/accounts/templates/accounts/restore_password_confirm.html:13
 msgid ""
 "Please enter your new password twice so we can verify you typed it in "
 "correctly."
@@ -161,91 +213,145 @@ msgstr ""
 "Por favor, introduce tu nueva contraseña dos veces para que podamos "
 "verificar que has escrito correctamente."
 
+#: source/accounts/templates/accounts/restore_password_confirm.html:28
 msgid ""
 "The password reset link was invalid, possibly because it has already been "
 "used. Please request a new password reset."
 msgstr ""
-"El enlace para restablecer la contraseña era inválido, posiblemente por "
-"que ya ha sido usado. Por favor, solicita un nuevo restablecimiento de "
+"El enlace para restablecer la contraseña era inválido, posiblemente por que "
+"ya ha sido usado. Por favor, solicita un nuevo restablecimiento de "
 "contraseña."
 
+#: source/accounts/templates/accounts/restore_password_done.html:10
 msgid ""
 "We've emailed you instructions for setting your password, if an account "
 "exists with the email you entered."
 msgstr ""
-"Te hemos enviado instrucciones para establecer tu contraseña, si existe "
-"una cuenta con el email que has introducido."
+"Te hemos enviado instrucciones para establecer tu contraseña, si existe una "
+"cuenta con el email que has introducido."
 
+#: source/accounts/templates/accounts/restore_password_done.html:11
 msgid "You should receive them shortly."
 msgstr "Deberías recibirlos en breve."
 
+#: source/accounts/templates/accounts/restore_password_done.html:15
 msgid ""
-"If you don't receive an email, please make sure you've entered the "
-"address you signed up with, and check your spam folder."
+"If you don't receive an email, please make sure you've entered the address "
+"you signed up with, and check your spam folder."
 msgstr ""
 "Si no recibes un email, por favor, asegúrate de haber introducido la "
-"dirección que has usado para registrarte, y comprueba tu carpeta de "
-"spam."
+"dirección que has usado para registrarte, y comprueba tu carpeta de spam."
 
+#: source/accounts/templates/accounts/sign_up.html:8
+#: source/content/templates/layouts/default/page.html:61
+msgid "Create an account"
+msgstr "Crear una cuenta"
+
+#: source/accounts/templates/accounts/sign_up.html:15
 msgid "Create"
 msgstr "Crear"
 
+#: source/accounts/utils.py:19
 msgid "Profile activation"
 msgstr "Activación de perfil"
 
+#: source/accounts/utils.py:47
 msgid "Your username"
 msgstr "Tu nombre de usuario"
 
+#: source/accounts/views.py:125
 msgid ""
-"You are signed up. To activate the account, follow the link sent to the "
-"mail."
+"You are signed up. To activate the account, follow the link sent to the mail."
 msgstr ""
 "Has sido registrado. Para activar la cuenta, sigue el enlace enviado al mail."
-""
 
+#: source/accounts/views.py:132
 msgid "You are successfully signed up!"
 msgstr "¡Has sido registrado con éxito!"
 
+#: source/accounts/views.py:150
 msgid "You have successfully activated your account!"
 msgstr "¡Has activado tu cuenta con éxito!"
 
+#: source/accounts/views.py:180
 msgid "A new activation code has been sent to your email address."
-msgstr "Se ha enviado un nuevo código de activación al email que has "
-"introducido."
+msgstr ""
+"Se ha enviado un nuevo código de activación al email que has introducido."
 
+#: source/accounts/views.py:225
 msgid "Profile data has been successfully updated."
 msgstr "Los datos del perfil se han actualizado correctamente."
 
-msgid ""
-"To complete the change of email address, click on the link sent to it."
-msgstr ""
-"Para completar el cambio de email, haz clic en el enlace enviado a él."
+#: source/accounts/views.py:259
+msgid "To complete the change of email address, click on the link sent to it."
+msgstr "Para completar el cambio de email, haz clic en el enlace enviado a él."
 
+#: source/accounts/views.py:264
 msgid "Email successfully changed."
 msgstr "El Email se cambió correctamente."
 
+#: source/accounts/views.py:282
 msgid "You have successfully changed your email!"
 msgstr "¡Has cambiado tu email correctamente!"
 
+#: source/accounts/views.py:295
 msgid "Your username has been successfully sent to your email."
-msgstr ""
-"Se ha enviado tu nombre de usuario al email que has introducido."
+msgstr "Se ha enviado tu nombre de usuario al email que has introducido."
 
+#: source/accounts/views.py:310
 msgid "Your password was changed."
 msgstr "Tu contraseña se ha cambiado."
 
+#: source/accounts/views.py:322
 msgid "Your password has been set. You may go ahead and log in now."
-msgstr ""
-"Tu contraseña ha sido establecida. Puedes ingresar ahora."
+msgstr "Tu contraseña ha sido establecida. Puedes ingresar ahora."
 
+#: source/app/conf/development/settings.py:115
+#: source/app/conf/production/settings.py:114
 msgid "English"
 msgstr "Inglés"
 
+#: source/app/conf/development/settings.py:116
+#: source/app/conf/production/settings.py:115
 msgid "Russian"
 msgstr "Ruso"
 
+#: source/app/conf/development/settings.py:117
+#: source/app/conf/production/settings.py:116
 msgid "Simplified Chinese"
 msgstr "Chino simplificado"
 
+#: source/app/conf/development/settings.py:118
+#: source/app/conf/production/settings.py:117
 msgid "French"
 msgstr "Francés"
+
+#: source/app/conf/development/settings.py:119
+#: source/app/conf/production/settings.py:118
+msgid "Spanish"
+msgstr "Española"
+
+#: source/content/templates/layouts/default/page.html:30
+msgid "Home"
+msgstr "Inicio"
+
+#: source/content/templates/layouts/default/page.html:41
+msgid "Django administration"
+msgstr "Administración de Django"
+
+#: source/content/templates/layouts/default/page.html:68
+#: source/content/templates/main/change_language.html:10
+msgid "Change language"
+msgstr "Cambiar idioma"
+
+#: source/content/templates/main/change_language.html:19
+msgid "Select the language"
+msgstr "Seleccionar el idioma"
+
+#: source/content/templates/main/index.html:9
+msgid "Your username is"
+msgstr "Tu nombre de usuario es"
+
+#: source/content/templates/main/index.html:13
+msgid "You are a guest."
+msgstr "Ha ingresado al sitio como invitado."

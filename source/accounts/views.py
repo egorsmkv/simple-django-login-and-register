@@ -6,6 +6,7 @@ from django.contrib.auth.views import (
     LogoutView as BaseLogoutView, PasswordChangeView as BasePasswordChangeView,
     PasswordResetDoneView as BasePasswordResetDoneView, PasswordResetConfirmView as BasePasswordResetConfirmView,
 )
+from django.views.generic.base import TemplateView
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
@@ -325,6 +326,10 @@ class RestorePasswordConfirmView(BasePasswordResetConfirmView):
 
 class RestorePasswordDoneView(BasePasswordResetDoneView):
     template_name = 'accounts/restore_password_done.html'
+
+
+class LogOutConfirmView(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/log_out_confirm.html'
 
 
 class LogOutView(LoginRequiredMixin, BaseLogoutView):
