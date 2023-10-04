@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simple-django-login-and-register"
-version = "3.6"
+version = "3.8"
 description = "An example of Django project with basic user functionality."
 readme = "README.md"
 authors = ["Yehor Smoliakov <yehors+gh@ukr.net>"]
@@ -15,7 +15,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-Django = "==4.2.3"
+Django = "==4.2.5"
 django-bootstrap4 = "==23.2"
 
 [build-system]
