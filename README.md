@@ -46,7 +46,7 @@ cd simple-django-login-and-register
 #### Create a virtualenv using conda (optional)
 
 ```bash
-conda create -n simple-django-login-and-register python=3.8
+conda create -n simple-django-login-and-register python=3.11
 
 conda activate simple-django-login-and-register
 ```
