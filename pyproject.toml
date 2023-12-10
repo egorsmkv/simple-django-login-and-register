@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "simple-django-login-and-register"
-version = "3.11"
+version = "4.0"
 description = "An example of Django project with basic user functionality."
 readme = "README.md"
 authors = ["Yehor Smoliakov <yehors+gh@ukr.net>"]
