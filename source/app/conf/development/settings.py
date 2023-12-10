@@ -1,12 +1,12 @@
-import os
 import warnings
+from os.path import dirname, abspath, join
+
 from django.utils.translation import gettext_lazy as _
-from os.path import dirname
 
 warnings.simplefilter('error', DeprecationWarning)
 
-BASE_DIR = dirname(dirname(dirname(dirname(os.path.abspath(__file__)))))
-CONTENT_DIR = os.path.join(BASE_DIR, 'content')
+BASE_DIR = dirname(dirname(dirname(dirname(abspath(__file__)))))
+CONTENT_DIR = join(BASE_DIR, 'content')
 
 SECRET_KEY = 'NhfTvayqggTBPswCXXhWaN69HuglgZIkM'
 
@@ -49,7 +49,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(CONTENT_DIR, 'templates'),
+            join(CONTENT_DIR, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -66,14 +66,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'app.wsgi.application'
 
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(CONTENT_DIR, 'tmp/emails')
+EMAIL_FILE_PATH = join(CONTENT_DIR, 'tmp/emails')
 EMAIL_HOST_USER = 'test@example.com'
 DEFAULT_FROM_EMAIL = 'test@example.com'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -122,18 +122,18 @@ LANGUAGES = [
 TIME_ZONE = 'UTC'
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(CONTENT_DIR, 'static')
+STATIC_ROOT = join(CONTENT_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(CONTENT_DIR, 'media')
+MEDIA_ROOT = join(CONTENT_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    os.path.join(CONTENT_DIR, 'assets'),
+    join(CONTENT_DIR, 'assets'),
 ]
 
 LOCALE_PATHS = [
-    os.path.join(CONTENT_DIR, 'locale')
+    join(CONTENT_DIR, 'locale')
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

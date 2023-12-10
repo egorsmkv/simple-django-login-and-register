@@ -1,9 +1,9 @@
-import os
-from os.path import dirname
+from os.path import dirname, abspath, join
+
 from django.utils.translation import gettext_lazy as _
 
-BASE_DIR = dirname(dirname(dirname(dirname(os.path.abspath(__file__)))))
-CONTENT_DIR = os.path.join(BASE_DIR, 'content')
+BASE_DIR = dirname(dirname(dirname(dirname(abspath(__file__)))))
+CONTENT_DIR = join(BASE_DIR, 'content')
 
 SECRET_KEY = '3d305kajG5Jy8KBafCMpHwDIsNi0SqVaW'
 
@@ -47,7 +47,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(CONTENT_DIR, 'templates'),
+            join(CONTENT_DIR, 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -76,7 +76,7 @@ EMAIL_USE_SSL = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -121,18 +121,18 @@ LANGUAGES = [
 TIME_ZONE = 'UTC'
 USE_TZ = True
 
-STATIC_ROOT = os.path.join(CONTENT_DIR, 'static')
+STATIC_ROOT = join(CONTENT_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(CONTENT_DIR, 'media')
+MEDIA_ROOT = join(CONTENT_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    os.path.join(CONTENT_DIR, 'assets'),
+    join(CONTENT_DIR, 'assets'),
 ]
 
 LOCALE_PATHS = [
-    os.path.join(CONTENT_DIR, 'locale')
+    join(CONTENT_DIR, 'locale')
 ]
 
 SIGN_UP_FIELDS = ['username', 'first_name', 'last_name', 'email', 'password1', 'password2']
