@@ -15,8 +15,8 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-Django = "==5.0.3"
-django-bootstrap4 = "==23.2"
+Django = "==5.0.4"
+django-bootstrap4 = "==24.1"
 
 [build-system]
 requires = ["poetry>=0.12"]

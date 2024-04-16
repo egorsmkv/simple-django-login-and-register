@@ -54,7 +54,7 @@ conda activate simple-django-login-and-register
 #### Install dependencies
 
 ```bash
-pip install poetry
+pip install -U poetry
 
 poetry install
 poetry shell
