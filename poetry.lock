@@ -57,18 +57,18 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-bootstrap4"
-version = "24.1"
+version = "24.3"
 description = "Django extensions by Zostera"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django-bootstrap4-24.1.tar.gz", hash = "sha256:948a620a10efc3e091e55571341ae1749a3f6f521f1f031889242b65767b4c04"},
-    {file = "django_bootstrap4-24.1-py3-none-any.whl", hash = "sha256:accc64255af7bb45df6b518673facbbaf572418c26e3c3579a0cf4e9c4ef1183"},
+    {file = "django_bootstrap4-24.3-py3-none-any.whl", hash = "sha256:b555d87740a571036f100ad6026b1f62aabcb913404fb7f08f521881019b14bc"},
+    {file = "django_bootstrap4-24.3.tar.gz", hash = "sha256:819bc0ba7b25fcdeb12eb04353962436dbe95b228ba4cf4b49f5d3fee53692e1"},
 ]
 
 [package.dependencies]
 beautifulsoup4 = ">=4.8.0"
-Django = ">=3.2"
+Django = ">=4.1"
 
 [[package]]
 name = "soupsieve"
@@ -110,4 +110,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11"
-content-hash = "f36a88ab30c5c5bc43d766edddf0992295fbf91993d9ed4bca08b41331b0b23e"
+content-hash = "5c1ba464067db015f9f5f3db88589d701b6ff44821c0486620a3c5e768043ff4"
