@@ -15,7 +15,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.11"
-Django = "==5.0.4"
+Django = "==5.0.7"
 django-bootstrap4 = "==24.3"
 
 [build-system]
