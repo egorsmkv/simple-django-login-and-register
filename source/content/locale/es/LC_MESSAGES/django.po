@@ -311,11 +311,6 @@ msgstr "Tu contraseña ha sido establecida. Puedes ingresar ahora."
 msgid "English"
 msgstr "Inglés"
 
-#: source/app/conf/development/settings.py:116
-#: source/app/conf/production/settings.py:115
-msgid "Russian"
-msgstr "Ruso"
-
 #: source/app/conf/development/settings.py:117
 #: source/app/conf/production/settings.py:116
 msgid "Simplified Chinese"

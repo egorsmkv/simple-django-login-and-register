@@ -317,11 +317,6 @@ msgstr ""
 msgid "English"
 msgstr "Anglais"
 
-#: source/app/conf/development/settings.py:116
-#: source/app/conf/production/settings.py:115
-msgid "Russian"
-msgstr "Russe"
-
 #: source/app/conf/development/settings.py:117
 #: source/app/conf/production/settings.py:116
 msgid "Simplified Chinese"

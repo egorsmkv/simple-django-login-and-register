@@ -298,11 +298,6 @@ msgstr "你的密码已经重设。现在可以继续登录。"
 msgid "English"
 msgstr "英语"
 
-#: source/app/conf/development/settings.py:116
-#: source/app/conf/production/settings.py:115
-msgid "Russian"
-msgstr "俄语"
-
 #: source/app/conf/development/settings.py:117
 #: source/app/conf/production/settings.py:116
 msgid "Simplified Chinese"
