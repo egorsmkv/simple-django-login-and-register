@@ -41,23 +41,23 @@ git clone https://github.com/egorsmkv/simple-django-login-and-register
 cd simple-django-login-and-register
 ```
 
-### Install dependencies & activate virtualenv
+### Activate virtualenv
 
-#### Create a virtualenv using conda (optional)
+#### Create a virtualenv using `uv`
 
 ```bash
-conda create -n simple-django-login-and-register python=3.11
+uv venv --python 3.12
 
-conda activate simple-django-login-and-register
+source .venv/bin/activate
 ```
 
 #### Install dependencies
 
 ```bash
-pip install -U poetry
+uv pip install -r requirements.txt
 
-poetry install
-poetry shell
+# in development mode
+uv pip install -r requirements-dev.txt
 ```
 
 ### Configure the settings (connection to the database, connection to an SMTP server, and other options)
@@ -72,18 +72,20 @@ poetry shell
 python source/manage.py migrate
 ```
 
-### Collect static files (only on a production server)
-
-```bash
-python source/manage.py collectstatic
-```
-
 ### Running
 
-#### A development server
+#### On development server
 
-Just run this command:
+Start the local web server:
 
 ```bash
 python source/manage.py runserver
+```
+
+#### On production server
+
+Collect static files:
+
+```bash
+python source/manage.py collectstatic
 ```
