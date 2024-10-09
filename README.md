@@ -46,7 +46,7 @@ cd simple-django-login-and-register
 #### Create a virtualenv using `uv`
 
 ```bash
-uv venv --python 3.12
+uv venv --python 3.13
 
 source .venv/bin/activate
 ```
@@ -54,6 +54,10 @@ source .venv/bin/activate
 #### Install dependencies
 
 ```bash
+uv sync
+
+# Or using requirements files:
+
 uv pip install -r requirements.txt
 
 # in development mode

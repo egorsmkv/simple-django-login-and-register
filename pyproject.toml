@@ -1,0 +1,10 @@
+[project]
+name = "simple-django-login-and-register"
+version = "0.4.6"
+description = "An example of Django project with basic user functionality."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "Django==5.1.2",
+    "django-bootstrap4==24.4",
+]
