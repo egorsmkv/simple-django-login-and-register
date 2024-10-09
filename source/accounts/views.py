@@ -1,47 +1,53 @@
+from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
-from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth import REDIRECT_FIELD_NAME, authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView,
+)
+from django.contrib.auth.views import (
     PasswordChangeView as BasePasswordChangeView,
-    PasswordResetDoneView as BasePasswordResetDoneView,
+)
+from django.contrib.auth.views import (
     PasswordResetConfirmView as BasePasswordResetConfirmView,
 )
-from django.views.generic.base import TemplateView
+from django.contrib.auth.views import (
+    PasswordResetDoneView as BasePasswordResetDoneView,
+)
 from django.shortcuts import get_object_or_404, redirect
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
-from django.utils.http import url_has_allowed_host_and_scheme as is_safe_url
 from django.utils.encoding import force_bytes
+from django.utils.http import url_has_allowed_host_and_scheme as is_safe_url
 from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import gettext_lazy as _
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
-from django.views.generic import View, FormView
-from django.conf import settings
+from django.views.generic import FormView, View
+from django.views.generic.base import TemplateView
 
-from .utils import (
-    send_activation_email,
-    send_reset_password_email,
-    send_forgotten_username_email,
-    send_activation_change_email,
-)
 from .forms import (
-    SignInViaUsernameForm,
-    SignInViaEmailForm,
-    SignInViaEmailOrUsernameForm,
-    SignUpForm,
-    RestorePasswordForm,
-    RestorePasswordViaEmailOrUsernameForm,
+    ChangeEmailForm,
+    ChangeProfileForm,
     RemindUsernameForm,
     ResendActivationCodeForm,
     ResendActivationCodeViaEmailForm,
-    ChangeProfileForm,
-    ChangeEmailForm,
+    RestorePasswordForm,
+    RestorePasswordViaEmailOrUsernameForm,
+    SignInViaEmailForm,
+    SignInViaEmailOrUsernameForm,
+    SignInViaUsernameForm,
+    SignUpForm,
 )
 from .models import Activation
+from .utils import (
+    send_activation_change_email,
+    send_activation_email,
+    send_forgotten_username_email,
+    send_reset_password_email,
+)
 
 
 class GuestOnlyView(View):

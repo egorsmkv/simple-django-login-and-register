@@ -98,12 +98,14 @@ python source/manage.py collectstatic
 
 #### Check & format code
 
+This following commands sort imports and format the code:
+
 ```bash
-ruff check
+ruff check --select I --fix
 ruff format
 ```
 
-### Format templates
+Format templates:
 
 ```bash
 git ls-files -z -- '*.html' | xargs -0 djade --target-version '5.1'

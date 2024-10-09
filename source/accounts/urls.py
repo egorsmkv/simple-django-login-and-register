@@ -1,20 +1,20 @@
 from django.urls import path
 
 from .views import (
-    LogInView,
-    ResendActivationCodeView,
-    RemindUsernameView,
-    SignUpView,
     ActivateView,
-    LogOutView,
-    ChangeEmailView,
     ChangeEmailActivateView,
-    ChangeProfileView,
+    ChangeEmailView,
     ChangePasswordView,
-    RestorePasswordView,
-    RestorePasswordDoneView,
-    RestorePasswordConfirmView,
+    ChangeProfileView,
+    LogInView,
     LogOutConfirmView,
+    LogOutView,
+    RemindUsernameView,
+    ResendActivationCodeView,
+    RestorePasswordConfirmView,
+    RestorePasswordDoneView,
+    RestorePasswordView,
+    SignUpView,
 )
 
 app_name = "accounts"
