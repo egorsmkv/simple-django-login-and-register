@@ -1,18 +1,17 @@
 {% extends 'layouts/default/page.html' %}
 
-{% load bootstrap4 %}
-{% load i18n %}
+{% load bootstrap4 i18n %}
 
 {% block content %}
 
-    <h4>{% trans 'Remind a username' %}</h4>
+    <h4>{% translate 'Remind a username' %}</h4>
 
     <form method="post">
 
         {% csrf_token %}
         {% bootstrap_form form %}
 
-        <button class="btn btn-primary">{% trans 'Next' %}</button>
+        <button class="btn btn-primary">{% translate 'Next' %}</button>
 
     </form>
 
@@ -20,8 +19,8 @@
 
     <ul>
         <li>
-            <a href="{% url 'accounts:log_in' %}">{% trans 'Log in' %}</a>
+            <a href="{% url 'accounts:log_in' %}">{% translate 'Log in' %}</a>
         </li>
     </ul>
 
-{% endblock %}
+{% endblock content %}

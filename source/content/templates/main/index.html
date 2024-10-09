@@ -6,12 +6,12 @@
 
     {% if request.user.is_authenticated %}
 
-        {% trans 'Your username is' %} <b>{{ request.user.username }}</b>.
+        {% translate 'Your username is' %} <b>{{ request.user.username }}</b>.
 
     {% else %}
 
-        {% trans 'You are a guest.' %}
+        {% translate 'You are a guest.' %}
 
     {% endif %}
 
-{% endblock %}
+{% endblock content %}

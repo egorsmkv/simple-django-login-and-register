@@ -1,19 +1,18 @@
 {% extends 'layouts/default/page.html' %}
 
-{% load bootstrap4 %}
-{% load i18n %}
+{% load bootstrap4 i18n %}
 
 {% block content %}
 
-    <h4>{% trans 'Create an account' %}</h4>
+    <h4>{% translate 'Create an account' %}</h4>
 
     <form method="post">
 
         {% csrf_token %}
         {% bootstrap_form form %}
 
-        <button class="btn btn-success">{% trans 'Create' %}</button>
+        <button class="btn btn-success">{% translate 'Create' %}</button>
 
     </form>
 
-{% endblock %}
+{% endblock content %}

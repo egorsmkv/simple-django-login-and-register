@@ -7,7 +7,7 @@
     {% get_current_language as language_code %}
     {% get_available_languages as languages %}
 
-    <h4>{% trans 'Change language' %}</h4>
+    <h4>{% translate 'Change language' %}</h4>
 
     <form action="{% url 'set_language' %}" method="post">
 
@@ -16,7 +16,7 @@
         <input name="next" type="hidden" value="{{ redirect_to }}"/>
 
         <div class="form-group">
-            <label class="form-control-label" for="language-field">{% trans 'Select the language' %}</label>
+            <label class="form-control-label" for="language-field">{% translate 'Select the language' %}</label>
             <select name="language" class="form-control" id="language-field">
                 {% for code, name in languages %}
                     <option value="{{ code }}" {% if code == language_code %} selected="selected"{% endif %}>
@@ -26,8 +26,8 @@
             </select>
         </div>
 
-        <button class="btn btn-success">{% trans 'Change' %}</button>
+        <button class="btn btn-success">{% translate 'Change' %}</button>
 
     </form>
 
-{% endblock %}
+{% endblock content %}

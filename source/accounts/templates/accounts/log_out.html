@@ -4,14 +4,14 @@
 
 {% block content %}
 
-    <h4>{% trans 'Logged out' %}</h4>
+    <h4>{% translate 'Logged out' %}</h4>
 
     <p>
-        {% trans 'Thanks for spending some quality time with the site today.' %}
+        {% translate 'Thanks for spending some quality time with the site today.' %}
     </p>
 
     <p>
-        <a href="{% url 'accounts:log_in' %}">{% trans 'Log in again' %}</a>
+        <a href="{% url 'accounts:log_in' %}">{% translate 'Log in again' %}</a>
     </p>
 
-{% endblock %}
+{% endblock content %}

@@ -93,3 +93,18 @@ Collect static files:
 ```bash
 python source/manage.py collectstatic
 ```
+
+### Development
+
+#### Check & format code
+
+```bash
+ruff check
+ruff format
+```
+
+### Format templates
+
+```bash
+git ls-files -z -- '*.html' | xargs -0 djade --target-version '5.1'
+```

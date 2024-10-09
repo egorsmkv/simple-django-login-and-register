@@ -4,15 +4,15 @@
 
 {% block content %}
 
-    <h4>{% trans 'Log out' %}</h4>
+    <h4>{% translate 'Log out' %}</h4>
 
     <p>
-        {% trans 'Confirm this action:' %}
+        {% translate 'Confirm this action:' %}
     </p>
 
     <form action="{% url 'accounts:log_out' %}" method="post">
         {% csrf_token %}
-        <button class="btn btn-success">{% trans 'Log out' %}</button>
+        <button class="btn btn-success">{% translate 'Log out' %}</button>
     </form>
 
-{% endblock %}
+{% endblock content %}
