@@ -54,6 +54,8 @@ source .venv/bin/activate
 #### Install dependencies
 
 ```bash
+# uv sync --extra dev
+
 uv sync
 
 # Or using requirements files:
@@ -98,15 +100,8 @@ python source/manage.py collectstatic
 
 #### Check & format code
 
-This following commands sort imports and format the code:
+This command formats the code:
 
 ```bash
-ruff check --select I --fix
-ruff format
-```
-
-Format templates:
-
-```bash
-git ls-files -z -- '*.html' | xargs -0 djade --target-version '5.1'
+just fmt
 ```
