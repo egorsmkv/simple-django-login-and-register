@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import REDIRECT_FIELD_NAME, authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView,
@@ -27,7 +28,6 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, View
 from django.views.generic.base import TemplateView
-from django.contrib.auth.models import User
 
 from .forms import (
     ChangeEmailForm,
@@ -105,6 +105,9 @@ class LogInView(GuestOnlyView, FormView):
             allowed_hosts=request.get_host(),
             require_https=request.is_secure(),
         )
+
+        if not redirect_to:
+            redirect_to = "/"
 
         if url_is_safe:
             return redirect(redirect_to)
@@ -195,10 +198,11 @@ class ResendActivationCodeView(GuestOnlyView, FormView):
     def form_valid(self, form):
         user: User = form.user_cache
 
-        activation = user.activation_set.first()
-        activation.delete()
+        activation: Activation | None = Activation.objects.filter(user=user).first()
+        if activation:
+            activation.delete()
 
-        code = get_random_string(20)
+        code = get_random_string(length=20)
 
         act = Activation()
         act.code = code
@@ -243,14 +247,19 @@ class ChangeProfileView(FormView, LoginRequiredMixin):
     form_class = ChangeProfileForm
 
     def get_initial(self):
-        user: User = self.request.user
         initial = super().get_initial()
+        user = self.request.user
+        if isinstance(user, AnonymousUser):
+            return initial
         initial["first_name"] = user.first_name
         initial["last_name"] = user.last_name
         return initial
 
     def form_valid(self, form):
-        user: User = self.request.user
+        initial = super().get_initial()
+        user = self.request.user
+        if isinstance(user, AnonymousUser):
+            return initial
         user.first_name = form.cleaned_data["first_name"]
         user.last_name = form.cleaned_data["last_name"]
         user.save()
@@ -270,17 +279,22 @@ class ChangeEmailView(FormView, LoginRequiredMixin):
         return kwargs
 
     def get_initial(self):
-        user: User = self.request.user
         initial = super().get_initial()
+        user = self.request.user
+        if isinstance(user, AnonymousUser):
+            return initial
         initial["email"] = user.email
         return initial
 
     def form_valid(self, form):
-        user: User = self.request.user
+        user = self.request.user
+        if isinstance(user, AnonymousUser):
+            return redirect("index")
+
         email = form.cleaned_data["email"]
 
         if settings.ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE:
-            code = get_random_string(20)
+            code = get_random_string(length=20)
 
             act = Activation()
             act.code = code

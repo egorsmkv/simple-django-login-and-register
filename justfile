@@ -2,7 +2,10 @@ check:
 	ruff check
 
 mypy:
-	PYTHONPATH=source mypy source/
+	cd source && PYTHONPATH=. mypy . --check-untyped-defs
+
+pyrefly:
+	pyrefly check
 
 fmt:
 	ruff format

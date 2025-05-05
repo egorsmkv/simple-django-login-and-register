@@ -1,10 +1,16 @@
-from datetime import timedelta, datetime
+from datetime import datetime, timedelta
 
-from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
-from django.forms import ValidationError
+from django.forms import (
+    BooleanField,
+    CharField,
+    EmailField,
+    Form,
+    PasswordInput,
+    ValidationError,
+)
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -12,19 +18,23 @@ from .models import Activation, User
 
 
 class UserCacheMixin:
-    user_cache = None
+    user_cache: User | None = None
 
 
-class SignIn(UserCacheMixin, forms.Form):
-    password = forms.CharField(
-        label=_("Password"), strip=False, widget=forms.PasswordInput
-    )
+class SignIn(UserCacheMixin, Form):
+    password = CharField(label=_("Password"), strip=False, widget=PasswordInput)
+
+    @property
+    def field_order(self):
+        if settings.USE_REMEMBER_ME:
+            return ["username", "password", "remember_me"]
+        return ["username", "password"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         if settings.USE_REMEMBER_ME:
-            self.fields["remember_me"] = forms.BooleanField(
+            self.fields["remember_me"] = BooleanField(
                 label=_("Remember me"), required=False
             )
 
@@ -41,10 +51,10 @@ class SignIn(UserCacheMixin, forms.Form):
 
 
 class SignInViaUsernameForm(SignIn):
-    username = forms.CharField(label=_("Username"))
+    username = CharField(label=_("Username"))
 
     @property
-    def field_order():
+    def field_order(self):
         if settings.USE_REMEMBER_ME:
             return ["username", "password", "remember_me"]
         return ["username", "password"]
@@ -64,8 +74,8 @@ class SignInViaUsernameForm(SignIn):
         return username
 
 
-class EmailForm(UserCacheMixin, forms.Form):
-    email = forms.EmailField(label=_("Email"))
+class EmailForm(UserCacheMixin, Form):
+    email = EmailField(label=_("Email"))
 
     def clean_email(self):
         email = self.cleaned_data["email"]
@@ -90,8 +100,8 @@ class SignInViaEmailForm(SignIn, EmailForm):
         return ["email", "password"]
 
 
-class EmailOrUsernameForm(UserCacheMixin, forms.Form):
-    email_or_username = forms.CharField(label=_("Email or Username"))
+class EmailOrUsernameForm(UserCacheMixin, Form):
+    email_or_username = CharField(label=_("Email or Username"))
 
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data["email_or_username"]
@@ -125,7 +135,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = settings.SIGN_UP_FIELDS
 
-    email = forms.EmailField(
+    email = EmailField(
         label=_("Email"), help_text=_("Required. Enter an existing email address.")
     )
 
@@ -139,8 +149,8 @@ class SignUpForm(UserCreationForm):
         return email
 
 
-class ResendActivationCodeForm(UserCacheMixin, forms.Form):
-    email_or_username = forms.CharField(label=_("Email or Username"))
+class ResendActivationCodeForm(UserCacheMixin, Form):
+    email_or_username = CharField(label=_("Email or Username"))
 
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data["email_or_username"]
@@ -174,8 +184,8 @@ class ResendActivationCodeForm(UserCacheMixin, forms.Form):
         return email_or_username
 
 
-class ResendActivationCodeViaEmailForm(UserCacheMixin, forms.Form):
-    email = forms.EmailField(label=_("Email"))
+class ResendActivationCodeViaEmailForm(UserCacheMixin, Form):
+    email = EmailField(label=_("Email"))
 
     def clean_email(self):
         email = self.cleaned_data["email"]
@@ -213,13 +223,13 @@ class RestorePasswordViaEmailOrUsernameForm(EmailOrUsernameForm):
     pass
 
 
-class ChangeProfileForm(forms.Form):
-    first_name = forms.CharField(label=_("First name"), max_length=30, required=False)
-    last_name = forms.CharField(label=_("Last name"), max_length=150, required=False)
+class ChangeProfileForm(Form):
+    first_name = CharField(label=_("First name"), max_length=30, required=False)
+    last_name = CharField(label=_("Last name"), max_length=150, required=False)
 
 
-class ChangeEmailForm(forms.Form):
-    email = forms.EmailField(label=_("Email"))
+class ChangeEmailForm(Form):
+    email = EmailField(label=_("Email"))
 
     def __init__(self, user, **kwargs):
         self.user = user

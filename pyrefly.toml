@@ -1,5 +1,5 @@
 project_includes = ["source"]
-project_excludes = ["**/__pycache__/**", "**/.[!/.]*", "**/tests"]
+project_excludes = ["**/__pycache__/**", "**/migrations/**", "**/.[!/.]*", "**/tests"]
 
 search_path = ["source"]
 site_package_path = ["./.venv/lib/python3.13/site-packages"]
@@ -11,8 +11,3 @@ python_interpreter = "./.venv/bin/python3"
 ignore_errors_in_generated_code = true
 use_untyped_imports = true
 ignore_missing_source = true
-
-# disable `bad-override` for the whole project
-[errors]
-bad-assignment = false
-bad-override = false
