@@ -1,6 +1,9 @@
 check:
-	./.venv/bin/ruff check
+	ruff check
+
+mypy:
+	PYTHONPATH=source mypy source/
 
 fmt:
-	./.venv/bin/ruff format
-	git ls-files -z -- '*.html' | xargs -0 ./.venv/bin/djade --target-version '5.2'
+	ruff format
+	find source/ -name '*.html' | xargs djade --target-version '5.2'

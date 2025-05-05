@@ -27,6 +27,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import FormView, View
 from django.views.generic.base import TemplateView
+from django.contrib.auth.models import User
 
 from .forms import (
     ChangeEmailForm,
@@ -73,7 +74,7 @@ class LogInView(GuestOnlyView, FormView):
         return SignInViaUsernameForm
 
     @method_decorator(sensitive_post_parameters("password"))
-    @method_decorator(csrf_protect)
+    @method_decorator(csrf_protect)  # pyrefly: ignore
     @method_decorator(never_cache)
     def dispatch(self, request, *args, **kwargs):
         # Sets a test cookie to make sure the user has cookies enabled
@@ -121,7 +122,7 @@ class SignUpView(GuestOnlyView, FormView):
 
         if settings.DISABLE_USERNAME:
             # Set a temporary username
-            user.username = get_random_string()
+            user.username = get_random_string(length=20)
         else:
             user.username = form.cleaned_data["username"]
 
@@ -169,7 +170,7 @@ class ActivateView(View):
         act = get_object_or_404(Activation, code=code)
 
         # Activate profile
-        user = act.user
+        user: User = act.user
         user.is_active = True
         user.save()
 
@@ -192,7 +193,7 @@ class ResendActivationCodeView(GuestOnlyView, FormView):
         return ResendActivationCodeForm
 
     def form_valid(self, form):
-        user = form.user_cache
+        user: User = form.user_cache
 
         activation = user.activation_set.first()
         activation.delete()
@@ -225,7 +226,7 @@ class RestorePasswordView(GuestOnlyView, FormView):
         return RestorePasswordForm
 
     def form_valid(self, form):
-        user = form.user_cache
+        user: User = form.user_cache
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
 
@@ -237,19 +238,19 @@ class RestorePasswordView(GuestOnlyView, FormView):
         return redirect("accounts:restore_password_done")
 
 
-class ChangeProfileView(LoginRequiredMixin, FormView):
+class ChangeProfileView(FormView, LoginRequiredMixin):
     template_name = "accounts/profile/change_profile.html"
     form_class = ChangeProfileForm
 
     def get_initial(self):
-        user = self.request.user
+        user: User = self.request.user
         initial = super().get_initial()
         initial["first_name"] = user.first_name
         initial["last_name"] = user.last_name
         return initial
 
     def form_valid(self, form):
-        user = self.request.user
+        user: User = self.request.user
         user.first_name = form.cleaned_data["first_name"]
         user.last_name = form.cleaned_data["last_name"]
         user.save()
@@ -259,7 +260,7 @@ class ChangeProfileView(LoginRequiredMixin, FormView):
         return redirect("accounts:change_profile")
 
 
-class ChangeEmailView(LoginRequiredMixin, FormView):
+class ChangeEmailView(FormView, LoginRequiredMixin):
     template_name = "accounts/profile/change_email.html"
     form_class = ChangeEmailForm
 
@@ -269,12 +270,13 @@ class ChangeEmailView(LoginRequiredMixin, FormView):
         return kwargs
 
     def get_initial(self):
+        user: User = self.request.user
         initial = super().get_initial()
-        initial["email"] = self.request.user.email
+        initial["email"] = user.email
         return initial
 
     def form_valid(self, form):
-        user = self.request.user
+        user: User = self.request.user
         email = form.cleaned_data["email"]
 
         if settings.ENABLE_ACTIVATION_AFTER_EMAIL_CHANGE:
@@ -309,7 +311,7 @@ class ChangeEmailActivateView(View):
         act = get_object_or_404(Activation, code=code)
 
         # Change the email
-        user = act.user
+        user: User = act.user
         user.email = act.email
         user.save()
 
@@ -321,12 +323,12 @@ class ChangeEmailActivateView(View):
         return redirect("accounts:change_email")
 
 
-class RemindUsernameView(GuestOnlyView, FormView):
+class RemindUsernameView(FormView, GuestOnlyView):
     template_name = "accounts/remind_username.html"
     form_class = RemindUsernameForm
 
     def form_valid(self, form):
-        user = form.user_cache
+        user: User = form.user_cache
         send_forgotten_username_email(user.email, user.username)
 
         messages.success(
@@ -374,5 +376,5 @@ class LogOutConfirmView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/log_out_confirm.html"
 
 
-class LogOutView(LoginRequiredMixin, BaseLogoutView):
+class LogOutView(BaseLogoutView):
     template_name = "accounts/log_out.html"

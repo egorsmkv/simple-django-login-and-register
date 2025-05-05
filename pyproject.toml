@@ -11,10 +11,17 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "django-stubs[compatible-mypy]>=5.2.0",
     "ruff>=0.1",
     "pyrefly>=0.1",
     "djade>=0.1",
 ]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "app.settings"
 
 [tool.ruff]
 exclude = [

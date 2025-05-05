@@ -1,13 +1,14 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 from django import forms
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.db.models import Q
 from django.forms import ValidationError
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+from .models import Activation, User
 
 
 class UserCacheMixin:
@@ -43,7 +44,7 @@ class SignInViaUsernameForm(SignIn):
     username = forms.CharField(label=_("Username"))
 
     @property
-    def field_order(self):
+    def field_order():
         if settings.USE_REMEMBER_ME:
             return ["username", "password", "remember_me"]
         return ["username", "password"]
@@ -51,7 +52,7 @@ class SignInViaUsernameForm(SignIn):
     def clean_username(self):
         username = self.cleaned_data["username"]
 
-        user = User.objects.filter(username=username).first()
+        user: User | None = User.objects.filter(username=username).first()
         if not user:
             raise ValidationError(_("You entered an invalid username."))
 
@@ -69,7 +70,7 @@ class EmailForm(UserCacheMixin, forms.Form):
     def clean_email(self):
         email = self.cleaned_data["email"]
 
-        user = User.objects.filter(email__iexact=email).first()
+        user: User | None = User.objects.filter(email__iexact=email).first()
         if not user:
             raise ValidationError(_("You entered an invalid email address."))
 
@@ -95,7 +96,7 @@ class EmailOrUsernameForm(UserCacheMixin, forms.Form):
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data["email_or_username"]
 
-        user = User.objects.filter(
+        user: User | None = User.objects.filter(
             Q(username=email_or_username) | Q(email__iexact=email_or_username)
         ).first()
         if not user:
@@ -144,7 +145,7 @@ class ResendActivationCodeForm(UserCacheMixin, forms.Form):
     def clean_email_or_username(self):
         email_or_username = self.cleaned_data["email_or_username"]
 
-        user = User.objects.filter(
+        user: User | None = User.objects.filter(
             Q(username=email_or_username) | Q(email__iexact=email_or_username)
         ).first()
         if not user:
@@ -155,12 +156,13 @@ class ResendActivationCodeForm(UserCacheMixin, forms.Form):
         if user.is_active:
             raise ValidationError(_("This account has already been activated."))
 
-        activation = user.activation_set.first()
+        activation: Activation | None = Activation.objects.filter(user=user).first()
         if not activation:
             raise ValidationError(_("Activation code not found."))
 
+        created_at: datetime = activation.created_at
         now_with_shift = timezone.now() - timedelta(hours=24)
-        if activation.created_at > now_with_shift:
+        if created_at > now_with_shift:
             raise ValidationError(
                 _(
                     "Activation code has already been sent. You can request a new code in 24 hours."
@@ -178,19 +180,20 @@ class ResendActivationCodeViaEmailForm(UserCacheMixin, forms.Form):
     def clean_email(self):
         email = self.cleaned_data["email"]
 
-        user = User.objects.filter(email__iexact=email).first()
+        user: User | None = User.objects.filter(email__iexact=email).first()
         if not user:
             raise ValidationError(_("You entered an invalid email address."))
 
         if user.is_active:
             raise ValidationError(_("This account has already been activated."))
 
-        activation = user.activation_set.first()
+        activation: Activation | None = Activation.objects.filter(user=user).first()
         if not activation:
             raise ValidationError(_("Activation code not found."))
 
+        created_at: datetime = activation.created_at
         now_with_shift = timezone.now() - timedelta(hours=24)
-        if activation.created_at > now_with_shift:
+        if created_at > now_with_shift:
             raise ValidationError(
                 _(
                     "Activation code has already been sent. You can request a new code in 24 hours."
@@ -218,9 +221,9 @@ class ChangeProfileForm(forms.Form):
 class ChangeEmailForm(forms.Form):
     email = forms.EmailField(label=_("Email"))
 
-    def __init__(self, user, *args, **kwargs):
+    def __init__(self, user, **kwargs):
         self.user = user
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)  # pyrefly: ignore
 
     def clean_email(self):
         email = self.cleaned_data["email"]
