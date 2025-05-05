@@ -44,16 +44,16 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "5.1.7"
+version = "5.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "sqlparse" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5f/57/11186e493ddc5a5e92cc7924a6363f7d4c2b645f7d7cb04a26a63f9bfb8b/Django-5.1.7.tar.gz", hash = "sha256:30de4ee43a98e5d3da36a9002f287ff400b43ca51791920bfb35f6917bfe041c", size = 10716510 }
+sdist = { url = "https://files.pythonhosted.org/packages/4c/1b/c6da718c65228eb3a7ff7ba6a32d8e80fa840ca9057490504e099e4dd1ef/Django-5.2.tar.gz", hash = "sha256:1a47f7a7a3d43ce64570d350e008d2949abe8c7e21737b351b6a1611277c6d89", size = 10824891 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ba/0f/7e042df3d462d39ae01b27a09ee76653692442bc3701fbfa6cb38e12889d/Django-5.1.7-py3-none-any.whl", hash = "sha256:1323617cb624add820cb9611cdcc788312d250824f92ca6048fda8625514af2b", size = 8276912 },
+    { url = "https://files.pythonhosted.org/packages/63/e0/6a5b5ea350c5bd63fe94b05e4c146c18facb51229d9dee42aa39f9fc2214/Django-5.2-py3-none-any.whl", hash = "sha256:91ceed4e3a6db5aedced65e3c8f963118ea9ba753fc620831c77074e620e7d83", size = 8301361 },
 ]
 
 [[package]]
@@ -67,6 +67,21 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/cf/bb/e2f15ae18598d81d0ef4dd51e9abc6cd42bbd1398cb36d3f28201572b756/django_bootstrap4-25.1.tar.gz", hash = "sha256:6e05d17dda5922ec643e40bb804c7f399ec262c3723a4e5aef5bd550b3ff4ffa", size = 108902 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/0a/13/007e451caec1406da56f65d1a9fcbfe76bbc7dd4b9653dcab4713f0564dd/django_bootstrap4-25.1-py3-none-any.whl", hash = "sha256:9eb574b6ddd0ae2e8b9da13746e1d084a797b8962cb8e0284c937c97e1938f29", size = 25329 },
+]
+
+[[package]]
+name = "pyrefly"
+version = "0.13.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/21/15/4505ff3e874b2d5799f88e7bf322278a86f37f390c2ef1b056efec95d6ca/pyrefly-0.13.0.tar.gz", hash = "sha256:d904cd3ccb11ac24470f449c1a3b3f3feb6e19a3f8b0a8da9ffec94f76c8565a", size = 893156 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/2e/83/49c694a6de150ac98e8a5184f411056483bd42053a96aa6b06abb9270ebd/pyrefly-0.13.0-py3-none-macosx_10_12_x86_64.whl", hash = "sha256:6eb35b41d3aa1990eb99c30cf5b4ae679805dc1cdc4b24c302e4c03f891f5664", size = 5647672 },
+    { url = "https://files.pythonhosted.org/packages/4f/87/763be0ed87243d615b90c9f02b023147b6a1eaafec158b0c41cc6bc45b58/pyrefly-0.13.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:5f2caaa4575c2c4b91955f8d8d06302047aae7d5a33a9f8a7f1de39dd13d2530", size = 5346105 },
+    { url = "https://files.pythonhosted.org/packages/b0/46/b43e8f4d071f00e5d62a98af18389799ff0e5dfcf2e3abd5e5367a06d68a/pyrefly-0.13.0-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:1721482d42265b3322e0d394c38d862f5c21098eb9a4f8b64fa9ba8c41e61c81", size = 6176346 },
+    { url = "https://files.pythonhosted.org/packages/36/11/ad33dc6ad5e88431b5c8ae0fec13a4afaff19c28c3d52fa32870ad65d213/pyrefly-0.13.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c747dd512c65e88e07757ff0b81785e360f0170f74dc3bb35999241223112cf2", size = 5845233 },
+    { url = "https://files.pythonhosted.org/packages/ce/a3/c41cbf27f4cef90675f18fa0d35b24ebfac19ac2c255168cf4b6726b7f9d/pyrefly-0.13.0-py3-none-win32.whl", hash = "sha256:beb9e3e249d9080778a2aad7a0c874eebe501ea7672b8be77524251d96d391b9", size = 5351536 },
+    { url = "https://files.pythonhosted.org/packages/35/cb/52486bb5cea9678aac01e4a4ed2bca0df86b721e18c7a597639dd03929bc/pyrefly-0.13.0-py3-none-win_amd64.whl", hash = "sha256:d4983035740825cc3221c58db38fc64293f70b1bfbd0e405ad3c396c6c282532", size = 5754295 },
+    { url = "https://files.pythonhosted.org/packages/15/65/e6bbab5a3bac4a1916a709e31d2a557fea8c28667faffea5834a00783beb/pyrefly-0.13.0-py3-none-win_arm64.whl", hash = "sha256:db16c497dcfbc303f073223ab94c1cc3756b8c11139be75931c3589d6e97d5aa", size = 5471310 },
 ]
 
 [[package]]
@@ -96,7 +111,7 @@ wheels = [
 
 [[package]]
 name = "simple-django-login-and-register"
-version = "0.4.8"
+version = "0.4.9"
 source = { virtual = "." }
 dependencies = [
     { name = "django" },
@@ -106,14 +121,16 @@ dependencies = [
 [package.optional-dependencies]
 dev = [
     { name = "djade" },
+    { name = "pyrefly" },
     { name = "ruff" },
 ]
 
 [package.metadata]
 requires-dist = [
     { name = "djade", marker = "extra == 'dev'", specifier = ">=0.1" },
-    { name = "django", specifier = "==5.1.7" },
+    { name = "django", specifier = "==5.2" },
     { name = "django-bootstrap4", specifier = "==25.1" },
+    { name = "pyrefly", marker = "extra == 'dev'", specifier = ">=0.1" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1" },
 ]
 provides-extras = ["dev"]
