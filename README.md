@@ -54,9 +54,9 @@ source .venv/bin/activate
 #### Install dependencies
 
 ```bash
-# uv sync --extra dev
+# uv sync --upgrade --extra dev
 
-uv sync
+uv sync --upgrade
 
 # Or using requirements files:
 
