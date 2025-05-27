@@ -1,3 +1,5 @@
+My name is Aniket Mokal 
+
 # Simple Django Login and Registration
 
 An example of Django project with basic user functionality.
