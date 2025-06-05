@@ -1,5 +1,7 @@
 # Simple Django Login and Registration
 
+[![CI pipeline](https://github.com/egorsmkv/simple-django-login-and-register/actions/workflows/ci.yml/badge.svg)](https://github.com/egorsmkv/simple-django-login-and-register/actions/workflows/ci.yml)
+
 An example of Django project with basic user functionality.
 
 ## Screenshots
