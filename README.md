@@ -63,9 +63,7 @@ uv sync --upgrade
 # Or using requirements files:
 
 uv pip install -r requirements.txt
-
-# in development mode
-uv pip install -r requirements-dev.txt
+uv pip install -r requirements-dev.txt # in development mode
 ```
 
 ### Configure the settings (connection to the database, connection to an SMTP server, and other options)

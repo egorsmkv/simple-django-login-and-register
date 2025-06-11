@@ -1,4 +1,3 @@
-ruff
-pyrefly
-
-djade
+ruff>=0.1
+pyrefly>=0.1
+djade>=0.1
