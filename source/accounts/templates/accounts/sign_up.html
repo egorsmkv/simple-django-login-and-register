@@ -11,8 +11,23 @@
         {% csrf_token %}
         {% bootstrap_form form %}
 
+        <button type="button" id="generate-password-btn" class="btn btn-secondary btn-sm mt-2">
+              Generate Password
+        </button>
+
         <button class="btn btn-success">{% translate 'Create' %}</button>
 
     </form>
+
+    <script>
+    document.getElementById('generate-password-btn').addEventListener('click', function() {
+        fetch("{% url 'accounts:generate_password' %}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("id_password1").value = data.password;
+                document.getElementById("id_password2").value = data.password;
+            });
+    });
+     </script>
 
 {% endblock content %}

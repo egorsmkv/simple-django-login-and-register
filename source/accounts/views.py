@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.contrib import messages
+from django.http import JsonResponse
 from django.contrib.auth import REDIRECT_FIELD_NAME, authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import AnonymousUser, User
 from django.contrib.auth.tokens import default_token_generator
+from .utils import generate_secure_password
 from django.contrib.auth.views import (
     LogoutView as BaseLogoutView,
 )
@@ -380,6 +382,12 @@ class RestorePasswordConfirmView(BasePasswordResetConfirmView):
         )
 
         return redirect("accounts:log_in")
+
+class GeneratePasswordView(View):
+    def get(self, request, *args, **kwargs):
+        # Create secure password
+        password = generate_secure_password(length=20, require_each=True)
+        return JsonResponse({'password': password})
 
 
 class RestorePasswordDoneView(BasePasswordResetDoneView):

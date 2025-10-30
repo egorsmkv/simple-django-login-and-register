@@ -3,7 +3,9 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
+import string
+import secrets
+from random import SystemRandom
 
 def send_mail(to, template, context):
     html_content = render_to_string(f"accounts/emails/{template}.html", context)
@@ -59,3 +61,48 @@ def send_forgotten_username_email(email, username):
     }
 
     send_mail(email, "forgotten_username", context)
+
+_sysrand = SystemRandom()
+def generate_secure_password(length: int = 20,
+                             use_lower: bool = True,
+                             use_upper: bool = True,
+                             use_digits: bool = True,
+                             use_symbols: bool = True,
+                             require_each: bool = True) -> str:
+
+    if length <= 0:
+        raise ValueError("length must be > 0")
+
+    categories = []
+    if use_lower:
+        categories.append(string.ascii_lowercase)
+    if use_upper:
+        categories.append(string.ascii_uppercase)
+    if use_digits:
+        categories.append(string.digits)
+    if use_symbols:
+        symbols = string.punctuation
+        categories.append(symbols)
+
+    if not categories:
+        raise ValueError("At least one character category must be enabled")
+
+    if require_each and length < len(categories):
+        raise ValueError(f"length must be at least {len(categories)} when require_each=True")
+
+    pool = "".join(categories)
+
+    pw_chars = []
+
+    if require_each:
+        for cat in categories:
+            pw_chars.append(secrets.choice(cat))
+
+    remaining = length - len(pw_chars)
+    for _ in range(remaining):
+        pw_chars.append(secrets.choice(pool))
+
+    _sysrand.shuffle(pw_chars)
+
+    return "".join(pw_chars)
+
