@@ -70,9 +70,25 @@ def generate_secure_password(length: int = 20,
                              use_symbols: bool = True,
                              require_each: bool = True) -> str:
 
+    """
+    Generate a cryptographically secure random password.
+
+    Parameters:
+        length (int): Length of the password (default 20)
+        use_lower (bool): Include lowercase letters
+        use_upper (bool): Include uppercase letters
+        use_digits (bool): Include digits
+        use_symbols (bool): Include symbols/punctuation
+        require_each (bool): Ensure at least one character from each selected category is present
+
+    Returns:
+        str: Generated password
+    """
+    #Ensure positive length
     if length <= 0:
         raise ValueError("length must be > 0")
 
+    #Collect selected character categories
     categories = []
     if use_lower:
         categories.append(string.ascii_lowercase)
@@ -84,9 +100,11 @@ def generate_secure_password(length: int = 20,
         symbols = string.punctuation
         categories.append(symbols)
 
+    #Raise error if no category is selected
     if not categories:
         raise ValueError("At least one character category must be enabled")
 
+    #Ensure length is sufficient if requiring one char from each category
     if require_each and length < len(categories):
         raise ValueError(f"length must be at least {len(categories)} when require_each=True")
 
@@ -94,14 +112,17 @@ def generate_secure_password(length: int = 20,
 
     pw_chars = []
 
+    #If require_each is True, pick one character from each category
     if require_each:
         for cat in categories:
             pw_chars.append(secrets.choice(cat))
 
+    #Fill the remaining characters randomly from the pool
     remaining = length - len(pw_chars)
     for _ in range(remaining):
         pw_chars.append(secrets.choice(pool))
 
+    #Shuffle the resulting password list to avoid predictable positions
     _sysrand.shuffle(pw_chars)
 
     return "".join(pw_chars)
