@@ -27,12 +27,17 @@
     <script>
     //Generate random password when button is clicked
     document.getElementById('generate-password-btn').addEventListener('click', function() {
-        fetch("{% url 'accounts:generate_password' %}")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("id_password1").value = data.password;
-                document.getElementById("id_password2").value = data.password;
-            });
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+        const array = new Uint32Array(20);
+        crypto.getRandomValues(array);
+
+        let password = "";
+        for (let i = 0; i < array.length; i++) {
+            password += charset[array[i] % charset.length];
+        }
+
+        document.getElementById("id_password1").value = password;
+        document.getElementById("id_password2").value = password;  
     });
 
     (function() {
