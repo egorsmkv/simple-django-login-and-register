@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "Django==5.2.8",
-    "django-bootstrap4==25.2",
+    "django-bootstrap4==25.3",
 ]
 
 [project.optional-dependencies]
