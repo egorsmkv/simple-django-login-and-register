@@ -22,13 +22,6 @@
         <button class="btn btn-success">{% translate 'Create' %}</button>
     </form>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.5/font/bootstrap-icons.css">
-
-<script>
-    const SHOW_PASSWORD_TEXT = "{% translate 'Show password' %}";
-    const HIDE_PASSWORD_TEXT = "{% translate 'Hide password' %}";
-</script>
-
 <script>
     document.getElementById('generate-password-btn').addEventListener('click', function() {
         const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
@@ -44,8 +37,10 @@
         document.getElementById("id_password2").value = password;  
     });
 
-    // 👁️ Show/Hide password toggle
+    //Show/Hide password toggle
     (function() {
+        const SHOW_PASSWORD_TEXT = "{% translate 'Show password' %}";
+        const HIDE_PASSWORD_TEXT = "{% translate 'Hide password' %}";
         const input = document.getElementById('id_password1');
         if (!input) return;
 
