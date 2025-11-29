@@ -3,7 +3,9 @@ from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-
+import string
+import secrets
+from random import SystemRandom
 
 def send_mail(to, template, context):
     html_content = render_to_string(f"accounts/emails/{template}.html", context)
@@ -59,3 +61,4 @@ def send_forgotten_username_email(email, username):
     }
 
     send_mail(email, "forgotten_username", context)
+
