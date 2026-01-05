@@ -5,8 +5,8 @@ description = "An example of Django project with basic user functionality."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "Django==5.2.8",
-    "django-bootstrap4==25.3",
+    "Django==6.0",
+    "django-bootstrap4==26.1",
 ]
 
 [project.optional-dependencies]
