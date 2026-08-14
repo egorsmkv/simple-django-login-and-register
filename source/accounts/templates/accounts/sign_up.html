@@ -7,12 +7,89 @@
     <h4>{% translate 'Create an account' %}</h4>
 
     <form method="post">
-
         {% csrf_token %}
         {% bootstrap_form form %}
 
-        <button class="btn btn-success">{% translate 'Create' %}</button>
+        <div class="mt-2 mb-3">
+            <button 
+                type="button" 
+                id="generate-password-btn" 
+                class="btn btn-success btn-sm">
+                {% translate 'Generate Password' %}
+            </button>
+        </div>
 
+        <button class="btn btn-success">{% translate 'Create' %}</button>
     </form>
+
+<script>
+    document.getElementById('generate-password-btn').addEventListener('click', function() {
+        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+        const array = new Uint32Array(20);
+        crypto.getRandomValues(array);
+
+        let password = "";
+        for (let i = 0; i < array.length; i++) {
+            password += charset[array[i] % charset.length];
+        }
+
+        document.getElementById("id_password1").value = password;
+        document.getElementById("id_password2").value = password;  
+    });
+
+    //Show/Hide password toggle
+    (function() {
+        const SHOW_PASSWORD_TEXT = "{% translate 'Show password' %}";
+        const HIDE_PASSWORD_TEXT = "{% translate 'Hide password' %}";
+        const input = document.getElementById('id_password1');
+        if (!input) return;
+
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('input-group', 'mb-2');
+        input.parentNode.insertBefore(wrapper, input);
+        wrapper.appendChild(input);
+
+        const btnWrap = document.createElement('div');
+        btnWrap.classList.add('input-group-append');
+
+        const toggleBtn = document.createElement('button');
+        toggleBtn.type = 'button';
+        toggleBtn.classList.add('btn', 'btn-success');
+        toggleBtn.setAttribute('id', 'togglePassword');
+        toggleBtn.setAttribute('title', SHOW_PASSWORD_TEXT);
+        toggleBtn.setAttribute('aria-pressed', 'false');
+        toggleBtn.style.minWidth = '44px';
+
+        const icon = document.createElement('i');
+        icon.className = 'bi bi-eye';
+        icon.setAttribute('aria-hidden', 'true');
+
+        const sr = document.createElement('span');
+        sr.classList.add('visually-hidden');
+        sr.textContent = SHOW_PASSWORD_TEXT;
+
+        toggleBtn.appendChild(icon);
+        toggleBtn.appendChild(sr);
+        btnWrap.appendChild(toggleBtn);
+        wrapper.appendChild(btnWrap);
+
+        toggleBtn.addEventListener('click', function() {
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+
+            if (isHidden) {
+                icon.className = 'bi bi-eye-slash';
+                toggleBtn.setAttribute('title', HIDE_PASSWORD_TEXT);
+                sr.textContent = HIDE_PASSWORD_TEXT;
+                toggleBtn.setAttribute('aria-pressed', 'true');
+            } else {
+                icon.className = 'bi bi-eye';
+                toggleBtn.setAttribute('title', SHOW_PASSWORD_TEXT);
+                sr.textContent = SHOW_PASSWORD_TEXT;
+                toggleBtn.setAttribute('aria-pressed', 'false');
+            }
+        });
+    })();
+</script>
 
 {% endblock content %}
