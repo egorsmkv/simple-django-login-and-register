@@ -45,29 +45,29 @@ wheels = [
 
 [[package]]
 name = "django"
-version = "6.1"
+version = "6.1.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
     { name = "sqlparse" },
     { name = "tzdata", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e2/42/6cb20996733984c1f6661daeda3877990836c76c633c6c8879d39f7120eb/django-6.1.tar.gz", hash = "sha256:86a2aacd59b817e4d6ac2ebfe22356c58f66f7b24e503f71b7c2fead677ee48b", size = 11223034, upload-time = "2026-08-05T19:21:53.789Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f8/d4/8314b5bdef20832f0ac6ae3b3e4d4924e4759fa3b4af27609dd747e7a6be/django-6.1.1.tar.gz", hash = "sha256:7ab93536d8e677aa14554c56426290c69480bf2ee68d7513d4a22f57d6bfeb84", size = 11284905, upload-time = "2026-09-02T17:20:45.621Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/91/9c/ce847620134cfab903e75690c498af73b46abbede2912ea89bd76d5c1e76/django-6.1-py3-none-any.whl", hash = "sha256:6c132cd980c9392b06807d4ca52d72530d631dc65a85d9dacede00a780cefbbe", size = 8417399, upload-time = "2026-08-05T19:21:47.285Z" },
+    { url = "https://files.pythonhosted.org/packages/8d/ca/c1040a4fd15754ede7df15fd72fc2e123045b473b253ab5f5284e11c651e/django-6.1.1-py3-none-any.whl", hash = "sha256:585fb82bf15053c42cf52e67c2f1b54a032dca384759315fd6678ab1870d1d72", size = 8419512, upload-time = "2026-09-02T17:20:39.153Z" },
 ]
 
 [[package]]
 name = "django-bootstrap4"
-version = "26.1"
+version = "26.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "beautifulsoup4" },
     { name = "django" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/58/f2f7e73b9657b4310080bbcaca6d4702244c3ff996d180b1655564ad7455/django_bootstrap4-26.1.tar.gz", hash = "sha256:164ff10d7f21c627301bca9b5186f0b0478a2c5647d35147283f3a125bc98018", size = 43548, upload-time = "2026-01-03T07:52:33.719Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/81/00/e7467e5968219a04f5aae6d810c2d8a78c3bd667e62d18c20eb439ed3b53/django_bootstrap4-26.2.tar.gz", hash = "sha256:3d277c350f77ccfd2800f1997c6e79ac05c15d614a8b114764449774a82d9307", size = 49005, upload-time = "2026-08-28T08:54:59.444Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b6/bc/962bd3665c146518004ad4ffe0fb14c4f89f78057892c7f993cf9d1cc9cd/django_bootstrap4-26.1-py3-none-any.whl", hash = "sha256:e0fa98c9e613e3f3f2fe3c394486899f62c1a11c77f5bf11653c6bcc8c0a4267", size = 25504, upload-time = "2026-01-03T07:52:32.554Z" },
+    { url = "https://files.pythonhosted.org/packages/1c/5f/a5d6b9119e969db6463edc924239d9d266454314d50de8020825ced59ab8/django_bootstrap4-26.2-py3-none-any.whl", hash = "sha256:309930e2e2a81bd9c88cca52d9f8ae30b68eadb5ce582629231647ffe5965085", size = 25482, upload-time = "2026-08-28T08:54:58.424Z" },
 ]
 
 [[package]]
@@ -199,8 +199,8 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "djade", marker = "extra == 'dev'", specifier = ">=0.1" },
-    { name = "django", specifier = "==6.1" },
-    { name = "django-bootstrap4", specifier = "==26.1" },
+    { name = "django", specifier = "==6.1.1" },
+    { name = "django-bootstrap4", specifier = "==26.2" },
     { name = "django-stubs", extras = ["compatible-mypy"], marker = "extra == 'dev'", specifier = ">=5.2.0" },
     { name = "pyrefly", marker = "extra == 'dev'", specifier = ">=0.1" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.1" },
@@ -209,11 +209,11 @@ provides-extras = ["dev"]
 
 [[package]]
 name = "soupsieve"
-version = "2.8.4"
+version = "2.9"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/47/2c/0a5f6f8ee0d5589e48c7640213ed5175d52cf540a06725b628cc1a45d6ce/soupsieve-2.8.4.tar.gz", hash = "sha256:e121fd02e975c695e4e9e8774a5ee35d74714b59307868dcc5319ad2d9e3328e", size = 121110, upload-time = "2026-05-24T13:55:57.154Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/80/f1/93422647dd7e461f23d254e6b2bfa687a85b53aeb4903fcdbb74474d4584/soupsieve-2.9.tar.gz", hash = "sha256:acee8417325c5653e1377dc31eccad59eb82cbc65942afe6174c53b3aaad63fc", size = 122122, upload-time = "2026-07-19T01:35:18.425Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/5e/f5/0c41cb68dcae6b7de4fac4188a3a9589e21fb31df21ea3a2e888db95e6c9/soupsieve-2.8.4-py3-none-any.whl", hash = "sha256:e7e6b0769c8f51ed59acab6e994b00621096cfb1c640a7509295987388fbaf65", size = 37304, upload-time = "2026-05-24T13:55:55.406Z" },
+    { url = "https://files.pythonhosted.org/packages/7b/d6/3185ab5ad1280319b31986898f3206dd7227cd75e293d4dba2a5e6bf27a0/soupsieve-2.9-py3-none-any.whl", hash = "sha256:a2b2c76d67df2382d245409fd71e321a571717e58463efa32ace87dcadac2c12", size = 37387, upload-time = "2026-07-19T01:35:17.106Z" },
 ]
 
 [[package]]
