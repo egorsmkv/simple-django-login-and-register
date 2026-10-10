@@ -1,2 +1,2 @@
-Django==6.1.1
+Django==6.1.2
 django-bootstrap4==26.2
